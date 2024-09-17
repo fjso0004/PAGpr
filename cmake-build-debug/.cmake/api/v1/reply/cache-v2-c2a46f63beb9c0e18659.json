@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/admin/Desktop/pr1/cmake-build-debug"
+			"value" : "c:/Users/admin/Desktop/PAGpr/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -538,22 +538,6 @@
 			"value" : ""
 		},
 		{
-			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Enable/Disable output of compile commands during generation."
-				}
-			],
-			"type" : "BOOL",
-			"value" : ""
-		},
-		{
 			"name" : "CMAKE_EXTRA_GENERATOR",
 			"properties" : 
 			[
@@ -575,7 +559,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/admin/Desktop/pr1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/admin/Desktop/PAGpr/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -587,7 +571,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "MinGW Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -647,7 +631,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/admin/Desktop/pr1"
+			"value" : "C:/Users/admin/Desktop/PAGpr"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -659,7 +643,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/pr1"
+			"value" : "C:/Program Files (x86)/PAGpr"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -682,12 +666,16 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Path to a program."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "C:/Users/admin/AppData/Local/Programs/CLion/bin/ninja/win/x64/ninja.exe"
+			"type" : "FILEPATH",
+			"value" : "C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -875,7 +863,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "pr1"
+			"value" : "PAGpr"
 		},
 		{
 			"name" : "CMAKE_PROJECT_TOP_LEVEL_INCLUDES",
@@ -1330,6 +1318,42 @@
 			"value" : "--build=missing"
 		},
 		{
+			"name" : "PAGpr_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/admin/Desktop/PAGpr/cmake-build-debug"
+		},
+		{
+			"name" : "PAGpr_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "PAGpr_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/admin/Desktop/PAGpr"
+		},
+		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
 			"properties" : 
 			[
@@ -1387,7 +1411,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/admin/Desktop/pr1/cmake-build-debug/conan/build/Debug/generators"
+			"value" : "C:/Users/admin/Desktop/PAGpr/cmake-build-debug/conan/build/Debug/generators"
 		},
 		{
 			"name" : "opengl_system_DIR",
@@ -1399,43 +1423,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/admin/Desktop/pr1/cmake-build-debug/conan/build/Debug/generators"
-		},
-		{
-			"name" : "pr1_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/admin/Desktop/pr1/cmake-build-debug"
-		},
-		{
-			"name" : "pr1_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "pr1_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/admin/Desktop/pr1"
+			"value" : "C:/Users/admin/Desktop/PAGpr/cmake-build-debug/conan/build/Debug/generators"
 		}
 	],
 	"kind" : "cache",

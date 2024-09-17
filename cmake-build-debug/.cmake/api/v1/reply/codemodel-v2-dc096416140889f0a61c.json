@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "pr1",
+					"name" : "PAGpr",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "pr1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-pr1-Debug-8864f45afaf582ae486e.json",
-					"name" : "pr1",
+					"id" : "PAGpr::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PAGpr-Debug-65864080d95261b8b559.json",
+					"name" : "PAGpr",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/admin/Desktop/pr1/cmake-build-debug",
-		"source" : "C:/Users/admin/Desktop/pr1"
+		"build" : "C:/Users/admin/Desktop/PAGpr/cmake-build-debug",
+		"source" : "C:/Users/admin/Desktop/PAGpr"
 	},
 	"version" : 
 	{

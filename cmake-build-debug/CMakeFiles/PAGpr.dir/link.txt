@@ -1,0 +1,3 @@
+C:\Users\admin\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E rm -f CMakeFiles\PAGpr.dir/objects.a
+C:\Users\admin\AppData\Local\Programs\CLion\bin\mingw\bin\ar.exe qc CMakeFiles\PAGpr.dir/objects.a @CMakeFiles\PAGpr.dir\objects1.rsp
+C:\Users\admin\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\PAGpr.dir/objects.a -Wl,--no-whole-archive -o PAGpr.exe -Wl,--out-implib,libPAGpr.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\PAGpr.dir\linkLibs.rsp

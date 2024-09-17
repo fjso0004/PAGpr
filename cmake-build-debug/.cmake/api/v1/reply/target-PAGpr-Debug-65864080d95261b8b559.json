@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "pr1.exe"
+			"path" : "PAGpr.exe"
 		},
 		{
-			"path" : "pr1.pdb"
+			"path" : "PAGpr.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -167,12 +167,12 @@
 			[
 				{
 					"backtrace" : 21,
-					"path" : "C:/Users/admin/Desktop/pr1/GLAD/include"
+					"path" : "C:/Users/admin/Desktop/PAGpr/GLAD/include"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Users/admin/.conan2/p/b/glfwc2139bb7e8a77/p/include"
+					"path" : "C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/include"
 				}
 			],
 			"language" : "CXX",
@@ -200,12 +200,12 @@
 			[
 				{
 					"backtrace" : 21,
-					"path" : "C:/Users/admin/Desktop/pr1/GLAD/include"
+					"path" : "C:/Users/admin/Desktop/PAGpr/GLAD/include"
 				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Users/admin/.conan2/p/b/glfwc2139bb7e8a77/p/include"
+					"path" : "C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/include"
 				}
 			],
 			"language" : "C",
@@ -215,7 +215,7 @@
 			]
 		}
 	],
-	"id" : "pr1::@6890427a1f51a3e7e1df",
+	"id" : "PAGpr::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -230,12 +230,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-LC:\\Users\\admin\\.conan2\\p\\b\\glfwc2139bb7e8a77\\p\\lib",
+				"fragment" : "-LC:\\Users\\admin\\.conan2\\p\\b\\glfwb491673a7037b\\p\\lib",
 				"role" : "libraryPath"
 			},
 			{
 				"backtrace" : 10,
-				"fragment" : "C:\\Users\\admin\\.conan2\\p\\b\\glfwc2139bb7e8a77\\p\\lib\\libglfw3.a",
+				"fragment" : "C:\\Users\\admin\\.conan2\\p\\b\\glfwb491673a7037b\\p\\lib\\libglfw3.a",
 				"role" : "libraries"
 			},
 			{
@@ -255,8 +255,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "pr1",
-	"nameOnDisk" : "pr1.exe",
+	"name" : "PAGpr",
+	"nameOnDisk" : "PAGpr.exe",
 	"paths" : 
 	{
 		"build" : ".",

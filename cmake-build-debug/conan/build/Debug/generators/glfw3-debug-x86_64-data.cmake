@@ -12,7 +12,7 @@ set(opengl_system_FIND_MODE "NO_MODULE")
 
 ########### VARIABLES #######################################################################
 #############################################################################################
-set(glfw_PACKAGE_FOLDER_DEBUG "C:/Users/admin/.conan2/p/b/glfwc2139bb7e8a77/p")
+set(glfw_PACKAGE_FOLDER_DEBUG "C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p")
 set(glfw_BUILD_MODULES_PATHS_DEBUG )
 
 
