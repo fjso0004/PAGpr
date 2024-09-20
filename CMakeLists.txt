@@ -7,7 +7,9 @@ file( GLOB MY_FILES *.cpp )
 file( GLOB GLAD_FILES GLAD/src/*.c )
 # Indica qué archivos hay que compilar para generar el ejecutable
 
-add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES})
+add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES}
+        Renderer.cpp
+        Renderer.h)
 
 # Indica directorios (adicionales a los por defecto) para buscar includes
 target_include_directories( ${PROJECT_NAME} PUBLIC GLAD/include )

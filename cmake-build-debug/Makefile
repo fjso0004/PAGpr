@@ -152,6 +152,30 @@ GLAD/src/glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/GLAD/src/glad.c.s
 .PHONY : GLAD/src/glad.c.s
 
+Renderer.obj: Renderer.cpp.obj
+.PHONY : Renderer.obj
+
+# target to build an object file
+Renderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/Renderer.cpp.obj
+.PHONY : Renderer.cpp.obj
+
+Renderer.i: Renderer.cpp.i
+.PHONY : Renderer.i
+
+# target to preprocess a source file
+Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/Renderer.cpp.i
+.PHONY : Renderer.cpp.i
+
+Renderer.s: Renderer.cpp.s
+.PHONY : Renderer.s
+
+# target to generate assembly for a file
+Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/Renderer.cpp.s
+.PHONY : Renderer.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -188,6 +212,9 @@ help:
 	@echo ... GLAD/src/glad.obj
 	@echo ... GLAD/src/glad.i
 	@echo ... GLAD/src/glad.s
+	@echo ... Renderer.obj
+	@echo ... Renderer.i
+	@echo ... Renderer.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
