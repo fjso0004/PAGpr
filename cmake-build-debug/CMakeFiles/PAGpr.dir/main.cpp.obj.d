@@ -153,4 +153,4 @@ CMakeFiles/PAGpr.dir/main.cpp.obj: C:\Users\admin\Desktop\PAGpr\main.cpp \
  C:/Users/admin/Desktop/PAGpr/GLAD/include/KHR/khrplatform.h \
  C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/include/GLFW/glfw3.h
+ C:/Users/admin/.conan2/p/b/glfw02d68c8469a00/p/include/GLFW/glfw3.h

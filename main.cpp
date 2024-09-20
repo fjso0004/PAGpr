@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f; // Valores iniciales
+
 // - Esta función callback será llamada cuando GLFW produzca algún error
 void error_callback ( int errno, const char* desc )
 { std::string aux (desc);
@@ -46,9 +48,27 @@ void mouse_button_callback ( GLFWwindow *window, int button, int action, int mod
 
 // - Esta función callback será llamada cada vez que se mueva la rueda del ratón sobre el área de dibujo OpenGL.
 void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
-{ std::cout << "Movida la rueda del raton " << xoffset
-            << " Unidades en horizontal y " << yoffset
-            << " unidades en vertical" << std::endl;
+{ // Ajusta el color según el desplazamiento vertical (yoffset)
+    // Ajusta el color según el desplazamiento vertical (yoffset)
+    float colorChange = 0.05f * static_cast<float>(yoffset);
+
+    red = std::min(1.0f, std::max(0.0f, red + colorChange));
+    green = std::min(1.0f, std::max(0.0f, green + colorChange));
+    blue = std::min(1.0f, std::max(0.0f, blue + colorChange));
+
+    // Actualizamos el color de fondo
+    glClearColor(red, green, blue, alpha);
+
+    std::cout << "Scroll callback called - New color: (" << red << ", " << green << ", " << blue << ")" << std::endl;
+    std::cout << "Movida la rueda del raton " << xoffset
+              << " Unidades en horizontal y " << yoffset
+              << " unidades en vertical" << std::endl;
+
+    // Borra los buffers (color y profundidad) para aplicar el nuevo color
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Intercambia los buffers para reflejar los cambios en pantalla
+    glfwSwapBuffers(window);
 }
 
 int main() {
@@ -111,7 +131,8 @@ int main() {
 
 //Establecemos un gris medio como color con el que se borrará el frame buffer.
 // No tiene por qué ejecutarse en cada paso por el ciclo de eventos.
-    glClearColor ( 0.6, 0.6, 0.6, 1.0 );
+    glClearColor(red, green, blue, alpha); // Color inicial del fondo
+
 
 //Le decimos a OpenGL que tenga en cuenta la profundidad a la hora de dibujar.
 // No tiene por qué ejecutarse en cada paso por el ciclo de eventos.

@@ -1,1 +1,1 @@
-  -LC:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/lib  C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/lib/libglfw3.a -lopengl32 -lgdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+  -LC:/Users/admin/.conan2/p/b/glfw02d68c8469a00/p/lib  C:/Users/admin/.conan2/p/b/glfw02d68c8469a00/p/lib/libglfw3.a -lopengl32 -lgdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

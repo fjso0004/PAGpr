@@ -172,7 +172,7 @@
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/include"
+					"path" : "C:/Users/admin/.conan2/p/b/glfw02d68c8469a00/p/include"
 				}
 			],
 			"language" : "CXX",
@@ -205,7 +205,7 @@
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "C:/Users/admin/.conan2/p/b/glfwb491673a7037b/p/include"
+					"path" : "C:/Users/admin/.conan2/p/b/glfw02d68c8469a00/p/include"
 				}
 			],
 			"language" : "C",
@@ -230,12 +230,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-LC:\\Users\\admin\\.conan2\\p\\b\\glfwb491673a7037b\\p\\lib",
+				"fragment" : "-LC:\\Users\\admin\\.conan2\\p\\b\\glfw02d68c8469a00\\p\\lib",
 				"role" : "libraryPath"
 			},
 			{
 				"backtrace" : 10,
-				"fragment" : "C:\\Users\\admin\\.conan2\\p\\b\\glfwb491673a7037b\\p\\lib\\libglfw3.a",
+				"fragment" : "C:\\Users\\admin\\.conan2\\p\\b\\glfw02d68c8469a00\\p\\lib\\libglfw3.a",
 				"role" : "libraries"
 			},
 			{
