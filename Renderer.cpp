@@ -24,7 +24,6 @@ namespace PAG
     */
     Renderer::Renderer ()
     {
-        glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
         glEnable(GL_DEPTH_TEST);
     }
 
@@ -53,6 +52,16 @@ namespace PAG
     void Renderer::refrescar ()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    void Renderer::cambiarTamano(int width, int height) {
+        // Ajusta el tamaño del viewport de OpenGL
+        glViewport(0, 0, width, height);
+    }
+
+    void Renderer::cambiarColorFondo(float red, float green, float blue, float alpha) {
+        // Cambia el color con el que se limpia el frame buffer
+        glClearColor(red, green, blue, alpha);
     }
 }
 

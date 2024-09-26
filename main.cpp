@@ -30,7 +30,8 @@ void window_refresh_callback ( GLFWwindow *window )
 
 // - Esta función callback será llamada cada vez que se cambie el tamaño del área de dibujo OpenGL.
 void framebuffer_size_callback ( GLFWwindow *window, int width, int height )
-{ glViewport ( 0, 0, width, height );
+{
+    PAG::Renderer::getInstancia().cambiarTamano(width, height);
     std::cout << "Resize callback called" << std::endl;
 }
 
@@ -62,16 +63,8 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
     green = std::min(1.0f, std::max(0.0f, green + colorChange));
     blue = std::min(1.0f, std::max(0.0f, blue + colorChange));
 
-    // Actualizamos el color de fondo
-    glClearColor(red, green, blue, alpha);
-
-    std::cout << "Scroll callback called - New color: (" << red << ", " << green << ", " << blue << ")" << std::endl;
-    std::cout << "Movida la rueda del raton " << xoffset
-              << " Unidades en horizontal y " << yoffset
-              << " unidades en vertical" << std::endl;
-
-    // Borra los buffers (color y profundidad) para aplicar el nuevo color
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Llamamos a Renderer para cambiar el color
+    PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
 
     // Intercambia los buffers para reflejar los cambios en pantalla
     glfwSwapBuffers(window);
@@ -137,7 +130,7 @@ int main() {
 
 //Establecemos un gris medio como color con el que se borrará el frame buffer.
 // No tiene por qué ejecutarse en cada paso por el ciclo de eventos.
-    glClearColor(red, green, blue, alpha); // Color inicial del fondo
+    PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);  // Establece el color de fondo inical
 
 
 //Le decimos a OpenGL que tenga en cuenta la profundidad a la hora de dibujar.
@@ -154,7 +147,7 @@ int main() {
 
     // Inicializa los backends de GLFW y OpenGL para Dear ImGui
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 410");
+    ImGui_ImplOpenGL3_Init();
     // -------------------------------------
 
 //Ciclo de eventos de la aplicación. La condición de parada es que la ventana principal
@@ -186,7 +179,9 @@ int main() {
 
 // Establecemos un gris medio como color con el que se borrará el frame buffer.
 //No tiene por qué ejecutarse en cada paso por el ciclo de eventos.
-    glClearColor ( 0.6, 0.6, 0.6, 1.0 );
+    // Control de color de ImGui
+    ImGui::ColorEdit3("Color de fondo", (float*)&red);
+    PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);  // Cambiar el color de fondo
 
 //Le decimos a OpenGL que tenga en cuenta la profundidad a la hora de dibujar.
 //No tiene por qué ejecutarse en cada paso por el ciclo de eventos.
@@ -198,7 +193,7 @@ int main() {
     while ( !glfwWindowShouldClose ( window ) )
     {
 //Borra los buffers (color y profundidad)
-        glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+        PAG::Renderer::getInstancia().refrescar();
 //GLFW usa un doble buffer para que no haya parpadeo. Esta orden
 //intercambia el buffer back (en el que se ha estado dibujando) por el que se mostraba hasta ahora (front).
         glfwSwapBuffers ( window );

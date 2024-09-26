@@ -47,6 +47,13 @@ namespace PAG
         * @brief Método para hacer el refresco de la escena
         */
         void refrescar ();
+
+        // Método para cambiar el tamaño del viewport
+        void cambiarTamano(int width, int height);
+
+        // Método para cambiar el color de fondo
+        void cambiarColorFondo(float red, float green, float blue, float alpha);
+
     };
 }
 
