@@ -2,6 +2,11 @@
 // IMPORTANTE: El include de GLAD debe estar siempre ANTES de el de GLFW
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Renderer.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 
 float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f; // Valores iniciales
 
@@ -13,7 +18,8 @@ void error_callback ( int errno, const char* desc )
 
 // - Esta función callback será llamada cada vez que el área de dibujo OpenGL deba ser redibujada.
 void window_refresh_callback ( GLFWwindow *window )
-{ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+{
+    PAG::Renderer::getInstancia().refrescar();
 // - GLFW usa un doble buffer para que no haya parpadeo. Esta orden
 // intercambia el buffer back (que se ha estado dibujando) por el
 // que se mostraba hasta ahora front. Debe ser la última orden de
@@ -138,6 +144,19 @@ int main() {
 // No tiene por qué ejecutarse en cada paso por el ciclo de eventos.
     glEnable ( GL_DEPTH_TEST );
 
+    // ---- Inicialización de Dear ImGui ----
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Activa navegación por teclado
+
+    ImGui::StyleColorsDark();  // Usa un esquema de colores oscuros
+
+    // Inicializa los backends de GLFW y OpenGL para Dear ImGui
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 410");
+    // -------------------------------------
+
 //Ciclo de eventos de la aplicación. La condición de parada es que la ventana principal
 //deba cerrarse, por ejemplo, si el usuario pulsa el botón de cerrar la ventana (la X).
     while ( !glfwWindowShouldClose ( window ) )
@@ -146,6 +165,23 @@ int main() {
 //de teclas o de ratón, etc. Siempre al final de cada iteración del
 //ciclo de eventos y después de glfwSwapBuffers ( window );
         glfwPollEvents ();
+
+        // ---- Nuevo frame de ImGui ----
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        // --------------------------------
+
+        // Refresca la ventana de OpenGL
+        PAG::Renderer::getInstancia().refrescar();
+
+        // ---- Renderiza el frame de ImGui ----
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        // -------------------------------------
+
+        // Intercambia los buffers
+        glfwSwapBuffers(window);
     }
 
 // Establecemos un gris medio como color con el que se borrará el frame buffer.
@@ -171,6 +207,12 @@ int main() {
 //de eventos y después de glfwSwapBuffers(window);
         glfwPollEvents ();
     }
+
+    // ---- Limpieza de ImGui ----
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    // --------------------------
 
 //Una vez terminado el ciclo de eventos, liberar recursos, etc.
     std::cout << "Finishing application pag prueba" << std::endl;

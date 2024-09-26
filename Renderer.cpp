@@ -23,7 +23,10 @@ namespace PAG
     * Constructor por defecto
     */
     Renderer::Renderer ()
-    { }
+    {
+        glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
+        glEnable(GL_DEPTH_TEST);
+    }
 
     /**
     * Destructor
