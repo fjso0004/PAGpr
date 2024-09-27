@@ -165,6 +165,35 @@ int main() {
         ImGui::NewFrame();
         // --------------------------------
 
+        // ---- Ventana de control de color (Fondo) ----
+        ImGui::Begin("Fondo");
+        static ImVec4 color = ImVec4(red, green, blue, alpha);  // Color seleccionado
+
+        // Control de color avanzado con rueda y triángulo
+        ImGui::Text("Selecciona un color:");
+
+        // Usamos ColorPicker4 con ImGuiColorEditFlags para mostrar el círculo con triángulo
+        ImGui::ColorPicker4("Actual", (float*)&color, ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_InputRGB);
+
+        // Mostrar valores RGB y hexadecimal
+        ImGui::Text("R: %d G: %d B: %d",
+                    (int)(color.x * 255),
+                    (int)(color.y * 255),
+                    (int)(color.z * 255));
+        ImGui::Text("#%02X%02X%02X",
+                    (int)(color.x * 255),
+                    (int)(color.y * 255),
+                    (int)(color.z * 255));
+
+        // Actualizamos el color de fondo de OpenGL con el nuevo color seleccionado
+        red = color.x;
+        green = color.y;
+        blue = color.z;
+        PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
+        ImGui::End();
+        // --------------------------------------------
+
+
         // Refresca la ventana de OpenGL
         PAG::Renderer::getInstancia().refrescar();
 
