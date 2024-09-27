@@ -150,6 +150,17 @@ int main() {
     ImGui_ImplOpenGL3_Init();
     // -------------------------------------
 
+    // ------------ Antes del while ------------
+    try {
+        PAG::Renderer::getInstancia().creaShaderProgram();
+        PAG::Renderer::getInstancia().creaModelo();
+    }
+    catch (const std::runtime_error& e) {
+        // Manejo de errores: imprime el mensaje de la excepción
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    // -----------------------------------------
+
 //Ciclo de eventos de la aplicación. La condición de parada es que la ventana principal
 //deba cerrarse, por ejemplo, si el usuario pulsa el botón de cerrar la ventana (la X).
     while ( !glfwWindowShouldClose ( window ) )

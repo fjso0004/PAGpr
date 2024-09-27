@@ -9,3 +9,4 @@ Después, forzamos la ventana a redibujarse con glclear y glfwSwapBuffers, para 
 ## Práctica 2
 
 
+## Práctica 3

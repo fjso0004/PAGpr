@@ -18,6 +18,9 @@
 * Espacio de nombres para las prácticas de Programación de Aplicaciones
 * Gráficas
 */
+#include "glad/glad.h"
+#include <string>
+
 namespace PAG
 {
     /**
@@ -33,6 +36,12 @@ namespace PAG
     private:
         static Renderer* instancia; ///< Puntero al único objeto
         Renderer ();
+        GLuint idVS = 0; // Identificador del vertex shader
+        GLuint idFS = 0; // Identificador del fragment shader
+        GLuint idSP = 0; // Identificador del shader program
+        GLuint idVAO = 0; // Identificador del vertex array object
+        GLuint idVBO = 0; // Identificador del vertex buffer object
+        GLuint idIBO = 0; // Identificador del index buffer object
 
     public:
         virtual ~Renderer ();
@@ -54,6 +63,13 @@ namespace PAG
         // Método para cambiar el color de fondo
         void cambiarColorFondo(float red, float green, float blue, float alpha);
 
+        void creaShaderProgram( );
+
+        void creaModelo ( );
+
+        void loadShaderProgram(std::string archivo);
+
+        GLuint loadShader(const std::string &fileName, GLenum shaderType);
     };
 }
 

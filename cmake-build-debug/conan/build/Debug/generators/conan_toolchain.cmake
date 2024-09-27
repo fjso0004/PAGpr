@@ -23,9 +23,9 @@ endif()
 
 ########## 'compilers' block #############
 
-set(CMAKE_C_COMPILER "C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe")
-set(CMAKE_CXX_COMPILER "C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/g++.exe")
-set(CMAKE_RC_COMPILER "C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/windres.exe")
+set(CMAKE_C_COMPILER "C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe")
+set(CMAKE_CXX_COMPILER "C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/g++.exe")
+set(CMAKE_RC_COMPILER "C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/windres.exe")
 
 
 ########## 'arch_flags' block #############
@@ -47,22 +47,10 @@ string(APPEND CONAN_EXE_LINKER_FLAGS " -m64")
 ########## 'cppstd' block #############
 # Define the C++ and C standards from 'compiler.cppstd' and 'compiler.cstd'
 
-function(conan_modify_std_watch variable access value current_list_file stack)
-    set(conan_watched_std_variable 20)
-    if (${variable} STREQUAL "CMAKE_C_STANDARD")
-        set(conan_watched_std_variable )
-    endif()
-    if (${access} STREQUAL "MODIFIED_ACCESS" AND NOT ${value} STREQUAL ${conan_watched_std_variable})
-        message(STATUS "Warning: Standard ${variable} value defined in conan_toolchain.cmake to ${conan_watched_std_variable} has been modified to ${value} by ${current_list_file}")
-    endif()
-    unset(conan_watched_std_variable)
-endfunction()
-
 message(STATUS "Conan toolchain: C++ Standard 20 with extensions OFF")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-variable_watch(CMAKE_CXX_STANDARD conan_modify_std_watch)
 
 
 ########## 'extra_flags' block #############
@@ -133,9 +121,9 @@ list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
 # Definition of CMAKE_PREFIX_PATH, CMAKE_XXXXX_PATH
 # The Conan local "generators" folder, where this toolchain is saved.
 list(PREPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_LIST_DIR} )
-list(PREPEND CMAKE_LIBRARY_PATH "C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/lib")
-list(PREPEND CMAKE_INCLUDE_PATH "C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include")
-set(CONAN_RUNTIME_LIB_DIRS "C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/bin" )
+list(PREPEND CMAKE_LIBRARY_PATH "C:/Users/admin/.conan2/p/b/glfwa8e52e3e1b024/p/lib")
+list(PREPEND CMAKE_INCLUDE_PATH "C:/Users/admin/.conan2/p/b/glfwa8e52e3e1b024/p/include")
+set(CONAN_RUNTIME_LIB_DIRS "C:/Users/admin/.conan2/p/b/glfwa8e52e3e1b024/p/bin" )
 
 
 
