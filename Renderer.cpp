@@ -12,6 +12,8 @@
 */
 
 #include <stdexcept>
+#include <fstream>
+#include <sstream>
 #include "Renderer.h"
 #include "glad/glad.h"
 
@@ -93,6 +95,7 @@ namespace PAG
 * Método para crear, compilar y enlazar el shader program
 * @note No se incluye ninguna comprobación de errores
 */
+/*
     void PAG::Renderer::creaShaderProgram( )
     { std::string miVertexShader =
                 "#version 410\n"
@@ -136,6 +139,7 @@ namespace PAG
             throw std::runtime_error(mensaje);
         }
     }
+    */
 
     /**
 * Método para crear el VAO para el modelo a renderizar

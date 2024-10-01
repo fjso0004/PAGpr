@@ -63,7 +63,7 @@ namespace PAG
         // Método para cambiar el color de fondo
         void cambiarColorFondo(float red, float green, float blue, float alpha);
 
-        void creaShaderProgram( );
+        //void creaShaderProgram( );
 
         void creaModelo ( );
 

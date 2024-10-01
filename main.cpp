@@ -152,7 +152,8 @@ int main() {
 
     // ------------ Antes del while ------------
     try {
-        PAG::Renderer::getInstancia().creaShaderProgram();
+        //PAG::Renderer::getInstancia().creaShaderProgram();
+        PAG::Renderer::getInstancia().loadShaderProgram("../pag03");
         PAG::Renderer::getInstancia().creaModelo();
     }
     catch (const std::runtime_error& e) {
