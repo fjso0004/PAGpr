@@ -15,3 +15,9 @@ Para lograrlo, actualizamos el ciclo principal de eventos, donde añadimos la re
 
 En esta aplicación, hemos implementado la carga de shaders desde archivos externos mediante la función loadShaderProgram, que toma como parámetro un archivo "pag03" y luego carga los archivos de shaders con loadShader(archivo + "-vs.glsl", GL_VERTEX_SHADER) y loadShader(archivo + "-fs.glsl", GL_FRAGMENT_SHADER). 
 Estos archivos GLSL se encuentran en la carpeta raíz y se cargan usando rutas relativas. Además, se ha añadido manejo de errores en la compilación y enlace de shaders, lanzando excepciones con throw std::runtime_error(mensaje) si ocurre un fallo, garantizando así que se detecten y manejen adecuadamente los errores.
+
+### Respuesta a la pregunta: Si redimensionas la ventana de la aplicación, verás que el triángulo
+no permanece igual, sino que se deforma al mismo tiempo que la ventana. ¿A qué crees que se
+debe este comportamiento?
+
+Creo que este comportamiento se debe a que no se refresca la aplicación de openGL para mantener la relación de aspecto, simplemente se redmiensiona la imagen y se deforma.
