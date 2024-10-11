@@ -8,4 +8,4 @@ compiler.libcxx=libstdc++11
 build_type=Debug
 [conf]
 tools.cmake.cmaketoolchain:generator=MinGW Makefiles
-tools.build:compiler_executables={"c":"C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe","cpp":"C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/g++.exe","rc":"C:/Users/admin/AppData/Local/Programs/CLion/bin/mingw/bin/windres.exe"}
+tools.build:compiler_executables={"c":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe","cpp":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/g++.exe","rc":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/windres.exe"}

@@ -19,6 +19,7 @@
 * Gráficas
 */
 #include "glad/glad.h"
+#include "ShaderProgram.h"
 #include <string>
 
 namespace PAG
@@ -27,49 +28,62 @@ namespace PAG
     * @brief Clase encargada de encapsular la gestión del área de dibujo
     * OpenGL
     *
-    * Esta clase coordina el renderizado de las escenas OpenGL. Se implementa
-    * aplicando el patrón de diseño Singleton. Está pensada para que las
-    * funciones callback hagan llamadas a sus métodos
+    * Esta clase coordina el renderizado de las escenas OpenGL. Implementa
+    * el patrón de diseño Singleton. Está pensada para que las funciones
+    * callback hagan llamadas a sus métodos.
     */
     class Renderer
     {
     private:
         static Renderer* instancia; ///< Puntero al único objeto
-        Renderer ();
-        GLuint idVS = 0; // Identificador del vertex shader
-        GLuint idFS = 0; // Identificador del fragment shader
-        GLuint idSP = 0; // Identificador del shader program
+
+        Renderer();  // Constructor privado para el patrón Singleton
+        ShaderProgram* shaderProgram; // Nuevo atributo para la gestión de shaders
+
         GLuint idVAO = 0; // Identificador del vertex array object
         GLuint idVBO = 0; // Identificador del vertex buffer object
         GLuint idIBO = 0; // Identificador del index buffer object
 
     public:
-        virtual ~Renderer ();
+        virtual ~Renderer(); // Destructor
 
         /**
         * @brief Consulta del objeto único de la clase
         * @return Referencia a la instancia única de la clase
         */
-        static Renderer& getInstancia ();
+        static Renderer& getInstancia();
 
         /**
-        * @brief Método para hacer el refresco de la escena
+        * @brief Método para refrescar la escena
         */
-        void refrescar ();
+        void refrescar();
 
-        // Método para cambiar el tamaño del viewport
+        /**
+        * @brief Método para cambiar el tamaño del viewport
+        * @param width Ancho del viewport
+        * @param height Alto del viewport
+        */
         void cambiarTamano(int width, int height);
 
-        // Método para cambiar el color de fondo
+        /**
+        * @brief Método para cambiar el color de fondo
+        * @param red Componente roja
+        * @param green Componente verde
+        * @param blue Componente azul
+        * @param alpha Componente alfa (transparencia)
+        */
         void cambiarColorFondo(float red, float green, float blue, float alpha);
 
-        //void creaShaderProgram( );
+        /**
+        * @brief Método para crear el modelo 3D a renderizar
+        */
+        void creaModelo();
 
-        void creaModelo ( );
-
-        void loadShaderProgram(std::string archivo);
-
-        GLuint loadShader(const std::string &fileName, GLenum shaderType);
+        /**
+        * @brief Método para cargar un programa de shaders
+        * @param shaderBase Nombre base de los archivos del shader
+        */
+        void loadShaderProgram(const std::string& shaderBase);
     };
 }
 

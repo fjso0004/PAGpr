@@ -97,6 +97,12 @@
 		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/Renderer.h">
 			<Option target="PAGpr"/>
 		</Unit>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/ShaderProgram.cpp">
+			<Option target="PAGpr"/>
+		</Unit>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/ShaderProgram.h">
+			<Option target="PAGpr"/>
+		</Unit>
 		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/imgui.cpp">
 			<Option target="PAGpr"/>
 		</Unit>
@@ -119,6 +125,12 @@
 			<Option target="PAGpr"/>
 		</Unit>
 		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/imgui_impl_opengl3.h">
+			<Option target="PAGpr"/>
+		</Unit>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/imgui_stdlib.cpp">
+			<Option target="PAGpr"/>
+		</Unit>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/imgui_stdlib.h">
 			<Option target="PAGpr"/>
 		</Unit>
 		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/imgui_tables.cpp">

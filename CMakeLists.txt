@@ -5,12 +5,14 @@ set(CMAKE_CXX_STANDARD 20)
 # Define variables agrupando nombres de archivo
 file( GLOB MY_FILES *.cpp )
 file( GLOB GLAD_FILES GLAD/src/*.c )
-file( GLOB IMGUI_FILES imgui/*.cpp )
+file( GLOB IMGUI_FILES imgui/*.cpp imgui/imgui_stdlib.cpp)
 # Indica qué archivos hay que compilar para generar el ejecutable
 
 add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES} ${IMGUI_FILES}
         Renderer.cpp
-        Renderer.h)
+        Renderer.h
+        ShaderProgram.cpp
+        ShaderProgram.h)
 
 # Indica directorios (adicionales a los por defecto) para buscar includes
 target_include_directories( ${PROJECT_NAME} PUBLIC GLAD/include
