@@ -17,7 +17,16 @@ En esta aplicación, hemos implementado la carga de shaders desde archivos exter
 Estos archivos GLSL se encuentran en la carpeta raíz y se cargan usando rutas relativas. Además, se ha añadido manejo de errores en la compilación y enlace de shaders, lanzando excepciones con throw std::runtime_error(mensaje) si ocurre un fallo, garantizando así que se detecten y manejen adecuadamente los errores.
 
 ### Respuesta a la pregunta: Si redimensionas la ventana de la aplicación, verás que el triángulo
-no permanece igual, sino que se deforma al mismo tiempo que la ventana. ¿A qué crees que se
+No permanece igual, sino que se deforma al mismo tiempo que la ventana. ¿A qué crees que se
 debe este comportamiento?
 
 Creo que este comportamiento se debe a que no se refresca la aplicación de openGL para mantener la relación de aspecto, simplemente se redmiensiona la imagen y se deforma.
+
+## Práctica 4
+
+He reordenado el código, en el uml queda reflejado los cambios de una forma clara y concisa, además, he conseguido que vuelva a funcionar el scroll callback con mi rueda del ratón para que modifique el color de fondo de la escena.
+
+Enlace a mi [UML](UML.puml)
+
+## Práctica 5
+

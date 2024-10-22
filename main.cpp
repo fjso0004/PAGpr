@@ -35,17 +35,52 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-// - Esta función callback será llamada cada vez que se mueva la rueda del ratón sobre el área de dibujo OpenGL.
+// Variable global para controlar cuál componente de color está siendo modificado
+int colorIndex = 0; // 0 = red, 1 = green, 2 = blue
+
+// Esta función callback será llamada cada vez que se mueva la rueda del ratón sobre el área de dibujo OpenGL.
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
     float colorChange = 0.05f * static_cast<float>(yoffset);
 
-    red = std::min(1.0f, std::max(0.0f, red + colorChange));
-    green = std::min(1.0f, std::max(0.0f, green + colorChange));
-    blue = std::min(1.0f, std::max(0.0f, blue + colorChange));
+    // Debugging: Imprimimos los valores de color y el índice de color actual
+    std::cout << "Before Change - Red: " << red << ", Green: " << green << ", Blue: " << blue << " (Color index: " << colorIndex << ")" << std::endl;
 
+    // Dependiendo del índice de color, modificamos el componente correspondiente
+    if (colorIndex == 0) {
+        red = std::min(1.0f, std::max(0.0f, red + colorChange));
+
+        // Si el rojo ha alcanzado su límite, pasamos a modificar el verde
+        if (red == 1.0f || red == 0.0f) {
+            colorIndex = 1; // Cambiamos al componente verde
+        }
+    }
+    else if (colorIndex == 1) {
+        green = std::min(1.0f, std::max(0.0f, green + colorChange));
+
+        // Si el verde ha alcanzado su límite, pasamos a modificar el azul
+        if (green == 1.0f || green == 0.0f) {
+            colorIndex = 2; // Cambiamos al componente azul
+        }
+    }
+    else if (colorIndex == 2) {
+        blue = std::min(1.0f, std::max(0.0f, blue + colorChange));
+
+        // Si el azul ha alcanzado su límite, volvemos a modificar el rojo
+        if (blue == 1.0f || blue == 0.0f) {
+            colorIndex = 0; // Volvemos al componente rojo
+        }
+    }
+
+    // Debugging: Imprimimos los valores de color después del cambio
+    std::cout << "After Change - Red: " << red << ", Green: " << green << ", Blue: " << blue << " (Next Color index: " << colorIndex << ")" << std::endl;
+
+    // Cambiamos el color de fondo en el renderer
     PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
+
+    // Forzamos un redibujado inmediato
     glfwSwapBuffers(window);
 }
+
 
 int main() {
     std::cout << "Starting Application PAG - Prueba 01" << std::endl;
@@ -114,11 +149,15 @@ int main() {
         return -4;
     }
 
-    // ---- Ciclo de eventos de la aplicación ----
+    // Variables para controlar el color, inicializadas a valores globales
+    ImVec4 color = ImVec4(red, green, blue, alpha);
+
+    // Ciclo de eventos de la aplicación
     while (!glfwWindowShouldClose(window)) {
+        // Poll de eventos
         glfwPollEvents();
 
-        // ---- Nuevo frame de ImGui ----
+        // Nuevo frame de ImGui
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -140,29 +179,35 @@ int main() {
 
         ImGui::End();
 
-        // ---- Ventana de control de color ----
+        // Ventana de control de color de fondo
         ImGui::Begin("Color de fondo");
-        static ImVec4 color = ImVec4(red, green, blue, alpha);
 
-        ImGui::Text("Selecciona un color:");
+        // Sincronizamos el picker de ImGui con los valores globales
+        color.x = red;
+        color.y = green;
+        color.z = blue;
+
+        // Selector de color
         ImGui::ColorPicker4("Actual", (float*)&color, ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_InputRGB);
 
-        // Actualizamos el color de fondo con el nuevo color seleccionado
+        // Actualizamos los valores globales con los seleccionados en ImGui
         red = color.x;
         green = color.y;
         blue = color.z;
+
+        // Cambiamos el color de fondo con los valores actualizados
         PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
 
         ImGui::End();
 
-        // Refresca la ventana de OpenGL
+        // Refrescamos la escena de OpenGL
         PAG::Renderer::getInstancia().refrescar();
 
-        // ---- Renderiza el frame de ImGui ----
+        // Renderizamos el frame de ImGui
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        // Intercambia los buffers
+        // Intercambiamos los buffers
         glfwSwapBuffers(window);
     }
 

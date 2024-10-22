@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!define RECTANGLE class
+
+RECTANGLE Sistema {
+    - red: float
+    - green: float
+    - blue: float
+    - alpha: float
+    - shaderBaseName: string
+    - error_callback(errno: int, desc: const char*)
+    - window_refresh_callback(window: GLFWwindow*)
+    - framebuffer_size_callback(window: GLFWwindow*, width: int, height: int)
+    - key_callback(window: GLFWwindow*, key: int, scancode: int, action: int, mods: int)
+    - scroll_callback(window: GLFWwindow*, xoffset: double, yoffset: double)
+}
+
+' Clase Renderer (Singleton)
+RECTANGLE Renderer {
+    - instancia: Renderer*
+    - shaderProgram: ShaderProgram*
+    - idVAO: GLuint
+    - idVBO: GLuint
+    - idIBO: GLuint
+    + getInstancia(): Renderer&
+    + refrescar()
+    + cambiarTamano(width: int, height: int)
+    + cambiarColorFondo(red: float, green: float, blue: float, alpha: float)
+    + creaModelo()
+    + loadShaderProgram(shaderBase: string)
+}
+
+' Clase ShaderProgram
+RECTANGLE ShaderProgram {
+    - idSP: GLuint
+    + ShaderProgram()
+    + ~ShaderProgram()
+    + loadShaders(vertexShaderPath: string, fragmentShaderPath: string)
+    + useProgram() const
+    + getProgramID() const: GLuint
+    + loadShader(fileName: string, shaderType: GLenum): GLuint
+}
+
+allowmixing
+Sistema --> Renderer : "Usa"
+Renderer --> ShaderProgram : "Crea y usa"
+Renderer -- GLAD : "Usa (dependencia)"
+Renderer -- ImGui : "Usa (dependencia)"
+
+' Colección de dependencias
+collections GLAD
+collections ImGui
+
+@enduml
