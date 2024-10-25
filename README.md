@@ -30,3 +30,6 @@ Enlace a mi [UML](UML.puml)
 
 ## Práctica 5
 
+Para la implementación de las diversas cámaras, he creado una nueva clase, en la que he adjuntado todo lo relacionado con las mismas. En el main, el bucle de ciclo de eventos de la aplicación ahora ha sido actualizado junto con los callbacks para usar las nuevas cámaras.
+En cuanto a la funcionalidad, he descargado y implementado la carpeta de GLM en el archivo raíz de el proyecto y añadido manualmente a cmake.
+Ahora, al ejecutar, aparece una menú desplegable creado con imgui en el que seleccionamos el tipo de cámara que queremos utilizar, y usamos el ratón para desplazar la vista.
