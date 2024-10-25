@@ -26,6 +26,7 @@
 				<Compiler>
 					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include"/>
 					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/include"/>
+					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/GLM"/>
 					<Add directory="C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include"/>
 					<Add directory="C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
 					<Add directory="C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
@@ -51,6 +52,7 @@
 				<Compiler>
 					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include"/>
 					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/imgui/include"/>
+					<Add directory="C:/Users/34660/Downloads/Universidad/PAGpr/GLM"/>
 					<Add directory="C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include"/>
 					<Add directory="C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
 					<Add directory="C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
@@ -88,6 +90,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/Camera.cpp">
+			<Option target="PAGpr"/>
+		</Unit>
+		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/Camera.h">
+			<Option target="PAGpr"/>
+		</Unit>
 		<Unit filename="C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/src/glad.c">
 			<Option target="PAGpr"/>
 		</Unit>

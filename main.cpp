@@ -11,6 +11,72 @@
 float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f; // Valores iniciales
 std::string shaderBaseName = "../pag03"; // Nombre base de los shaders
 
+// Variables globales para el control del ratón
+bool botonIzquierdoPulsado = false;
+double lastMouseX = 0.0, lastMouseY = 0.0;
+
+// Enumeración para seleccionar el tipo de movimiento de cámara
+enum class MovimientoCamara {
+    Ninguno,
+    Pan,
+    Tilt,
+    Dolly,
+    Crane,
+    Orbit,
+    Zoom
+};
+MovimientoCamara movimientoActual = MovimientoCamara::Ninguno;  // Movimiento seleccionado
+
+// Callback para manejar el estado del botón del ratón
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+        botonIzquierdoPulsado = (action == GLFW_PRESS);
+        if (botonIzquierdoPulsado) {
+            // Obtiene la posición actual del ratón cuando se presiona
+            glfwGetCursorPos(window, &lastMouseX, &lastMouseY);
+        }
+    }
+}
+
+// Callback para manejar el movimiento del ratón
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+    Camara* camara = PAG::Renderer::getInstancia().getCamara();
+
+    if (botonIzquierdoPulsado) {
+        double deltaX = xpos - lastMouseX;
+        double deltaY = ypos - lastMouseY;
+
+        // Aplica el movimiento de cámara según el tipo seleccionado
+        switch (movimientoActual) {
+            case MovimientoCamara::Pan:
+                camara->pan(deltaX * 0.1f);
+                break;
+            case MovimientoCamara::Tilt:
+                camara->tilt(deltaY * 0.1f);
+                break;
+            case MovimientoCamara::Dolly:
+                camara->dolly(deltaY * 0.05f);  // Dolly basado en el movimiento vertical
+                break;
+            case MovimientoCamara::Crane:
+                camara->crane(deltaY * 0.05f);  // Crane basado en el movimiento vertical
+                break;
+            case MovimientoCamara::Orbit:
+                camara->orbit(deltaY * 0.1f, deltaX * 0.1f);  // Orbit en ambos ejes
+                break;
+            case MovimientoCamara::Zoom:
+                camara->zoom(deltaY * 0.1f);  // Zoom basado en el movimiento vertical
+                break;
+            default:
+                break;
+        }
+
+        // Actualiza la última posición del ratón
+        lastMouseX = xpos;
+        lastMouseY = ypos;
+    }
+}
+
+
 // - Esta función callback será llamada cuando GLFW produzca algún error
 void error_callback(int errno, const char* desc) {
     std::string aux(desc);
@@ -28,12 +94,74 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     PAG::Renderer::getInstancia().cambiarTamano(width, height);
 }
 
-// - Esta función callback será llamada cada vez que se pulse una tecla dirigida al área de dibujo OpenGL.
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    Camara* camara = PAG::Renderer::getInstancia().getCamara();
+    float velocidad = 0.1f;  // Velocidad de traslación
+    float angulo = 5.0f;     // Velocidad de rotación en grados
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
+
+    if (action == GLFW_PRESS) {
+        switch (key) {
+            // Movimiento Pan (horizontal)
+            case GLFW_KEY_LEFT:
+                camara->pan(-angulo);  // Pan a la izquierda
+                break;
+            case GLFW_KEY_RIGHT:
+                camara->pan(angulo);  // Pan a la derecha
+                break;
+
+                // Movimiento Tilt (vertical)
+            case GLFW_KEY_UP:
+                camara->tilt(-angulo);  // Tilt hacia arriba
+                break;
+            case GLFW_KEY_DOWN:
+                camara->tilt(angulo);  // Tilt hacia abajo
+                break;
+
+                // Movimiento Dolly (adelante/atrás)
+            case GLFW_KEY_W:
+                camara->dolly(velocidad);  // Mover hacia adelante
+                break;
+            case GLFW_KEY_S:
+                camara->dolly(-velocidad);  // Mover hacia atrás
+                break;
+
+                // Movimiento Crane (arriba/abajo)
+            case GLFW_KEY_Q:
+                camara->crane(velocidad);  // Mover hacia arriba
+                break;
+            case GLFW_KEY_E:
+                camara->crane(-velocidad);  // Mover hacia abajo
+                break;
+
+                // Movimiento Orbit (alrededor del punto de interés)
+            case GLFW_KEY_A:
+                camara->orbit(0.0f, angulo);  // Orbit izquierda
+                break;
+            case GLFW_KEY_D:
+                camara->orbit(0.0f, -angulo);  // Orbit derecha
+                break;
+            case GLFW_KEY_Z:
+                camara->orbit(angulo, 0.0f);  // Orbit arriba
+                break;
+            case GLFW_KEY_X:
+                camara->orbit(-angulo, 0.0f);  // Orbit abajo
+                break;
+
+                // Zoom
+            case GLFW_KEY_R:
+                camara->zoom(-2.0f);  // Zoom In
+                break;
+            case GLFW_KEY_F:
+                camara->zoom(2.0f);  // Zoom Out
+                break;
+        }
+    }
 }
+
 
 // Variable global para controlar cuál componente de color está siendo modificado
 int colorIndex = 0; // 0 = red, 1 = green, 2 = blue
@@ -120,6 +248,8 @@ int main() {
               << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
     // Configuración de los callbacks de GLFW
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetWindowRefreshCallback(window, window_refresh_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetKeyCallback(window, key_callback);
@@ -157,14 +287,13 @@ int main() {
         // Poll de eventos
         glfwPollEvents();
 
-        // Nuevo frame de ImGui
+        // Iniciar un nuevo frame de ImGui
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
         // ---- Ventana para cambiar shaders ----
         ImGui::Begin("Shaders");
-
         ImGui::Text("Selecciona el nombre base de los shaders:");
         ImGui::InputText("Shader Base", &shaderBaseName, ImGuiInputTextFlags_AutoSelectAll);
 
@@ -197,6 +326,31 @@ int main() {
 
         // Cambiamos el color de fondo con los valores actualizados
         PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
+
+        ImGui::End();
+
+        // ---- Ventana para seleccionar el tipo de movimiento de cámara ----
+        ImGui::Begin("Control de Cámara");
+
+        ImGui::Text("Selecciona el tipo de movimiento:");
+        if (ImGui::RadioButton("Pan", movimientoActual == MovimientoCamara::Pan)) {
+            movimientoActual = MovimientoCamara::Pan;
+        }
+        if (ImGui::RadioButton("Tilt", movimientoActual == MovimientoCamara::Tilt)) {
+            movimientoActual = MovimientoCamara::Tilt;
+        }
+        if (ImGui::RadioButton("Dolly", movimientoActual == MovimientoCamara::Dolly)) {
+            movimientoActual = MovimientoCamara::Dolly;
+        }
+        if (ImGui::RadioButton("Crane", movimientoActual == MovimientoCamara::Crane)) {
+            movimientoActual = MovimientoCamara::Crane;
+        }
+        if (ImGui::RadioButton("Orbit", movimientoActual == MovimientoCamara::Orbit)) {
+            movimientoActual = MovimientoCamara::Orbit;
+        }
+        if (ImGui::RadioButton("Zoom", movimientoActual == MovimientoCamara::Zoom)) {
+            movimientoActual = MovimientoCamara::Zoom;
+        }
 
         ImGui::End();
 

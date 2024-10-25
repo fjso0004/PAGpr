@@ -14,6 +14,8 @@
 #include "Renderer.h"
 #include "ShaderProgram.h"
 #include "glad/glad.h"
+#include <glm/gtc/type_ptr.hpp>  // Necesario para glm::value_ptr
+
 
 namespace PAG
 {
@@ -23,7 +25,8 @@ namespace PAG
     /**
     * Constructor por defecto
     */
-    Renderer::Renderer() : shaderProgram(nullptr) {
+    Renderer::Renderer() : shaderProgram(nullptr), camara(nullptr){
+        camara = new Camara(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 1024.0f / 576.0f, 0.1f, 100.0f);
         glEnable(GL_DEPTH_TEST); // Activa el test de profundidad en OpenGL
     }
 
@@ -31,6 +34,10 @@ namespace PAG
     * Destructor
     */
     Renderer::~Renderer() {
+        if (camara) {
+            delete camara;
+            camara = nullptr;
+        }
         if (shaderProgram) {
             delete shaderProgram; // Libera la memoria del programa de shaders
             shaderProgram = nullptr;
@@ -62,6 +69,9 @@ namespace PAG
 
         if (shaderProgram) {
             shaderProgram->useProgram(); // Usa el shader program
+
+            // Enviar las matrices de transformación al shader
+            setUniforms(shaderProgram);
         }
 
         glBindVertexArray(idVAO); // Asocia el VAO
@@ -128,5 +138,21 @@ namespace PAG
 
         shaderProgram = new ShaderProgram(); // Crea un nuevo ShaderProgram
         shaderProgram->loadShaders(shaderBase + "-vs.glsl", shaderBase + "-fs.glsl"); // Carga los shaders
+    }
+
+    void Renderer::setUniforms(ShaderProgram *shaderProgram) {
+        glm::mat4 view = camara->getViewMatrix();
+        glm::mat4 projection = camara->getProjectionMatrix();
+
+        shaderProgram->useProgram();
+        GLint viewLoc = glGetUniformLocation(shaderProgram->getProgramID(), "view");
+        GLint projLoc = glGetUniformLocation(shaderProgram->getProgramID(), "projection");
+
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+    }
+
+    Camara *Renderer::getCamara() const {
+        return camara;
     }
 }

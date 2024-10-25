@@ -20,6 +20,7 @@
 */
 #include "glad/glad.h"
 #include "ShaderProgram.h"
+#include "Camera.h"
 #include <string>
 
 namespace PAG
@@ -43,6 +44,8 @@ namespace PAG
         GLuint idVAO = 0; // Identificador del vertex array object
         GLuint idVBO = 0; // Identificador del vertex buffer object
         GLuint idIBO = 0; // Identificador del index buffer object
+
+        Camara* camara;
 
     public:
         virtual ~Renderer(); // Destructor
@@ -84,6 +87,11 @@ namespace PAG
         * @param shaderBase Nombre base de los archivos del shader
         */
         void loadShaderProgram(const std::string& shaderBase);
+
+        // Método para pasar las matrices de transformación al shader
+        void setUniforms(ShaderProgram* shaderProgram);
+
+        Camara *getCamara() const;
     };
 }
 
