@@ -21,13 +21,15 @@
 #include "glad/glad.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
+#include "ModeloOBJ.h"
 #include <string>
+#include <vector>
+#include <memory>
 
 namespace PAG
 {
     /**
-    * @brief Clase encargada de encapsular la gestión del área de dibujo
-    * OpenGL
+    * @brief Clase encargada de encapsular la gestión del área de dibujo OpenGL
     *
     * Esta clase coordina el renderizado de las escenas OpenGL. Implementa
     * el patrón de diseño Singleton. Está pensada para que las funciones
@@ -36,10 +38,12 @@ namespace PAG
     class Renderer
     {
     private:
+        std::vector<std::unique_ptr<ModeloOBJ>> models;  // Lista de modelos usando ModeloOBJ
+        std::shared_ptr<ShaderProgram> shaderProgram;  // Gestión segura del ShaderProgram
+
         static Renderer* instancia; ///< Puntero al único objeto
 
         Renderer();  // Constructor privado para el patrón Singleton
-        ShaderProgram* shaderProgram; // Nuevo atributo para la gestión de shaders
 
         GLuint idVAO = 0; // Identificador del vertex array object
         GLuint idVBO = 0; // Identificador del vertex buffer object
@@ -89,9 +93,19 @@ namespace PAG
         void loadShaderProgram(const std::string& shaderBase);
 
         // Método para pasar las matrices de transformación al shader
-        void setUniforms(ShaderProgram* shaderProgram);
+        void setUniforms();
 
-        Camara *getCamara() const;
+        Camara* getCamara() const;
+
+        void cargarModelo(const std::string& filePath);
+        void eliminarModelo(int index);
+        void renderizarEscena();
+        void actualizarTransformacion(int index, const glm::mat4& transform);
+        void SetShaderProgram(std::shared_ptr<ShaderProgram> shader);
+        const std::shared_ptr<ShaderProgram> &getShaderProgram() const;
+        std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {
+            return models;
+        }
     };
 }
 

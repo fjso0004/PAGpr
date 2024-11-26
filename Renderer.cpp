@@ -14,7 +14,8 @@
 #include "Renderer.h"
 #include "ShaderProgram.h"
 #include "glad/glad.h"
-#include <glm/gtc/type_ptr.hpp>  // Necesario para glm::value_ptr
+#include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 
 namespace PAG
@@ -25,7 +26,7 @@ namespace PAG
     /**
     * Constructor por defecto
     */
-    Renderer::Renderer() : shaderProgram(nullptr), camara(nullptr){
+    Renderer::Renderer() : shaderProgram(std::make_shared<ShaderProgram>()), camara(nullptr) {
         camara = new Camara(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 1024.0f / 576.0f, 0.1f, 100.0f);
         glEnable(GL_DEPTH_TEST); // Activa el test de profundidad en OpenGL
     }
@@ -37,10 +38,6 @@ namespace PAG
         if (camara) {
             delete camara;
             camara = nullptr;
-        }
-        if (shaderProgram) {
-            delete shaderProgram; // Libera la memoria del programa de shaders
-            shaderProgram = nullptr;
         }
 
         // Libera los recursos de OpenGL
@@ -65,13 +62,15 @@ namespace PAG
     */
     void Renderer::refrescar() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Limpia los buffers
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Modo de dibujado
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         if (shaderProgram) {
-            shaderProgram->useProgram(); // Usa el shader program
+            shaderProgram->useProgram(); // Activar el programa de shaders
+            setUniforms();               // Configurar vista y proyección
 
-            // Enviar las matrices de transformación al shader
-            setUniforms(shaderProgram);
+            for (const auto& modelo : models) {
+                modelo->renderizar(shaderProgram->getProgramID()); // Renderizar con la matriz de transformación actualizada
+            }
         }
 
         glBindVertexArray(idVAO); // Asocia el VAO
@@ -132,15 +131,13 @@ namespace PAG
     * @param shaderBase Nombre base de los archivos de shaders
     */
     void Renderer::loadShaderProgram(const std::string& shaderBase) {
-        if (shaderProgram) {
-            delete shaderProgram; // Elimina el shader program anterior si existe
-        }
-
-        shaderProgram = new ShaderProgram(); // Crea un nuevo ShaderProgram
+        shaderProgram = std::make_shared<ShaderProgram>(); // Crea un nuevo ShaderProgram de forma segura
         shaderProgram->loadShaders(shaderBase + "-vs.glsl", shaderBase + "-fs.glsl"); // Carga los shaders
     }
 
-    void Renderer::setUniforms(ShaderProgram *shaderProgram) {
+    void Renderer::setUniforms() {
+        if (!shaderProgram) return;
+
         glm::mat4 view = camara->getViewMatrix();
         glm::mat4 projection = camara->getProjectionMatrix();
 
@@ -152,7 +149,52 @@ namespace PAG
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
     }
 
-    Camara *Renderer::getCamara() const {
+    Camara* Renderer::getCamara() const {
         return camara;
+    }
+
+    void Renderer::SetShaderProgram(std::shared_ptr<ShaderProgram> shader) {
+        shaderProgram = shader;
+    }
+
+    void Renderer::cargarModelo(const std::string& filePath) {
+        try {
+            auto model = std::make_unique<ModeloOBJ>(filePath);
+            if (model->cargarModelo()) {
+                model->inicializarBuffers();
+                models.push_back(std::move(model));
+                std::cout << "Modelo cargado y buffers inicializados: " << filePath << std::endl;
+            } else {
+                std::cerr << "Error al cargar el modelo: " << filePath << std::endl;
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "Excepción al cargar el modelo: " << e.what() << std::endl;
+        }
+    }
+
+    void Renderer::eliminarModelo(int index) {
+        if (index >= 0 && index < models.size()) {
+            models.erase(models.begin() + index);
+            std::cout << "Modelo eliminado en el índice: " << index << std::endl;
+        }
+    }
+
+    void Renderer::renderizarEscena() {
+        if (shaderProgram) {
+            shaderProgram->useProgram();  // Activar el shader program
+            for (const auto& modelo : models) {
+                modelo->renderizar(shaderProgram->getProgramID());
+            }
+        }
+    }
+
+    void Renderer::actualizarTransformacion(int index, const glm::mat4& transform) {
+        if (index >= 0 && index < models.size()) {
+            models[index]->SetModelMatrix(transform);
+        }
+    }
+
+    const std::shared_ptr<ShaderProgram> &Renderer::getShaderProgram() const {
+        return shaderProgram;
     }
 }

@@ -1,1 +1,1 @@
--IC:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include -IC:/Users/34660/Downloads/Universidad/PAGpr/imgui/include -IC:/Users/34660/Downloads/Universidad/PAGpr/GLM -isystem C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include
+-I"C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include" -I"C:/Users/34660/Downloads/Universidad/PAGpr - copia/imgui/include" -I"C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM" -isystem C:/Users/34660/.conan2/p/b/glfw89d13ecbf1797/p/include -isystem C:/Users/34660/.conan2/p/b/tinyoaf0b5210e088f/p/include

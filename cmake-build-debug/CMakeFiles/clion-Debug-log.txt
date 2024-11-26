@@ -1,13 +1,4 @@
-C:\Users\34660\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -G "CodeBlocks - MinGW Makefiles" -S C:\Users\34660\Downloads\Universidad\PAGpr -B C:\Users\34660\Downloads\Universidad\PAGpr\cmake-build-debug
-CMake Deprecation Warning:
-  Support for "Extra Generators" like
-
-    CodeBlocks
-
-  is deprecated and will be removed from a future version of CMake.  IDEs may
-  use the cmake-file-api(7) to view CMake-generated project build trees.
-
-
+C:\Users\34660\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -G "MinGW Makefiles" -S "C:\Users\34660\Downloads\Universidad\PAGpr - copia" -B "C:\Users\34660\Downloads\Universidad\PAGpr - copia\cmake-build-debug"
 -- CMake-Conan: first find_package() found. Installing dependencies with Conan
 -- CMake-Conan: Checking if a default profile exists
 C:\Users\34660\.conan2\profiles\default
@@ -17,7 +8,7 @@ C:\Users\34660\.conan2\profiles\default
 -- CMake-Conan: CMake compiler version=13.1.0
 -- CMake-Conan: [settings] compiler=gcc
 -- CMake-Conan: [settings] compiler.version=13
--- CMake-Conan: Creating profile C:/Users/34660/Downloads/Universidad/PAGpr/cmake-build-debug/conan_host_profile
+-- CMake-Conan: Creating profile C:/Users/34660/Downloads/Universidad/PAGpr - copia/cmake-build-debug/conan_host_profile
 -- CMake-Conan: Profile: 
 [settings]
 arch=x86_64
@@ -32,7 +23,7 @@ tools.cmake.cmaketoolchain:generator=MinGW Makefiles
 tools.build:compiler_executables={"c":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe","cpp":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/g++.exe","rc":"C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/bin/windres.exe"}
 
 -- CMake-Conan: Installing single configuration Debug
--- CMake-Conan: conan install C:/Users/34660/Downloads/Universidad/PAGpr -of=C:/Users/34660/Downloads/Universidad/PAGpr/cmake-build-debug/conan --profile:host=default;--profile:host=C:/Users/34660/Downloads/Universidad/PAGpr/cmake-build-debug/conan_host_profile;--profile:build=default;--build=missing
+-- CMake-Conan: conan install C:/Users/34660/Downloads/Universidad/PAGpr - copia -of=C:/Users/34660/Downloads/Universidad/PAGpr - copia/cmake-build-debug/conan --profile:host=default;--profile:host=C:/Users/34660/Downloads/Universidad/PAGpr - copia/cmake-build-debug/conan_host_profile;--profile:build=default;--build=missing
 
 ======== Input profiles ========
 Profile host:
@@ -61,47 +52,53 @@ os=Windows
 
 ======== Computing dependency graph ========
 Graph root
-    conanfile.py: C:/Users/34660/Downloads/Universidad/PAGpr\conanfile.py
+    conanfile.py: C:/Users/34660/Downloads/Universidad/PAGpr - copia\conanfile.py
 Requirements
-    glfw/3.3.8#eaa2d6de4e064b2c92ad7fc4ac255141 - Cache
+    glfw/3.3.8#d75a15a362a707163bfaabbf4dc993d8 - Cache
     opengl/system#4df6fecde4084386beded3ed0e56e4ea - Cache
+    tinyobjloader/2.0.0-rc10#1f75250f5a1b3a0373ce8e134061b318 - Cache
 
 ======== Computing necessary packages ========
 Requirements
-    glfw/3.3.8#eaa2d6de4e064b2c92ad7fc4ac255141:8017d78d70cd810fbc93ef6c919368c5a0f66568#281ea3229391c8670455d950aa35eb06 - Cache
+    glfw/3.3.8#d75a15a362a707163bfaabbf4dc993d8:8017d78d70cd810fbc93ef6c919368c5a0f66568#7bff40a17c08e32cc4f145a08bda381f - Cache
     opengl/system#4df6fecde4084386beded3ed0e56e4ea:da39a3ee5e6b4b0d3255bfef95601890afd80709#0ba8627bd47edc3a501e8f0eb9a79e5e - Cache
+    tinyobjloader/2.0.0-rc10#1f75250f5a1b3a0373ce8e134061b318:ad1d489d379442d83baa82ec8e898db2bd62f522#83f0af68e6064d5ce0fec246c93067f3 - Cache
 
 ======== Installing packages ========
-opengl/system: Already installed! (1 of 2)
-glfw/3.3.8: Already installed! (2 of 2)
+opengl/system: Already installed! (1 of 3)
+tinyobjloader/2.0.0-rc10: Already installed! (2 of 3)
+glfw/3.3.8: Already installed! (3 of 3)
 WARN: deprecated: Usage of deprecated Conan 1.X features that will be removed in Conan 2.X:
-WARN: deprecated:     'cpp_info.filenames' used in: glfw/3.3.8, opengl/system
+WARN: deprecated:     'cpp_info.filenames' used in: opengl/system, glfw/3.3.8
+WARN: deprecated:     'cpp_info.build_modules' used in: tinyobjloader/2.0.0-rc10, glfw/3.3.8
 WARN: deprecated:     'cpp_info.names' used in: glfw/3.3.8
-WARN: deprecated:     'cpp_info.build_modules' used in: glfw/3.3.8
 
 ======== Finalizing install (deploy, generators) ========
-conanfile.py: Writing generators to C:\Users\34660\Downloads\Universidad\PAGpr\cmake-build-debug\conan\build\Debug\generators
+conanfile.py: Writing generators to C:\Users\34660\Downloads\Universidad\PAGpr - copia\cmake-build-debug\conan\build\Debug\generators
 conanfile.py: Generator 'CMakeDeps' calling 'generate()'
 conanfile.py: CMakeDeps necessary find_package() and targets for your CMakeLists.txt
     find_package(glfw3)
     find_package(opengl_system)
-    target_link_libraries(... glfw opengl::opengl)
+    find_package(tinyobjloader)
+    target_link_libraries(... glfw opengl::opengl tinyobjloader::tinyobjloader)
 conanfile.py: Calling generate()
-conanfile.py: Generators folder: C:\Users\34660\Downloads\Universidad\PAGpr\cmake-build-debug\conan\build\Debug\generators
+conanfile.py: Generators folder: C:\Users\34660\Downloads\Universidad\PAGpr - copia\cmake-build-debug\conan\build\Debug\generators
 conanfile.py: CMakeToolchain generated: conan_toolchain.cmake
 conanfile.py: CMakeToolchain: Preset 'conan-debug' added to CMakePresets.json.
     (cmake>=3.23) cmake --preset conan-debug
     (cmake<3.23) cmake <path> -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=generators\conan_toolchain.cmake  -DCMAKE_SH=CMAKE_SH-NOTFOUND -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE=Debug
-conanfile.py: CMakeToolchain generated: C:\Users\34660\Downloads\Universidad\PAGpr\cmake-build-debug\conan\build\Debug\generators\CMakePresets.json
+conanfile.py: CMakeToolchain generated: C:\Users\34660\Downloads\Universidad\PAGpr - copia\cmake-build-debug\conan\build\Debug\generators\CMakePresets.json
 conanfile.py: Generating aggregated env files
 conanfile.py: Generated aggregated env files: ['conanbuild.bat', 'conanrun.bat']
 Install finished successfully
--- CMake-Conan: CONAN_GENERATORS_FOLDER=C:/Users/34660/Downloads/Universidad/PAGpr/cmake-build-debug/conan/build/Debug/generators
--- CMake-Conan: CONANFILE=C:/Users/34660/Downloads/Universidad/PAGpr/conanfile.py
+-- CMake-Conan: CONAN_GENERATORS_FOLDER=C:/Users/34660/Downloads/Universidad/PAGpr - copia/cmake-build-debug/conan/build/Debug/generators
+-- CMake-Conan: CONANFILE=C:/Users/34660/Downloads/Universidad/PAGpr - copia/conanfile.py
 -- Conan: Target declared 'glfw'
 -- CMake-Conan: find_package(opengl_system) found, 'conan install' already ran
 -- Conan: Target declared 'opengl::opengl'
 -- CMake-Conan: find_package(opengl_system) found, 'conan install' already ran
--- Configuring done (2.0s)
--- Generating done (0.0s)
--- Build files have been written to: C:/Users/34660/Downloads/Universidad/PAGpr/cmake-build-debug
+-- CMake-Conan: find_package(tinyobjloader) found, 'conan install' already ran
+-- Conan: Target declared 'tinyobjloader::tinyobjloader'
+-- Configuring done (2.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/34660/Downloads/Universidad/PAGpr - copia/cmake-build-debug

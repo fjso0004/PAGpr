@@ -3,5 +3,6 @@ message(STATUS "Conan: It is recommended to use explicit find_package() per depe
 
 find_package(glfw3)
 find_package(opengl_system)
+find_package(tinyobjloader)
 
-set(CONANDEPS_LEGACY  glfw  opengl::opengl )
+set(CONANDEPS_LEGACY  glfw  opengl::opengl  tinyobjloader::tinyobjloader )

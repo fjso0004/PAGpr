@@ -4,3 +4,4 @@
 requirements:
   - "opengl/system"
   - "glfw/3.3.8"
+  - "tinyobjloader/2.0.0-rc10"

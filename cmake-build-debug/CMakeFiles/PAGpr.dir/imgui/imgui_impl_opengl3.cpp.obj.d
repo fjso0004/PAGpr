@@ -1,7 +1,7 @@
 CMakeFiles/PAGpr.dir/imgui/imgui_impl_opengl3.cpp.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_impl_opengl3.cpp \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imconfig.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_impl_opengl3.cpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imconfig.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -35,7 +35,7 @@ CMakeFiles/PAGpr.dir/imgui/imgui_impl_opengl3.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_impl_opengl3.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_impl_opengl3.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
@@ -43,7 +43,7 @@ CMakeFiles/PAGpr.dir/imgui/imgui_impl_opengl3.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_impl_opengl3_loader.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_impl_opengl3_loader.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/windows.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/excpt.h \

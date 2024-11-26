@@ -8,6 +8,9 @@ file(GLOB MY_FILES *.cpp)
 file(GLOB GLAD_FILES GLAD/src/*.c)
 file(GLOB IMGUI_FILES imgui/*.cpp imgui/imgui_stdlib.cpp)
 
+# Fuerza que pugixml se construya como shared library
+set(BUILD_SHARED_LIBS ON CACHE INTERNAL "" FORCE)
+
 # Indica qué archivos hay que compilar para generar el ejecutable
 add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES} ${IMGUI_FILES}
         Renderer.cpp
@@ -16,14 +19,19 @@ add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES} ${IMGUI_FILES}
         ShaderProgram.h
         Camera.cpp
         Camera.h
-        Camera.h)
+        Camera.cpp
+        ModeloOBJ.cpp
+        ModeloOBJ.h
+)
 
 # Indica directorios (adicionales a los por defecto) para buscar includes
 target_include_directories(${PROJECT_NAME} PUBLIC GLAD/include
         imgui/include
-        GLM)
+        GLM
+)
 
 # Indica bibliotecas a enlazar en el ejecutable
-find_package(glfw3)
-find_package(opengl_system)
-target_link_libraries(${PROJECT_NAME} opengl::opengl glfw)
+find_package(glfw3 REQUIRED)
+find_package(opengl_system REQUIRED)
+find_package(tinyobjloader REQUIRED)
+target_link_libraries(${PROJECT_NAME} opengl::opengl glfw tinyobjloader::tinyobjloader)

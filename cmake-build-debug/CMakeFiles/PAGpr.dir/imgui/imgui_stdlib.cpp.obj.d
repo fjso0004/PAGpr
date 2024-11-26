@@ -1,7 +1,7 @@
 CMakeFiles/PAGpr.dir/imgui/imgui_stdlib.cpp.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_stdlib.cpp \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imconfig.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_stdlib.cpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imconfig.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -35,7 +35,7 @@ CMakeFiles/PAGpr.dir/imgui/imgui_stdlib.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_stdlib.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_stdlib.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stringfwd.h \

@@ -1,7 +1,7 @@
 CMakeFiles/PAGpr.dir/imgui/imgui_impl_glfw.cpp.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_impl_glfw.cpp \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imconfig.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_impl_glfw.cpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imconfig.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -35,12 +35,12 @@ CMakeFiles/PAGpr.dir/imgui/imgui_impl_glfw.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\imgui\imgui_impl_glfw.h \
- C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include/GLFW/glfw3.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui\imgui_impl_glfw.h \
+ C:/Users/34660/.conan2/p/b/glfw89d13ecbf1797/p/include/GLFW/glfw3.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/GL/gl.h \
- C:/Users/34660/.conan2/p/b/glfw0f29db7df83ef/p/include/GLFW/glfw3native.h \
+ C:/Users/34660/.conan2/p/b/glfw89d13ecbf1797/p/include/GLFW/glfw3native.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/windows.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/excpt.h \

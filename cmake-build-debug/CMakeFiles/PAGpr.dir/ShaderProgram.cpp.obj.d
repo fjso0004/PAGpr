@@ -1,8 +1,8 @@
 CMakeFiles/PAGpr.dir/ShaderProgram.cpp.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\ShaderProgram.cpp \
- C:\Users\34660\Downloads\Universidad\PAGpr\ShaderProgram.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include/glad/glad.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include/KHR/khrplatform.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.cpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/glad/glad.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/KHR/khrplatform.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \

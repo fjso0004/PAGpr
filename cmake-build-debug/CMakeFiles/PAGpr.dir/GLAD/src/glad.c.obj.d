@@ -1,5 +1,5 @@
 CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\GLAD\src\glad.c \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\GLAD\src\glad.c \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -23,8 +23,8 @@ CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/string.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include/glad/glad.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLAD/include/KHR/khrplatform.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/glad/glad.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/KHR/khrplatform.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stddef.h \

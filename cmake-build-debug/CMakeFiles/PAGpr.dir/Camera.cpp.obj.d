@@ -1,8 +1,8 @@
 CMakeFiles/PAGpr.dir/Camera.cpp.obj: \
- C:\Users\34660\Downloads\Universidad\PAGpr\Camera.cpp \
- C:\Users\34660\Downloads\Universidad\PAGpr\Camera.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/glm.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/_fixes.hpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Camera.cpp \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Camera.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/glm.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/_fixes.hpp \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cmath \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -68,14 +68,14 @@ CMakeFiles/PAGpr.dir/Camera.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/poly_hermite.tcc \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/poly_laguerre.tcc \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/riemann_zeta.tcc \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/setup.hpp \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/assert.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstddef \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stddef.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stddef.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/simd/platform.h \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/simd/platform.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
@@ -83,146 +83,151 @@ CMakeFiles/PAGpr.dir/Camera.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cfloat \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/float.h \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/fwd.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/qualifier.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/setup.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/vec2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec2.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/compute_vector_relational.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int2_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/scalar_int_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/setup.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint2_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/scalar_uint_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/vec3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec3.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int3_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint3_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/vec4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec4.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_bool4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_float4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_double4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_int4_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/vector_uint4_sized.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat2x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x2.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/matrix.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat2x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x3.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat2x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat2x4.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat3x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x2.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat3x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x3.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat3x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat3x4.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double3x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float3x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat4x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x2.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat4x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x3.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x3.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x3_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/mat4x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_mat4x4.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double4x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x4.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float4x4_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_matrix.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/geometric.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_geometric.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/exponential.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec1.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_vec1.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_exponential.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/vector_relational.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_vector_relational.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/_vectorize.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/common.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_common.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/compute_common.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_double2x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x2.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_float2x2_precision.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/trigonometric.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_trigonometric.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/packing.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_packing.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_half.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/type_half.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/integer.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/detail/func_integer.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/gtc/matrix_transform.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_projection.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/gtc/constants.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/scalar_constants.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/scalar_constants.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/gtc/constants.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_projection.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_clip_space.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_clip_space.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_transform.hpp \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/ext/matrix_transform.inl \
- C:/Users/34660/Downloads/Universidad/PAGpr/GLM/glm/gtc/matrix_transform.inl
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/fwd.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/qualifier.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/vec2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec2.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/compute_vector_relational.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool2_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float2_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double2_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int2_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../ext/scalar_int_sized.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint2_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../ext/scalar_uint_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/vec3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec3.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool3_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float3_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double3_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int3_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint3.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint3_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/vec4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_vec4.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_bool4_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_float4_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_double4_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_int4_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint4.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/vector_uint4_sized.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/mat2x2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/matrix_double2x2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_mat2x2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/../detail/type_mat2x2.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/matrix.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat2x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double2x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat2x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat2x3.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double2x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float2x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float2x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat2x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double2x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat2x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat2x4.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double2x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float2x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float2x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat3x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x2.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x2_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x2_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat3x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x3.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat3x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat3x4.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double3x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float3x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat4x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x2.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x2_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x2.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x2_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat4x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x3.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x3.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x3_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/mat4x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_mat4x4.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_double4x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x4.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/matrix_float4x4_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/func_matrix.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/geometric.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/func_geometric.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/exponential.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_vec1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_vec1.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/func_exponential.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/vector_relational.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/func_vector_relational.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/_vectorize.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/common.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/_fixes.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/func_common.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/compute_common.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/matrix_double2x2_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/matrix_float2x2.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/./ext/matrix_float2x2_precision.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/trigonometric.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/func_trigonometric.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/packing.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/func_packing.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/type_half.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/type_half.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/integer.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/func_integer.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/matrix_transform.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_projection.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/gtc/constants.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/scalar_constants.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/scalar_constants.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/gtc/constants.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_projection.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_clip_space.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_clip_space.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_transform.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../ext/matrix_transform.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/matrix_transform.inl

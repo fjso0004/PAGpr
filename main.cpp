@@ -7,6 +7,7 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_stdlib.h"
+#include "ModeloOBJ.h"
 
 float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f; // Valores iniciales
 std::string shaderBaseName = "../pag03"; // Nombre base de los shaders
@@ -282,6 +283,11 @@ int main() {
     // Variables para controlar el color, inicializadas a valores globales
     ImVec4 color = ImVec4(red, green, blue, alpha);
 
+    //ModeloOBJ* modelo = new ModeloOBJ("../vaca.obj");
+    //if (modelo->cargarModelo()) {
+    //    modelo->inicializarBuffers();
+    //}
+
     // Ciclo de eventos de la aplicación
     while (!glfwWindowShouldClose(window)) {
         // Poll de eventos
@@ -354,6 +360,68 @@ int main() {
 
         ImGui::End();
 
+        // ---- Ventana para cargar y gestionar modelos ----
+        static std::string rutaModelo; // Ruta para cargar un modelo
+        static int modeloSeleccionado = -1; // Índice del modelo seleccionado
+        static float traslacion[3] = {0.0f, 0.0f, 0.0f};
+        static float rotacion[3] = {0.0f, 0.0f, 0.0f};
+        static float escala[3] = {1.0f, 1.0f, 1.0f};
+
+        ImGui::Begin("Gestión de Modelos");
+
+// Entrada de ruta y botón para cargar modelos
+        ImGui::Text("Cargar nuevo modelo:");
+        ImGui::InputText("Ruta del Modelo", &rutaModelo);
+        if (ImGui::Button("Cargar Modelo")) {
+            PAG::Renderer::getInstancia().cargarModelo(rutaModelo);
+            rutaModelo.clear(); // Limpiar el campo después de cargar
+        }
+
+        ImGui::Separator();
+
+// Lista de modelos cargados
+        ImGui::Text("Modelos en la escena:");
+        if (ImGui::BeginListBox("Modelos")) {
+            const auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a modelos
+            for (size_t i = 0; i < modelos.size(); ++i) {
+                const bool seleccionado = (modeloSeleccionado == static_cast<int>(i));
+                if (ImGui::Selectable(("Modelo " + std::to_string(i)).c_str(), seleccionado)) {
+                    modeloSeleccionado = static_cast<int>(i);
+                }
+                if (seleccionado) {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndListBox();
+        }
+
+// Si hay un modelo seleccionado, mostrar controles
+        if (modeloSeleccionado >= 0) {
+            if (ImGui::Button("Eliminar Modelo")) {
+                PAG::Renderer::getInstancia().eliminarModelo(modeloSeleccionado);
+                modeloSeleccionado = -1; // Reiniciar selección
+            }
+
+            ImGui::Separator();
+            ImGui::Text("Transformaciones:");
+
+            ImGui::InputFloat3("Traslación", traslacion);
+            ImGui::InputFloat3("Rotación (grados)", rotacion);
+            ImGui::InputFloat3("Escala", escala);
+
+            // Construir la transformación y actualizar el modelo
+            glm::mat4 transformacion = glm::mat4(1.0f);
+            transformacion = glm::translate(transformacion, glm::vec3(traslacion[0], traslacion[1], traslacion[2]));
+            transformacion = glm::rotate(transformacion, glm::radians(rotacion[0]), glm::vec3(1.0f, 0.0f, 0.0f));
+            transformacion = glm::rotate(transformacion, glm::radians(rotacion[1]), glm::vec3(0.0f, 1.0f, 0.0f));
+            transformacion = glm::rotate(transformacion, glm::radians(rotacion[2]), glm::vec3(0.0f, 0.0f, 1.0f));
+            transformacion = glm::scale(transformacion, glm::vec3(escala[0], escala[1], escala[2]));
+
+            PAG::Renderer::getInstancia().actualizarTransformacion(modeloSeleccionado, transformacion);
+        }
+
+        ImGui::End();
+
         // Refrescamos la escena de OpenGL
         PAG::Renderer::getInstancia().refrescar();
 
@@ -361,9 +429,13 @@ int main() {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+        //modelo->renderizar();
+
         // Intercambiamos los buffers
         glfwSwapBuffers(window);
     }
+
+    //delete modelo;
 
     // Limpieza de ImGui
     ImGui_ImplOpenGL3_Shutdown();
