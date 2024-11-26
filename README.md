@@ -33,3 +33,17 @@ Enlace a mi [UML](UML.puml)
 Para la implementación de las diversas cámaras, he creado una nueva clase, en la que he adjuntado todo lo relacionado con las mismas. En el main, el bucle de ciclo de eventos de la aplicación ahora ha sido actualizado junto con los callbacks para usar las nuevas cámaras.
 En cuanto a la funcionalidad, he descargado y implementado la carpeta de GLM en el archivo raíz de el proyecto y añadido manualmente a cmake.
 Ahora, al ejecutar, aparece una menú desplegable creado con imgui en el que seleccionamos el tipo de cámara que queremos utilizar, y usamos el ratón para desplazar la vista.
+
+## Práctica 6
+
+El uso de assimp fue imposible por errores con el puig.xml, assimp, conan y un error de librerías con basic_string, por lo que se opto por utilizar tinyobjloader.
+Se concentra todo en la clase ModeloOBJ, que contiene todo lo necesario para utilizar un archivo .obj y renderizarlo en la escena, a través de renderer.
+Se han creado nuevos métodos en la clase Renderer para utilizar esta clase, y se han añadido atributos para las transformaciones en él.
+
+#### Como usar
+
+Para usar la aplicación, se pone el directorio raíz que es en el que se encuentra el único objeto que hemos dejado en el proyecto para no cargarlo demasiado (../vaca.obj), se puede poner cuantas veces quiera, las flechas lo mueven en las distintas posiciones a las que apuntan las mismas.
+Al crear el modelo, pincha sobre este en la interfaz de ImGui para interactuar con ella y hacer las transformaciones que se requiera.
+
+## Práctica 7
+

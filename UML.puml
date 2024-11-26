@@ -42,14 +42,35 @@ RECTANGLE ShaderProgram {
     + loadShader(fileName: string, shaderType: GLenum): GLuint
 }
 
+' Clase ModeloOBJ
+RECTANGLE ModeloOBJ {
+    - ruta: std::string
+    - vertices: std::vector<Vertex>
+    - indices: std::vector<unsigned int>
+    - idVAO: GLuint
+    - idVBO: GLuint
+    - idIBO: GLuint
+    - transformacion: glm::mat4
+    + ModeloOBJ(rutaArchivo: const std::string&)
+    + ~ModeloOBJ()
+    + cargarModelo(): bool
+    + inicializarBuffers()
+    + renderizar(shaderProgramID: GLuint) const
+    + SetModelMatrix(nuevaTransformacion: glm::mat4)
+    + GetModelMatrix(): glm::mat4
+}
+
 allowmixing
 Sistema --> Renderer : "Usa"
 Renderer --> ShaderProgram : "Crea y usa"
 Renderer -- GLAD : "Usa (dependencia)"
 Renderer -- ImGui : "Usa (dependencia)"
+Renderer -- ModeloOBJ : "Gestiona y renderiza múltiples modelos"
+ModeloOBJ -- tinyobjloader : "Usa (dependencia)"
 
 ' Colección de dependencias
 collections GLAD
 collections ImGui
+collections tinyobjloader
 
 @enduml
