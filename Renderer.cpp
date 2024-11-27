@@ -61,24 +61,40 @@ namespace PAG
     * Método para refrescar la escena
     */
     void Renderer::refrescar() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Limpia los buffers
-        glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (shaderProgram) {
-            shaderProgram->useProgram(); // Activar el programa de shaders
+            shaderProgram->useProgram();
             setUniforms();
+
+            // Configurar el modo de polígonos
+            glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
+
             // Configurar subrutinas según el modo actual
             GLuint activeSubroutine = (modoActual == ModoVisualizacion::Alambre) ? subroutineIndices[0] : subroutineIndices[1];
             glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &activeSubroutine);
 
+            // Renderizar cada modelo con su material
             for (const auto& modelo : models) {
-                modelo->renderizar(shaderProgram->getProgramID()); // Renderizar con la matriz de transformación actualizada
+                GLint colorFijoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorFijo");
+                GLint colorDifusoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorDifuso");
+
+                if (modoActual == ModoVisualizacion::Alambre) {
+                    // Usar un color fijo para el modo alambre
+                    if (colorFijoLoc != -1) {
+                        glUniform3f(colorFijoLoc, 1.0f, 0.0f, 0.0f); // Rojo
+                    }
+                } else if (modoActual == ModoVisualizacion::Solido) {
+                    // Usar el color difuso del material del modelo actual
+                    if (colorDifusoLoc != -1) {
+                        Material mat = modelo->getMaterial();
+                        glUniform3fv(colorDifusoLoc, 1, glm::value_ptr(mat.colorDifuso));
+                    }
+                }
+
+                modelo->renderizar(shaderProgram->getProgramID());
             }
         }
-
-        glBindVertexArray(idVAO); // Asocia el VAO
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, idIBO); // Asocia el IBO
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr); // Dibuja el triángulo
     }
 
     /**
@@ -107,7 +123,6 @@ namespace PAG
                 0.0f,  0.5f, 0.0f
         };
 
-        // Definición de los índices de los vértices
         GLuint indices[] = { 0, 1, 2 };
 
         // Generación y configuración del VAO
@@ -160,10 +175,6 @@ namespace PAG
         return camara;
     }
 
-    void Renderer::SetShaderProgram(std::shared_ptr<ShaderProgram> shader) {
-        shaderProgram = shader;
-    }
-
     void Renderer::cargarModelo(const std::string& filePath) {
         try {
             auto model = std::make_unique<ModeloOBJ>(filePath);
@@ -186,23 +197,10 @@ namespace PAG
         }
     }
 
-    void Renderer::renderizarEscena() {
-        if (shaderProgram) {
-            shaderProgram->useProgram();  // Activar el shader program
-            for (const auto& modelo : models) {
-                modelo->renderizar(shaderProgram->getProgramID());
-            }
-        }
-    }
-
     void Renderer::actualizarTransformacion(int index, const glm::mat4& transform) {
         if (index >= 0 && index < models.size()) {
             models[index]->SetModelMatrix(transform);
         }
-    }
-
-    const std::shared_ptr<ShaderProgram> &Renderer::getShaderProgram() const {
-        return shaderProgram;
     }
 
     void PAG::Renderer::cambiarModoVisualizacion(ModoVisualizacion nuevoModo) {

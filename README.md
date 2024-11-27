@@ -26,7 +26,7 @@ Creo que este comportamiento se debe a que no se refresca la aplicación de open
 
 He reordenado el código, en el uml queda reflejado los cambios de una forma clara y concisa, además, he conseguido que vuelva a funcionar el scroll callback con mi rueda del ratón para que modifique el color de fondo de la escena.
 
-Enlace a mi [UML](UML.puml)
+Enlace a mi [UML](UML.puml)(mantener pulsado tecla control y hacer click izquiero y te redirige)
 
 ## Práctica 5
 
@@ -34,7 +34,7 @@ Para la implementación de las diversas cámaras, he creado una nueva clase, en 
 En cuanto a la funcionalidad, he descargado y implementado la carpeta de GLM en el archivo raíz de el proyecto y añadido manualmente a cmake.
 Ahora, al ejecutar, aparece una menú desplegable creado con imgui en el que seleccionamos el tipo de cámara que queremos utilizar, y usamos el ratón para desplazar la vista.
 
-Enlace a mi [UML](UML.puml)
+Enlace a mi [UML](UML.puml)(mantener pulsado tecla control y hacer click izquiero y te redirige)
 
 ## Práctica 6
 
@@ -47,7 +47,7 @@ Se han creado nuevos métodos en la clase Renderer para utilizar esta clase, y s
 Para usar la aplicación, se pone el directorio raíz que es en el que se encuentra el único objeto que hemos dejado en el proyecto para no cargarlo demasiado (../vaca.obj), se puede poner cuantas veces quiera, las flechas lo mueven en las distintas posiciones a las que apuntan las mismas.
 Al crear el modelo, pincha sobre este en la interfaz de ImGui para interactuar con ella y hacer las transformaciones que se requiera.
 
-Enlace a mi [UML](UML.puml)
+Enlace a mi [UML](UML.puml)(mantener pulsado tecla control y hacer click izquiero y te redirige)
 
 ## Práctica 7
 
@@ -61,7 +61,8 @@ A/D: Orbit (rotar horizontalmente).
 Q/E: Crane (mover arriba/abajo).
 Teclas de flecha: Pan y Tilt (horizontal/vertical).
 
-Enlace a mi [UML](UML.puml)
+Enlace a mi [UML](UML.puml)(mantener pulsado tecla control y hacer click izquiero y te redirige)
+enlace a Manual de Usuario [ManualDeUsuario.pdf](ManualDeUsuario.pdf)(mantener pulsado tecla control y hacer click izquiero y te redirige)
 
 ## Práctica 8
 

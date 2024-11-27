@@ -1,6 +1,5 @@
 #include <iostream>
 // IMPORTANTE: El include de GLAD debe estar siempre ANTES del de GLFW
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
 #include "imgui/imgui.h"
@@ -8,9 +7,10 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_stdlib.h"
 #include "ModeloOBJ.h"
+#include "glm/gtc/type_ptr.hpp"
 
-float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f; // Valores iniciales
-std::string shaderBaseName = "../pag03"; // Nombre base de los shaders
+float red = 0.6f, green = 0.6f, blue = 0.6f, alpha = 1.0f;
+std::string shaderBaseName = "../pag03";
 
 // Variables globales para el control del ratón
 bool botonIzquierdoPulsado = false;
@@ -33,7 +33,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
         botonIzquierdoPulsado = (action == GLFW_PRESS);
         if (botonIzquierdoPulsado) {
-            // Obtiene la posición actual del ratón cuando se presiona
             glfwGetCursorPos(window, &lastMouseX, &lastMouseY);
         }
     }
@@ -47,7 +46,6 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
         double deltaX = xpos - lastMouseX;
         double deltaY = ypos - lastMouseY;
 
-        // Aplica el movimiento de cámara según el tipo seleccionado
         switch (movimientoActual) {
             case MovimientoCamara::Pan:
                 camara->pan(deltaX * 0.1f);
@@ -97,8 +95,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     Camara* camara = PAG::Renderer::getInstancia().getCamara();
-    float velocidad = 0.1f;  // Velocidad de traslación
-    float angulo = 5.0f;     // Velocidad de rotación en grados
+    float velocidad = 0.1f;
+    float angulo = 5.0f;
 
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -163,18 +161,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-
-// Variable global para controlar cuál componente de color está siendo modificado
 int colorIndex = 0; // 0 = red, 1 = green, 2 = blue
 
 // Esta función callback será llamada cada vez que se mueva la rueda del ratón sobre el área de dibujo OpenGL.
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
     float colorChange = 0.05f * static_cast<float>(yoffset);
-
-    // Debugging: Imprimimos los valores de color y el índice de color actual
     std::cout << "Before Change - Red: " << red << ", Green: " << green << ", Blue: " << blue << " (Color index: " << colorIndex << ")" << std::endl;
 
-    // Dependiendo del índice de color, modificamos el componente correspondiente
     if (colorIndex == 0) {
         red = std::min(1.0f, std::max(0.0f, red + colorChange));
 
@@ -200,13 +193,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
         }
     }
 
-    // Debugging: Imprimimos los valores de color después del cambio
     std::cout << "After Change - Red: " << red << ", Green: " << green << ", Blue: " << blue << " (Next Color index: " << colorIndex << ")" << std::endl;
-
-    // Cambiamos el color de fondo en el renderer
     PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
-
-    // Forzamos un redibujado inmediato
     glfwSwapBuffers(window);
 }
 
@@ -283,11 +271,6 @@ int main() {
 
     // Variables para controlar el color, inicializadas a valores globales
     ImVec4 color = ImVec4(red, green, blue, alpha);
-
-    //ModeloOBJ* modelo = new ModeloOBJ("../vaca.obj");
-    //if (modelo->cargarModelo()) {
-    //    modelo->inicializarBuffers();
-    //}
 
     // Ciclo de eventos de la aplicación
     while (!glfwWindowShouldClose(window)) {
@@ -370,17 +353,15 @@ int main() {
 
         ImGui::Begin("Gestión de Modelos");
 
-// Entrada de ruta y botón para cargar modelos
         ImGui::Text("Cargar nuevo modelo:");
         ImGui::InputText("Ruta del Modelo", &rutaModelo);
         if (ImGui::Button("Cargar Modelo")) {
             PAG::Renderer::getInstancia().cargarModelo(rutaModelo);
-            rutaModelo.clear(); // Limpiar el campo después de cargar
+            rutaModelo.clear();
         }
 
         ImGui::Separator();
 
-// Lista de modelos cargados
         ImGui::Text("Modelos en la escena:");
         if (ImGui::BeginListBox("Modelos")) {
             const auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a modelos
@@ -396,7 +377,7 @@ int main() {
             ImGui::EndListBox();
         }
 
-// Si hay un modelo seleccionado, mostrar controles
+        // Si hay un modelo seleccionado, mostrar controles
         if (modeloSeleccionado >= 0) {
             if (ImGui::Button("Eliminar Modelo")) {
                 PAG::Renderer::getInstancia().eliminarModelo(modeloSeleccionado);
@@ -423,6 +404,28 @@ int main() {
 
         ImGui::End();
 
+        ImGui::Begin("Material de Modelos");
+
+        // Iterar sobre todos los modelos para mostrar y editar sus materiales
+        const auto& modelos = PAG::Renderer::getInstancia().getModels();
+        for (size_t i = 0; i < modelos.size(); ++i) {
+            ImGui::Text("Modelo %zu:", i);
+
+            static glm::vec3 colorDifuso = modelos[i]->getMaterial().colorDifuso;
+
+            // Mostrar el selector de color para editar el color difuso
+            ImGui::ColorEdit3(("Color Difuso##" + std::to_string(i)).c_str(), glm::value_ptr(colorDifuso));
+
+            if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
+                Material nuevoMaterial = modelos[i]->getMaterial();
+                nuevoMaterial.colorDifuso = colorDifuso;
+                modelos[i]->setMaterial(nuevoMaterial);
+            }
+
+            ImGui::Separator();
+        }
+        ImGui::End();
+
         ImGui::Begin("Modo de Visualización");
         if (ImGui::RadioButton("Alambre", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 0)) {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Alambre);
@@ -432,6 +435,7 @@ int main() {
         }
         ImGui::End();
 
+
         // Refrescamos la escena de OpenGL
         PAG::Renderer::getInstancia().refrescar();
 
@@ -439,13 +443,9 @@ int main() {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        //modelo->renderizar();
-
         // Intercambiamos los buffers
         glfwSwapBuffers(window);
     }
-
-    //delete modelo;
 
     // Limpieza de ImGui
     ImGui_ImplOpenGL3_Shutdown();

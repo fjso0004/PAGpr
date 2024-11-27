@@ -9,11 +9,18 @@ RECTANGLE Sistema {
     - blue: float
     - alpha: float
     - shaderBaseName: string
+    - botonIzquierdoPulsado: bool
+    - lastMouseX: double
+    - lastMouseY: double
+    - movimientoActual: MovimientoCamara
+    - colorIndex: int
     - error_callback(errno: int, desc: const char*)
     - window_refresh_callback(window: GLFWwindow*)
     - framebuffer_size_callback(window: GLFWwindow*, width: int, height: int)
     - key_callback(window: GLFWwindow*, key: int, scancode: int, action: int, mods: int)
     - scroll_callback(window: GLFWwindow*, xoffset: double, yoffset: double)
+    - mouse_button_callback(window: GLFWwindow*, button: int, action: int, mods: int)
+    - cursor_position_callback(window: GLFWwindow*, xpos: double, ypos: double)
 }
 
 ' Clase Renderer (Singleton)
@@ -25,6 +32,8 @@ RECTANGLE Renderer {
     - idIBO: GLuint
     - modoActual: ModoVisualizacion
     - subroutineIndices: GLuint[2]
+    - models: std::vector<std::unique_ptr<ModeloOBJ>>
+    - camara: Camara*
     + getInstancia(): Renderer&
     + refrescar()
     + cambiarTamano(width: int, height: int)
@@ -33,6 +42,32 @@ RECTANGLE Renderer {
     + loadShaderProgram(shaderBase: string)
     + cambiarModoVisualizacion(nuevoModo: ModoVisualizacion)
     + getModoVisualizacion(): ModoVisualizacion
+    + cargarModelo(filePath: std::string)
+    + eliminarModelo(index: int)
+    + actualizarTransformacion(index: int, transform: glm::mat4)
+    + setUniforms()
+    + getCamara(): Camara*
+}
+
+' Clase Camara
+RECTANGLE Camara {
+    - posicion: glm::vec3
+    - lookAt: glm::vec3
+    - up: glm::vec3
+    - fovY: float
+    - aspecto: float
+    - zNear: float
+    - zFar: float
+    + Camara(pos: glm::vec3, look: glm::vec3, upDir: glm::vec3, fov: float, aspect: float, near: float, far: float)
+    + getViewMatrix(): glm::mat4
+    + getProjectionMatrix(): glm::mat4
+    + forward(): glm::vec3
+    + pan(angulo: float)
+    + tilt(angulo: float)
+    + dolly(distancia: float)
+    + crane(distancia: float)
+    + orbit(anguloLatitud: float, anguloLongitud: float)
+    + zoom(factor: float)
 }
 
 ' Clase ShaderProgram
@@ -55,6 +90,7 @@ RECTANGLE ModeloOBJ {
     - idVBO: GLuint
     - idIBO: GLuint
     - transformacion: glm::mat4
+    - material: Material
     + ModeloOBJ(rutaArchivo: const std::string&)
     + ~ModeloOBJ()
     + cargarModelo(): bool
@@ -62,19 +98,44 @@ RECTANGLE ModeloOBJ {
     + renderizar(shaderProgramID: GLuint) const
     + SetModelMatrix(nuevaTransformacion: glm::mat4)
     + GetModelMatrix(): glm::mat4
+    + setMaterial(material: Material)
+    + getMaterial() const: Material
+}
+
+' Representación del struct Material
+annotation Material {
+    - colorDifuso: glm::vec3
+    - colorAmbiente: glm::vec3
+    - colorEspecular: glm::vec3
 }
 
 allowmixing
 Sistema --> Renderer : "Usa"
+Sistema --> Camara : "Utiliza para diferentes movimientos de cámara"
+Sistema -- ImGui : "Usa (dependencia)"
+Sistema -- GLM : "Usa (dependencia)"
+Sistema -- GLFW : "Usa (dependencia)"
 Renderer --> ShaderProgram : "Crea y usa"
+Renderer --> ModeloOBJ : "Gestiona y renderiza múltiples modelos"
 Renderer -- GLAD : "Usa (dependencia)"
-Renderer -- ImGui : "Usa (dependencia)"
-Renderer -- ModeloOBJ : "Gestiona y renderiza múltiples modelos"
+Renderer -- GLM : "Usa (dependencia)"
+ModeloOBJ --> Material : "Usa como propiedad"
 ModeloOBJ -- tinyobjloader : "Usa (dependencia)"
+ShaderProgram -- GLAD : "Usa (dependencia)"
+Camara -- GLM : "Usa (dependencia)"
+
+' Nota para especificar que Material es un struct
+note right of Material
+Material es un struct, no una clase.
+Se utiliza para almacenar las propiedades
+de los materiales del modelo.
+end note
 
 ' Colección de dependencias
 collections GLAD
 collections ImGui
 collections tinyobjloader
+collections GLM
+collections GLFW
 
 @enduml

@@ -12,6 +12,12 @@
 #include <string>
 #include <iostream>
 
+struct Material {
+    glm::vec3 colorDifuso;
+    glm::vec3 colorAmbiente;
+    glm::vec3 colorEspecular;
+};
+
 class ModeloOBJ {
 public:
     // Estructura para almacenar la información de un vértice
@@ -21,23 +27,14 @@ public:
         glm::vec2 texCoord;
     };
 
-    // Constructor
     ModeloOBJ(const std::string& rutaArchivo);
-
-    // Destructor
     ~ModeloOBJ();
-
-    // Función para cargar el archivo .obj
     bool cargarModelo();
-
-    // Función para inicializar los buffers de OpenGL
     void inicializarBuffers();
-
-    // Función para renderizar el modelo
     void renderizar(GLuint shaderProgramID) const;
-
     void SetModelMatrix(const glm::mat4& nuevaTransformacion);
-    glm::mat4 GetModelMatrix();
+    void setMaterial(const Material& nuevoMaterial) {material = nuevoMaterial;}
+    Material getMaterial() const {return material;}
 
 private:
     std::string ruta;                     // Ruta del archivo .obj
@@ -51,8 +48,8 @@ private:
 
     glm::mat4 transformacion = glm::mat4(1.0f);
 
-    // Función interna para liberar los recursos de OpenGL
     void liberarBuffers();
+    Material material;
 };
 
 #endif // MODELO_OBJ_H

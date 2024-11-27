@@ -5,16 +5,13 @@
 #include "ModeloOBJ.h"
 #include "glm/gtc/type_ptr.hpp"
 
-// Constructor
 ModeloOBJ::ModeloOBJ(const std::string& rutaArchivo)
         : ruta(rutaArchivo), idVAO(0), idVBO(0), idIBO(0) {}
 
-// Destructor
 ModeloOBJ::~ModeloOBJ() {
     liberarBuffers();
 }
 
-// Función para cargar el archivo .obj
 bool ModeloOBJ::cargarModelo() {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
@@ -123,10 +120,6 @@ void ModeloOBJ::liberarBuffers() {
 
 void ModeloOBJ::SetModelMatrix(const glm::mat4 &nuevaTransformacion) {
     transformacion = nuevaTransformacion;
-}
-
-glm::mat4 ModeloOBJ::GetModelMatrix() {
-    return transformacion;
 }
 
 void ModeloOBJ::renderizar(GLuint shaderProgramID) const {

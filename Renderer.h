@@ -44,7 +44,7 @@ namespace PAG
 
         static Renderer* instancia; ///< Puntero al único objeto
 
-        Renderer();  // Constructor privado para el patrón Singleton
+        Renderer();
 
         GLuint idVAO = 0; // Identificador del vertex array object
         GLuint idVBO = 0; // Identificador del vertex buffer object
@@ -56,7 +56,7 @@ namespace PAG
         GLuint subroutineIndices[2];
 
     public:
-        virtual ~Renderer(); // Destructor
+        virtual ~Renderer();
 
         /**
         * @brief Consulta del objeto único de la clase
@@ -103,13 +103,8 @@ namespace PAG
 
         void cargarModelo(const std::string& filePath);
         void eliminarModelo(int index);
-        void renderizarEscena();
         void actualizarTransformacion(int index, const glm::mat4& transform);
-        void SetShaderProgram(std::shared_ptr<ShaderProgram> shader);
-        const std::shared_ptr<ShaderProgram> &getShaderProgram() const;
-        std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {
-            return models;
-        }
+        std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {return models;}
         void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
         ModoVisualizacion getModoVisualizacion() const;
     };

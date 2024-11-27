@@ -375,4 +375,42 @@ CMakeFiles/PAGpr.dir/main.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imgui_impl_glfw.h \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imgui_impl_opengl3.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imgui_stdlib.h
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imgui_stdlib.h \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/type_ptr.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../gtc/quaternion.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_relational.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_relational.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_float.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_common.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_geometric.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_geometric.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_common.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_float.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_quat.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_relational.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_relational.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/type_quat.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_float_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_double.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_double_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_trigonometric.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_trigonometric.inl \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_transform.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/quaternion_transform.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../gtc/quaternion.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../gtc/epsilon.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/detail/setup.hpp \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../gtc/epsilon.inl \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/../gtc/vec1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_bool1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_bool1_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_float1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_float1_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_double1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_double1_precision.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_int1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_int1_sized.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_uint1.hpp \
+ C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_uint1_sized.hpp \
+ C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
+ C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/type_ptr.inl
