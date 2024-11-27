@@ -226,7 +226,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-    GLFWwindow* window = glfwCreateWindow(1024, 576, "PAG Introduction", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1024, 720, "PAG Introduction", nullptr, nullptr);
 
     if (window == nullptr) {
         std::cout << "Failed to open GLFW window" << std::endl;
@@ -272,6 +272,7 @@ int main() {
         // Carga los shaders iniciales
         PAG::Renderer::getInstancia().loadShaderProgram(shaderBaseName);
         PAG::Renderer::getInstancia().creaModelo();
+        PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
     }
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
@@ -361,7 +362,7 @@ int main() {
         ImGui::End();
 
         // ---- Ventana para cargar y gestionar modelos ----
-        static std::string rutaModelo; // Ruta para cargar un modelo
+        static std::string rutaModelo = "../vaca.obj"; // Ruta para cargar un modelo
         static int modeloSeleccionado = -1; // Índice del modelo seleccionado
         static float traslacion[3] = {0.0f, 0.0f, 0.0f};
         static float rotacion[3] = {0.0f, 0.0f, 0.0f};
@@ -420,6 +421,15 @@ int main() {
             PAG::Renderer::getInstancia().actualizarTransformacion(modeloSeleccionado, transformacion);
         }
 
+        ImGui::End();
+
+        ImGui::Begin("Modo de Visualización");
+        if (ImGui::RadioButton("Alambre", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 0)) {
+            PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Alambre);
+        }
+        if (ImGui::RadioButton("Sólido", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 1)) {
+            PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
+        }
         ImGui::End();
 
         // Refrescamos la escena de OpenGL

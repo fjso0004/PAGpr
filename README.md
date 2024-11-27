@@ -34,6 +34,8 @@ Para la implementación de las diversas cámaras, he creado una nueva clase, en 
 En cuanto a la funcionalidad, he descargado y implementado la carpeta de GLM en el archivo raíz de el proyecto y añadido manualmente a cmake.
 Ahora, al ejecutar, aparece una menú desplegable creado con imgui en el que seleccionamos el tipo de cámara que queremos utilizar, y usamos el ratón para desplazar la vista.
 
+Enlace a mi [UML](UML.puml)
+
 ## Práctica 6
 
 El uso de assimp fue imposible por errores con el puig.xml, assimp, conan y un error de librerías con basic_string, por lo que se opto por utilizar tinyobjloader.
@@ -45,5 +47,21 @@ Se han creado nuevos métodos en la clase Renderer para utilizar esta clase, y s
 Para usar la aplicación, se pone el directorio raíz que es en el que se encuentra el único objeto que hemos dejado en el proyecto para no cargarlo demasiado (../vaca.obj), se puede poner cuantas veces quiera, las flechas lo mueven en las distintas posiciones a las que apuntan las mismas.
 Al crear el modelo, pincha sobre este en la interfaz de ImGui para interactuar con ella y hacer las transformaciones que se requiera.
 
+Enlace a mi [UML](UML.puml)
+
 ## Práctica 7
+
+Hemos implementado lo necesario para cambiar en los modelos entre modos de renderizado en alambre o sólido (Alambre: Renderiza los modelos mostrando solo las líneas de los polígonos, Sólido: Renderiza los modelos con el color difuso definido en el material).
+También, se han modificado los vertex shader, para usar las subrutinas GLSL y asi no usar condicionales en ellas.
+
+#### Atajos del teclado
+ESC: Cierra la aplicación.
+W/S: Dolly (acercar/alejar).
+A/D: Orbit (rotar horizontalmente).
+Q/E: Crane (mover arriba/abajo).
+Teclas de flecha: Pan y Tilt (horizontal/vertical).
+
+Enlace a mi [UML](UML.puml)
+
+## Práctica 8
 

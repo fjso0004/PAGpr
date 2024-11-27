@@ -23,12 +23,16 @@ RECTANGLE Renderer {
     - idVAO: GLuint
     - idVBO: GLuint
     - idIBO: GLuint
+    - modoActual: ModoVisualizacion
+    - subroutineIndices: GLuint[2]
     + getInstancia(): Renderer&
     + refrescar()
     + cambiarTamano(width: int, height: int)
     + cambiarColorFondo(red: float, green: float, blue: float, alpha: float)
     + creaModelo()
     + loadShaderProgram(shaderBase: string)
+    + cambiarModoVisualizacion(nuevoModo: ModoVisualizacion)
+    + getModoVisualizacion(): ModoVisualizacion
 }
 
 ' Clase ShaderProgram

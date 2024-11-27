@@ -28,6 +28,7 @@
 
 namespace PAG
 {
+    enum class ModoVisualizacion { Alambre, Solido };
     /**
     * @brief Clase encargada de encapsular la gestión del área de dibujo OpenGL
     *
@@ -50,6 +51,9 @@ namespace PAG
         GLuint idIBO = 0; // Identificador del index buffer object
 
         Camara* camara;
+
+        ModoVisualizacion modoActual = ModoVisualizacion::Solido;
+        GLuint subroutineIndices[2];
 
     public:
         virtual ~Renderer(); // Destructor
@@ -106,6 +110,8 @@ namespace PAG
         std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {
             return models;
         }
+        void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
+        ModoVisualizacion getModoVisualizacion() const;
     };
 }
 

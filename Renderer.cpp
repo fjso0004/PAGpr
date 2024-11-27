@@ -62,11 +62,14 @@ namespace PAG
     */
     void Renderer::refrescar() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Limpia los buffers
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
 
         if (shaderProgram) {
             shaderProgram->useProgram(); // Activar el programa de shaders
-            setUniforms();               // Configurar vista y proyección
+            setUniforms();
+            // Configurar subrutinas según el modo actual
+            GLuint activeSubroutine = (modoActual == ModoVisualizacion::Alambre) ? subroutineIndices[0] : subroutineIndices[1];
+            glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &activeSubroutine);
 
             for (const auto& modelo : models) {
                 modelo->renderizar(shaderProgram->getProgramID()); // Renderizar con la matriz de transformación actualizada
@@ -130,9 +133,13 @@ namespace PAG
     * Método para cargar el shader program
     * @param shaderBase Nombre base de los archivos de shaders
     */
-    void Renderer::loadShaderProgram(const std::string& shaderBase) {
-        shaderProgram = std::make_shared<ShaderProgram>(); // Crea un nuevo ShaderProgram de forma segura
-        shaderProgram->loadShaders(shaderBase + "-vs.glsl", shaderBase + "-fs.glsl"); // Carga los shaders
+    void PAG::Renderer::loadShaderProgram(const std::string& shaderBase) {
+        shaderProgram = std::make_shared<ShaderProgram>();
+        shaderProgram->loadShaders(shaderBase + "-vs.glsl", shaderBase + "-fs.glsl");
+
+        // Obtener índices de las subrutinas
+        subroutineIndices[0] = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "colorModoAlambre");
+        subroutineIndices[1] = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "colorModoSolido");
     }
 
     void Renderer::setUniforms() {
@@ -196,5 +203,13 @@ namespace PAG
 
     const std::shared_ptr<ShaderProgram> &Renderer::getShaderProgram() const {
         return shaderProgram;
+    }
+
+    void PAG::Renderer::cambiarModoVisualizacion(ModoVisualizacion nuevoModo) {
+        modoActual = nuevoModo;
+    }
+
+    ModoVisualizacion PAG::Renderer::getModoVisualizacion() const {
+        return modoActual;
     }
 }
