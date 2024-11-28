@@ -210,4 +210,39 @@ namespace PAG
     ModoVisualizacion PAG::Renderer::getModoVisualizacion() const {
         return modoActual;
     }
+
+    void Renderer::addLuz(const Luz& luz) {
+        luces.push_back(luz);
+    }
+
+    void Renderer::clearLuces() {
+        luces.clear();
+    }
+
+    void Renderer::setLuzUniforms(const Luz& luz) const {
+        if (!shaderProgram) return;
+
+        GLint tipoLuzLoc = glGetUniformLocation(shaderProgram->getProgramID(), "tipoLuz");
+        GLint colorAmbienteLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Ia");
+        GLint colorDifusaLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Id");
+        GLint colorEspecularLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Is");
+        GLint posicionLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzPosicion");
+        GLint direccionLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzDireccion");
+        GLint anguloAperturaLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzApertura");
+
+        // Configura los uniforms según el tipo de luz
+        glUniform1i(tipoLuzLoc, static_cast<int>(luz.tipo));
+        glUniform3fv(colorAmbienteLoc, 1, glm::value_ptr(luz.colorAmbiente));
+        glUniform3fv(colorDifusaLoc, 1, glm::value_ptr(luz.colorDifusa));
+        glUniform3fv(colorEspecularLoc, 1, glm::value_ptr(luz.colorEspecular));
+
+        if (luz.tipo == TipoLuz::Puntual || luz.tipo == TipoLuz::Foco) {
+            glUniform3fv(posicionLoc, 1, glm::value_ptr(luz.posicion));
+        }
+
+        if (luz.tipo == TipoLuz::Direccional || luz.tipo == TipoLuz::Foco) {
+            glUniform3fv(direccionLoc, 1, glm::value_ptr(luz.direccion));
+            glUniform1f(anguloAperturaLoc, glm::radians(luz.anguloApertura));
+        }
+    }
 }

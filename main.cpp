@@ -28,6 +28,14 @@ enum class MovimientoCamara {
 };
 MovimientoCamara movimientoActual = MovimientoCamara::Ninguno;  // Movimiento seleccionado
 
+void inicializarLuces(PAG::Renderer& renderer) {
+    Luz luzAmbiente = { TipoLuz::Ambiente, glm::vec3(0.2f, 0.2f, 0.2f), {}, {} };
+    renderer.addLuz(luzAmbiente);
+
+    Luz luzPuntual = { TipoLuz::Puntual, {}, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f), glm::vec3(5.0f, 5.0f, 5.0f) };
+    renderer.addLuz(luzPuntual);
+}
+
 // Callback para manejar el estado del botón del ratón
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {

@@ -22,6 +22,7 @@
 #include "ShaderProgram.h"
 #include "Camera.h"
 #include "ModeloOBJ.h"
+#include "Luz.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -54,6 +55,8 @@ namespace PAG
 
         ModoVisualizacion modoActual = ModoVisualizacion::Solido;
         GLuint subroutineIndices[2];
+
+        void setLuzUniforms(const Luz& luz) const;
 
     public:
         virtual ~Renderer();
@@ -100,6 +103,10 @@ namespace PAG
         void setUniforms();
 
         Camara* getCamara() const;
+
+        std::vector<Luz> luces;
+        void addLuz(const Luz& luz);
+        void clearLuces();
 
         void cargarModelo(const std::string& filePath);
         void eliminarModelo(int index);

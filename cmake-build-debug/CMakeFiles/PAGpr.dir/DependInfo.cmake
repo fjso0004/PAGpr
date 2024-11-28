@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/GLAD/src/glad.c" "CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj" "gcc" "CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/Camera.cpp" "CMakeFiles/PAGpr.dir/Camera.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/Camera.cpp.obj.d"
+  "C:/Users/34660/Downloads/Universidad/PAGpr - copia/Luz.cpp" "CMakeFiles/PAGpr.dir/Luz.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/Luz.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/ModeloOBJ.cpp" "CMakeFiles/PAGpr.dir/ModeloOBJ.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/ModeloOBJ.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/Renderer.cpp" "CMakeFiles/PAGpr.dir/Renderer.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/Renderer.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/ShaderProgram.cpp" "CMakeFiles/PAGpr.dir/ShaderProgram.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/ShaderProgram.cpp.obj.d"
