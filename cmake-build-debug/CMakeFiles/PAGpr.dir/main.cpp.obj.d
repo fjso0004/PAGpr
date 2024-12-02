@@ -150,13 +150,12 @@ CMakeFiles/PAGpr.dir/main.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Renderer.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/glad/glad.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/KHR/khrplatform.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- C:/Users/34660/.conan2/p/b/glfw89d13ecbf1797/p/include/GLFW/glfw3.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Renderer.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.h \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Camera.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/glm.hpp \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/detail/_fixes.hpp \
@@ -347,6 +346,7 @@ CMakeFiles/PAGpr.dir/main.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_vector.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_bvector.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vector.tcc \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Luz.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \
@@ -366,6 +366,7 @@ CMakeFiles/PAGpr.dir/main.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ranges_algobase.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
+ C:/Users/34660/.conan2/p/b/glfw89d13ecbf1797/p/include/GLFW/glfw3.h \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imgui.h \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\imgui/imconfig.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \

@@ -18,7 +18,6 @@
 * Espacio de nombres para las prácticas de Programación de Aplicaciones
 * Gráficas
 */
-#include "glad/glad.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
 #include "ModeloOBJ.h"
@@ -107,6 +106,7 @@ namespace PAG
         std::vector<Luz> luces;
         void addLuz(const Luz& luz);
         void clearLuces();
+        std::vector<Luz>& getLuces(); // Devuelve una referencia al vector de luces
 
         void cargarModelo(const std::string& filePath);
         void eliminarModelo(int index);

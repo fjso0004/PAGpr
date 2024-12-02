@@ -13,7 +13,6 @@
 
 #include "Renderer.h"
 #include "ShaderProgram.h"
-#include "glad/glad.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
@@ -61,41 +60,64 @@ namespace PAG
     * Método para refrescar la escena
     */
     void Renderer::refrescar() {
+        // Limpiar el buffer de color y profundidad
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (shaderProgram) {
             shaderProgram->useProgram();
-            setUniforms();
+            setUniforms(); // Configurar matrices de vista y proyección
 
             // Configurar el modo de polígonos
             glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
 
-            // Configurar subrutinas según el modo actual
-            GLuint activeSubroutine = (modoActual == ModoVisualizacion::Alambre) ? subroutineIndices[0] : subroutineIndices[1];
-            glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &activeSubroutine);
+            // Habilitar blending para rendering multipasada
+            glEnable(GL_BLEND);
 
-            // Renderizar cada modelo con su material
-            for (const auto& modelo : models) {
-                GLint colorFijoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorFijo");
-                GLint colorDifusoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorDifuso");
+            for (size_t i = 0; i < luces.size(); ++i) {
+                const auto& luz = luces[i];
 
-                if (modoActual == ModoVisualizacion::Alambre) {
-                    // Usar un color fijo para el modo alambre
-                    if (colorFijoLoc != -1) {
-                        glUniform3f(colorFijoLoc, 1.0f, 0.0f, 0.0f); // Rojo
-                    }
-                } else if (modoActual == ModoVisualizacion::Solido) {
-                    // Usar el color difuso del material del modelo actual
-                    if (colorDifusoLoc != -1) {
-                        Material mat = modelo->getMaterial();
-                        glUniform3fv(colorDifusoLoc, 1, glm::value_ptr(mat.colorDifuso));
-                    }
+                // Configurar blending para la primera pasada o las siguientes
+                if (i == 0) {
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Primera luz
+                } else {
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Siguientes luces
                 }
 
-                modelo->renderizar(shaderProgram->getProgramID());
+                // Pasar datos de la luz actual al shader
+                setLuzUniforms(luz);
+
+                // Configurar subrutinas según el modo actual
+                GLuint activeSubroutine = (modoActual == ModoVisualizacion::Alambre) ? subroutineIndices[0] : subroutineIndices[1];
+                glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &activeSubroutine);
+
+                // Renderizar cada modelo con su material
+                for (const auto& modelo : models) {
+                    GLint colorFijoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorFijo");
+                    GLint colorDifusoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorDifuso");
+
+                    if (modoActual == ModoVisualizacion::Alambre) {
+                        // Usar un color fijo para el modo alambre
+                        if (colorFijoLoc != -1) {
+                            glUniform3f(colorFijoLoc, 1.0f, 0.0f, 0.0f); // Rojo
+                        }
+                    } else if (modoActual == ModoVisualizacion::Solido) {
+                        // Usar el color difuso del material del modelo actual
+                        if (colorDifusoLoc != -1) {
+                            Material mat = modelo->getMaterial();
+                            glUniform3fv(colorDifusoLoc, 1, glm::value_ptr(mat.colorDifuso));
+                        }
+                    }
+
+                    // Renderizar el modelo
+                    modelo->renderizar(shaderProgram->getProgramID());
+                }
             }
+
+            // Desactivar blending al finalizar
+            glDisable(GL_BLEND);
         }
     }
+
 
     /**
     * Método para cambiar el tamaño del viewport
@@ -220,29 +242,24 @@ namespace PAG
     }
 
     void Renderer::setLuzUniforms(const Luz& luz) const {
-        if (!shaderProgram) return;
-
-        GLint tipoLuzLoc = glGetUniformLocation(shaderProgram->getProgramID(), "tipoLuz");
-        GLint colorAmbienteLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Ia");
-        GLint colorDifusaLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Id");
-        GLint colorEspecularLoc = glGetUniformLocation(shaderProgram->getProgramID(), "Is");
-        GLint posicionLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzPosicion");
-        GLint direccionLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzDireccion");
-        GLint anguloAperturaLoc = glGetUniformLocation(shaderProgram->getProgramID(), "luzApertura");
-
-        // Configura los uniforms según el tipo de luz
-        glUniform1i(tipoLuzLoc, static_cast<int>(luz.tipo));
-        glUniform3fv(colorAmbienteLoc, 1, glm::value_ptr(luz.colorAmbiente));
-        glUniform3fv(colorDifusaLoc, 1, glm::value_ptr(luz.colorDifusa));
-        glUniform3fv(colorEspecularLoc, 1, glm::value_ptr(luz.colorEspecular));
+        glUniform1i(glGetUniformLocation(shaderProgram->getProgramID(), "tipoLuz"), static_cast<int>(luz.tipo));
+        glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ia"), 1, glm::value_ptr(luz.colorAmbiente));
+        glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Id"), 1, glm::value_ptr(luz.colorDifusa));
+        glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Is"), 1, glm::value_ptr(luz.colorEspecular));
 
         if (luz.tipo == TipoLuz::Puntual || luz.tipo == TipoLuz::Foco) {
-            glUniform3fv(posicionLoc, 1, glm::value_ptr(luz.posicion));
+            glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "luzPosicion"), 1, glm::value_ptr(luz.posicion));
         }
 
         if (luz.tipo == TipoLuz::Direccional || luz.tipo == TipoLuz::Foco) {
-            glUniform3fv(direccionLoc, 1, glm::value_ptr(luz.direccion));
-            glUniform1f(anguloAperturaLoc, glm::radians(luz.anguloApertura));
+            glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "luzDireccion"), 1, glm::value_ptr(luz.direccion));
+            if (luz.tipo == TipoLuz::Foco) {
+                glUniform1f(glGetUniformLocation(shaderProgram->getProgramID(), "luzApertura"), glm::radians(luz.anguloApertura));
+            }
         }
+    }
+
+    std::vector<Luz>& Renderer::getLuces() {
+        return luces;
     }
 }

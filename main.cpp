@@ -1,7 +1,7 @@
 #include <iostream>
 // IMPORTANTE: El include de GLAD debe estar siempre ANTES del de GLFW
-#include <GLFW/glfw3.h>
 #include "Renderer.h"
+#include <GLFW/glfw3.h>
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -29,11 +29,53 @@ enum class MovimientoCamara {
 MovimientoCamara movimientoActual = MovimientoCamara::Ninguno;  // Movimiento seleccionado
 
 void inicializarLuces(PAG::Renderer& renderer) {
-    Luz luzAmbiente = { TipoLuz::Ambiente, glm::vec3(0.2f, 0.2f, 0.2f), {}, {} };
+    // Luz ambiente
+    Luz luzAmbiente;
+    luzAmbiente.tipo = TipoLuz::Ambiente;
+    luzAmbiente.colorAmbiente = glm::vec3(0.2f, 0.2f, 0.2f);
+    luzAmbiente.colorDifusa = glm::vec3(0.0f);
+    luzAmbiente.colorEspecular = glm::vec3(0.0f);
+    luzAmbiente.posicion = glm::vec3(0.0f);
+    luzAmbiente.direccion = glm::vec3(0.0f);
+    luzAmbiente.anguloApertura = 0.0f;
+    luzAmbiente.atenuacion = 0.0f;
     renderer.addLuz(luzAmbiente);
 
-    Luz luzPuntual = { TipoLuz::Puntual, {}, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f), glm::vec3(5.0f, 5.0f, 5.0f) };
+    // Luz puntual
+    Luz luzPuntual;
+    luzPuntual.tipo = TipoLuz::Puntual;
+    luzPuntual.colorAmbiente = glm::vec3(0.0f);
+    luzPuntual.colorDifusa = glm::vec3(1.0f, 1.0f, 1.0f);
+    luzPuntual.colorEspecular = glm::vec3(0.0f);
+    luzPuntual.posicion = glm::vec3(5.0f, 5.0f, 5.0f);
+    luzPuntual.direccion = glm::vec3(0.0f);
+    luzPuntual.anguloApertura = 0.0f;
+    luzPuntual.atenuacion = 1.0f;
     renderer.addLuz(luzPuntual);
+
+    // Luz direccional
+    Luz luzDireccional;
+    luzDireccional.tipo = TipoLuz::Direccional;
+    luzDireccional.colorAmbiente = glm::vec3(0.0f);
+    luzDireccional.colorDifusa = glm::vec3(0.8f, 0.8f, 0.8f);
+    luzDireccional.colorEspecular = glm::vec3(0.0f);
+    luzDireccional.posicion = glm::vec3(0.0f); // No relevante para luz direccional
+    luzDireccional.direccion = glm::vec3(-1.0f, -1.0f, -1.0f);
+    luzDireccional.anguloApertura = 0.0f;
+    luzDireccional.atenuacion = 0.0f;
+    renderer.addLuz(luzDireccional);
+
+    // Luz foco
+    Luz luzFoco;
+    luzFoco.tipo = TipoLuz::Foco;
+    luzFoco.colorAmbiente = glm::vec3(0.0f);
+    luzFoco.colorDifusa = glm::vec3(1.0f, 0.9f, 0.8f);
+    luzFoco.colorEspecular = glm::vec3(0.0f);
+    luzFoco.posicion = glm::vec3(1.0f, 1.0f, 1.0f);
+    luzFoco.direccion = glm::vec3(0.0f, -1.0f, -1.0f);
+    luzFoco.anguloApertura = 45.0f; // Ángulo del foco
+    luzFoco.atenuacion = 1.0f;
+    renderer.addLuz(luzFoco);
 }
 
 // Callback para manejar el estado del botón del ratón
@@ -269,6 +311,7 @@ int main() {
         PAG::Renderer::getInstancia().loadShaderProgram(shaderBaseName);
         PAG::Renderer::getInstancia().creaModelo();
         PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
+        inicializarLuces(PAG::Renderer::getInstancia());
     }
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
@@ -443,6 +486,49 @@ int main() {
         }
         ImGui::End();
 
+        ImGui::Begin("Luces");
+
+        if (ImGui::Button("Recargar Luces")) {
+            PAG::Renderer::getInstancia().clearLuces();  // Limpiar luces actuales
+            inicializarLuces(PAG::Renderer::getInstancia());  // Recargar las luces
+        }
+
+        static int luzSeleccionada = 0;
+        if (ImGui::BeginListBox("Luces")) {
+            for (size_t i = 0; i < PAG::Renderer::getInstancia().getLuces().size(); ++i) {
+                const bool seleccionada = (luzSeleccionada == static_cast<int>(i));
+                if (ImGui::Selectable(("Luz " + std::to_string(i)).c_str(), seleccionada)) {
+                    luzSeleccionada = static_cast<int>(i);
+                }
+                if (seleccionada) {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndListBox();
+        }
+
+// Edita los parámetros de la luz seleccionada
+        if (luzSeleccionada >= 0 && luzSeleccionada < PAG::Renderer::getInstancia().getLuces().size()) {
+            Luz& luz = PAG::Renderer::getInstancia().getLuces()[luzSeleccionada];
+
+            ImGui::Text("Editar Luz:");
+            ImGui::ColorEdit3("Color Ambiente", glm::value_ptr(luz.colorAmbiente));
+            ImGui::ColorEdit3("Color Difuso", glm::value_ptr(luz.colorDifusa));
+            ImGui::ColorEdit3("Color Especular", glm::value_ptr(luz.colorEspecular));
+
+            if (luz.tipo == TipoLuz::Puntual || luz.tipo == TipoLuz::Foco) {
+                ImGui::InputFloat3("Posición", glm::value_ptr(luz.posicion));
+            }
+
+            if (luz.tipo == TipoLuz::Direccional || luz.tipo == TipoLuz::Foco) {
+                ImGui::InputFloat3("Dirección", glm::value_ptr(luz.direccion));
+                if (luz.tipo == TipoLuz::Foco) {
+                    ImGui::SliderAngle("Apertura", &luz.anguloApertura, 0.0f, 90.0f);
+                }
+            }
+        }
+
+        ImGui::End();
 
         // Refrescamos la escena de OpenGL
         PAG::Renderer::getInstancia().refrescar();

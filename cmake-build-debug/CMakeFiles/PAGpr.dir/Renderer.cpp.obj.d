@@ -1,6 +1,7 @@
 CMakeFiles/PAGpr.dir/Renderer.cpp.obj: \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Renderer.cpp \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Renderer.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/glad/glad.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLAD/include/KHR/khrplatform.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
@@ -14,7 +15,6 @@ CMakeFiles/PAGpr.dir/Renderer.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stddef.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/stddef.h \
- C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\ShaderProgram.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -346,6 +346,7 @@ CMakeFiles/PAGpr.dir/Renderer.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Luz.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \
