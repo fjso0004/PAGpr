@@ -86,12 +86,37 @@ namespace PAG
                 // Pasar datos de la luz actual al shader
                 setLuzUniforms(luz);
 
-                // Configurar subrutinas según el modo actual
-                GLuint activeSubroutine = (modoActual == ModoVisualizacion::Alambre) ? subroutineIndices[0] : subroutineIndices[1];
-                glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &activeSubroutine);
+                // Seleccionar la subrutina adecuada
+                GLuint subroutineIndex;
+                switch (luz.tipo) {
+                    case TipoLuz::Ambiente:
+                        subroutineIndex = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "luzAmbiente");
+                        break;
+                    case TipoLuz::Puntual:
+                        subroutineIndex = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "luzPuntual");
+                        break;
+                    case TipoLuz::Direccional:
+                        subroutineIndex = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "luzDireccional");
+                        break;
+                    case TipoLuz::Foco:
+                        subroutineIndex = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "luzFoco");
+                        break;
+                }
 
-                // Renderizar cada modelo con su material
+                glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &subroutineIndex);
+
+                // Renderizar cada modelo
                 for (const auto& modelo : models) {
+                    Material material = modelo->getMaterial();
+
+                    glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ka"), 1, glm::value_ptr(material.colorAmbiente));
+                    glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Kd"), 1, glm::value_ptr(material.colorDifuso));
+                    glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ks"), 1, glm::value_ptr(material.colorEspecular));
+                    glUniform1f(glGetUniformLocation(shaderProgram->getProgramID(), "ns"), 32.0f); // Brillo fijo
+
+                    modelo->renderizar(shaderProgram->getProgramID());
+                    //std::cout << "Luz configurada: " << i << " con tipo " << static_cast<int>(luz.tipo) << std::endl;
+                    /*
                     GLint colorFijoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorFijo");
                     GLint colorDifusoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorDifuso");
 
@@ -110,6 +135,7 @@ namespace PAG
 
                     // Renderizar el modelo
                     modelo->renderizar(shaderProgram->getProgramID());
+                    */
                 }
             }
 

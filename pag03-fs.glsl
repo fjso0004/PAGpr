@@ -1,53 +1,35 @@
 #version 410
 
-in vec3 posicionV;
-in vec3 normalV;
+in vec3 posicionV; // Posición en espacio de visión
+in vec3 normalV;   // Normal en espacio de visión
 
-uniform vec3 Ia, Id, Is; // Intensidades de luz
-uniform vec3 Ka, Kd, Ks; // Propiedades del material
-uniform float ns;        // Exponente especular
-uniform vec3 luzPosicion;
-uniform vec3 luzDireccion;
-uniform float luzApertura;
-uniform int tipoLuz;
+// Uniformes del material
+uniform vec3 Ka;        // Color ambiente
+uniform vec3 Kd;        // Color difuso
+uniform vec3 Ks;        // Color especular
+uniform float ns;       // Exponente especular
 
-subroutine vec4 CalculoLuz();
-subroutine uniform CalculoLuz luzActiva;
+// Uniformes para la luz
+uniform vec3 Ia;        // Intensidad de luz ambiente
+uniform vec3 Id;        // Intensidad de luz difusa
+uniform vec3 Is;        // Intensidad de luz especular
+uniform vec3 luzPosicion; // Posición de la luz en espacio de visión
 
-// Subrutina para luz direccional
-subroutine(CalculoLuz)
-vec4 luzDireccional() {
-    vec3 L = normalize(-luzDireccion);
-    vec3 N = normalize(normalV);
-    vec3 V = normalize(-posicionV);
-    vec3 R = reflect(-L, N);
-
-    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
-    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
-
-    return vec4(difusa + especular, 1.0);
-}
-
-// Subrutina para foco de luz
-subroutine(CalculoLuz)
-vec4 luzFoco() {
-    vec3 L = normalize(luzPosicion - posicionV);
-    vec3 N = normalize(normalV);
-    vec3 V = normalize(-posicionV);
-    vec3 R = reflect(-L, N);
-
-    // Ángulo entre L y la dirección del foco
-    float anguloLuz = dot(-L, normalize(luzDireccion));
-    if (anguloLuz < cos(luzApertura)) {
-        return vec4(0.0); // Fuera del cono de luz
-    }
-
-    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
-    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
-
-    return vec4(difusa + especular, 1.0);
-}
+out vec4 FragColor;
 
 void main() {
-    gl_FragColor = luzActiva();
+    // Dirección hacia la luz
+    vec3 L = normalize(luzPosicion - posicionV);
+    vec3 N = normalize(normalV);          // Normal del fragmento
+    vec3 V = normalize(-posicionV);       // Vector hacia la cámara
+    vec3 R = reflect(-L, N);              // Vector reflejado
+
+    // Componentes de la iluminación
+    vec3 ambiente = Ka * Ia;                                      // Luz ambiente
+    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;                  // Luz difusa
+    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;      // Luz especular
+
+    // Combinar componentes
+    vec3 colorFinal = ambiente + difusa + especular;
+    FragColor = vec4(colorFinal, 1.0);
 }

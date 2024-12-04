@@ -129,13 +129,9 @@ void ModeloOBJ::renderizar(GLuint shaderProgramID) const {
     GLuint modelLoc = glGetUniformLocation(shaderProgramID, "model");
     if (modelLoc != -1) {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformacion));
-    } else {
-        std::cerr << "Uniform 'model' no encontrado en el shader." << std::endl;
     }
 
     glBindVertexArray(idVAO);
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, nullptr);
     glBindVertexArray(0);
 }
-
-

@@ -408,8 +408,20 @@ int main() {
         ImGui::InputText("Ruta del Modelo", &rutaModelo);
         if (ImGui::Button("Cargar Modelo")) {
             PAG::Renderer::getInstancia().cargarModelo(rutaModelo);
+
+            // Configurar el material para el modelo cargado
+            auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a los modelos
+            if (!modelos.empty()) {
+                Material material;
+                material.colorAmbiente = glm::vec3(0.2f, 0.2f, 0.2f);  // Ambiente tenue
+                material.colorDifuso = glm::vec3(0.8f, 0.5f, 0.3f);    // Color marrón
+                material.colorEspecular = glm::vec3(1.0f, 1.0f, 1.0f); // Especular blanco
+                modelos.back()->setMaterial(material); // Configura el material en el último modelo cargado
+            }
+
             rutaModelo.clear();
         }
+
 
         ImGui::Separator();
 
@@ -469,14 +481,23 @@ int main() {
 
             if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
                 Material nuevoMaterial = modelos[i]->getMaterial();
-                nuevoMaterial.colorDifuso = colorDifuso;
+                nuevoMaterial.colorDifuso = colorDifuso; // Actualiza el color difuso
                 modelos[i]->setMaterial(nuevoMaterial);
+
+                // Reenviar propiedades del material al shader en el siguiente renderizado
+                PAG::Renderer::getInstancia().refrescar();
+                std::cout << "Material Actualizado: "
+                          << "Ka: " << nuevoMaterial.colorAmbiente.x << ", " << nuevoMaterial.colorAmbiente.y << ", " << nuevoMaterial.colorAmbiente.z << " | "
+                          << "Kd: " << nuevoMaterial.colorDifuso.x << ", " << nuevoMaterial.colorDifuso.y << ", " << nuevoMaterial.colorDifuso.z << " | "
+                          << "Ks: " << nuevoMaterial.colorEspecular.x << ", " << nuevoMaterial.colorEspecular.y << ", " << nuevoMaterial.colorEspecular.z << std::endl;
+
             }
 
             ImGui::Separator();
         }
         ImGui::End();
 
+        /*
         ImGui::Begin("Modo de Visualización");
         if (ImGui::RadioButton("Alambre", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 0)) {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Alambre);
@@ -485,6 +506,7 @@ int main() {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
         }
         ImGui::End();
+        */
 
         ImGui::Begin("Luces");
 
