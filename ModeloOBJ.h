@@ -20,7 +20,7 @@ struct Material {
 
 class ModeloOBJ {
 public:
-    // Estructura para almacenar la información de un vértice
+    //Vértices
     struct Vertex {
         glm::vec3 position;
         glm::vec3 normal;
@@ -37,9 +37,9 @@ public:
     Material getMaterial() const {return material;}
 
 private:
-    std::string ruta;                     // Ruta del archivo .obj
-    std::vector<Vertex> vertices;         // Vértices del modelo
-    std::vector<unsigned int> indices;    // Índices del modelo
+    std::string ruta;
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;//Índices del modelo
 
     // Identificadores de los buffers de OpenGL
     GLuint idVAO;

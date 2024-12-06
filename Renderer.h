@@ -28,7 +28,7 @@
 
 namespace PAG
 {
-    enum class ModoVisualizacion { Alambre, Solido };
+    //enum class ModoVisualizacion { Alambre, Solido };
     /**
     * @brief Clase encargada de encapsular la gestión del área de dibujo OpenGL
     *
@@ -39,20 +39,20 @@ namespace PAG
     class Renderer
     {
     private:
-        std::vector<std::unique_ptr<ModeloOBJ>> models;  // Lista de modelos usando ModeloOBJ
-        std::shared_ptr<ShaderProgram> shaderProgram;  // Gestión segura del ShaderProgram
+        std::vector<std::unique_ptr<ModeloOBJ>> models;
+        std::shared_ptr<ShaderProgram> shaderProgram;
 
         static Renderer* instancia; ///< Puntero al único objeto
 
         Renderer();
 
-        GLuint idVAO = 0; // Identificador del vertex array object
-        GLuint idVBO = 0; // Identificador del vertex buffer object
-        GLuint idIBO = 0; // Identificador del index buffer object
+        GLuint idVAO = 0;
+        GLuint idVBO = 0;
+        GLuint idIBO = 0;
 
         Camara* camara;
 
-        ModoVisualizacion modoActual = ModoVisualizacion::Solido;
+        //ModoVisualizacion modoActual = ModoVisualizacion::Solido;
         GLuint subroutineIndices[2];
 
         void setLuzUniforms(const Luz& luz) const;
@@ -106,14 +106,14 @@ namespace PAG
         std::vector<Luz> luces;
         void addLuz(const Luz& luz);
         void clearLuces();
-        std::vector<Luz>& getLuces(); // Devuelve una referencia al vector de luces
+        std::vector<Luz>& getLuces();
 
         void cargarModelo(const std::string& filePath);
         void eliminarModelo(int index);
         void actualizarTransformacion(int index, const glm::mat4& transform);
         std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {return models;}
-        void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
-        ModoVisualizacion getModoVisualizacion() const;
+        //void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
+        //ModoVisualizacion getModoVisualizacion() const;
     };
 }
 

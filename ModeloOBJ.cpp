@@ -34,7 +34,6 @@ bool ModeloOBJ::cargarModelo() {
         return false;
     }
 
-    // Procesar las formas (shapes) del archivo OBJ
     for (const auto& shape : shapes) {
         size_t indexOffset = 0;
 
@@ -68,7 +67,6 @@ bool ModeloOBJ::cargarModelo() {
                     );
                 }
 
-                // Agregar el vértice a la lista
                 vertices.push_back({ vertexPosition, vertexNormal, vertexTexCoord });
                 indices.push_back(static_cast<unsigned int>(indices.size()));
             }
@@ -111,7 +109,6 @@ void ModeloOBJ::inicializarBuffers() {
     glBindVertexArray(0);
 }
 
-// Función interna para liberar los recursos de OpenGL
 void ModeloOBJ::liberarBuffers() {
     if (idVBO != 0) { glDeleteBuffers(1, &idVBO); idVBO = 0; }
     if (idIBO != 0) { glDeleteBuffers(1, &idIBO); idIBO = 0; }
@@ -125,7 +122,6 @@ void ModeloOBJ::SetModelMatrix(const glm::mat4 &nuevaTransformacion) {
 void ModeloOBJ::renderizar(GLuint shaderProgramID) const {
     if (idVAO == 0) return;
 
-    // Pasar la matriz de transformación al shader
     GLuint modelLoc = glGetUniformLocation(shaderProgramID, "model");
     if (modelLoc != -1) {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformacion));

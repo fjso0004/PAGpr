@@ -27,7 +27,7 @@ namespace PAG
     */
     Renderer::Renderer() : shaderProgram(std::make_shared<ShaderProgram>()), camara(nullptr) {
         camara = new Camara(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 1024.0f / 576.0f, 0.1f, 100.0f);
-        glEnable(GL_DEPTH_TEST); // Activa el test de profundidad en OpenGL
+        glEnable(GL_DEPTH_TEST);
     }
 
     /**
@@ -50,43 +50,40 @@ namespace PAG
     * @return Referencia al objeto único de la clase
     */
     Renderer& Renderer::getInstancia() {
-        if (!instancia) { // Lazy initialization
+        if (!instancia) {
             instancia = new Renderer;
         }
         return *instancia;
     }
 
     /**
-    * Método para refrescar la escena
-    */
+ * Método para refrescar la escena
+ */
     void Renderer::refrescar() {
-        // Limpiar el buffer de color y profundidad
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LEQUAL);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (shaderProgram) {
             shaderProgram->useProgram();
-            setUniforms(); // Configurar matrices de vista y proyección
+            setUniforms();
 
             // Configurar el modo de polígonos
-            glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
+            //glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
 
-            // Habilitar blending para rendering multipasada
             glEnable(GL_BLEND);
+            glBlendEquation(GL_FUNC_ADD);
 
             for (size_t i = 0; i < luces.size(); ++i) {
                 const auto& luz = luces[i];
-
-                // Configurar blending para la primera pasada o las siguientes
                 if (i == 0) {
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Primera luz
+                    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
                 } else {
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Siguientes luces
+                    glBlendFunc(GL_ONE, GL_ONE);
                 }
 
-                // Pasar datos de la luz actual al shader
                 setLuzUniforms(luz);
 
-                // Seleccionar la subrutina adecuada
                 GLuint subroutineIndex;
                 switch (luz.tipo) {
                     case TipoLuz::Ambiente:
@@ -101,9 +98,20 @@ namespace PAG
                     case TipoLuz::Foco:
                         subroutineIndex = glGetSubroutineIndex(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, "luzFoco");
                         break;
+                    default:
+                        subroutineIndex = GL_INVALID_INDEX;
+                        break;
                 }
 
-                glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &subroutineIndex);
+                if (subroutineIndex != GL_INVALID_INDEX) {
+                    GLint numActiveSubroutines;
+                    glGetProgramStageiv(shaderProgram->getProgramID(), GL_FRAGMENT_SHADER, GL_ACTIVE_SUBROUTINE_UNIFORMS, &numActiveSubroutines);
+                    std::vector<GLuint> subroutineIndices(numActiveSubroutines, GL_INVALID_INDEX);
+                    subroutineIndices[0] = subroutineIndex; // Configura solo la subrutina activa
+                    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, numActiveSubroutines, subroutineIndices.data());
+                } else {
+                    std::cerr << "Error: Subrutina no válida para tipo de luz: " << static_cast<int>(luz.tipo) << std::endl;
+                }
 
                 // Renderizar cada modelo
                 for (const auto& modelo : models) {
@@ -112,44 +120,20 @@ namespace PAG
                     glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ka"), 1, glm::value_ptr(material.colorAmbiente));
                     glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Kd"), 1, glm::value_ptr(material.colorDifuso));
                     glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ks"), 1, glm::value_ptr(material.colorEspecular));
-                    glUniform1f(glGetUniformLocation(shaderProgram->getProgramID(), "ns"), 32.0f); // Brillo fijo
+                    glUniform1f(glGetUniformLocation(shaderProgram->getProgramID(), "ns"), 32.0f);
 
                     modelo->renderizar(shaderProgram->getProgramID());
-                    //std::cout << "Luz configurada: " << i << " con tipo " << static_cast<int>(luz.tipo) << std::endl;
-                    /*
-                    GLint colorFijoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorFijo");
-                    GLint colorDifusoLoc = glGetUniformLocation(shaderProgram->getProgramID(), "colorDifuso");
-
-                    if (modoActual == ModoVisualizacion::Alambre) {
-                        // Usar un color fijo para el modo alambre
-                        if (colorFijoLoc != -1) {
-                            glUniform3f(colorFijoLoc, 1.0f, 0.0f, 0.0f); // Rojo
-                        }
-                    } else if (modoActual == ModoVisualizacion::Solido) {
-                        // Usar el color difuso del material del modelo actual
-                        if (colorDifusoLoc != -1) {
-                            Material mat = modelo->getMaterial();
-                            glUniform3fv(colorDifusoLoc, 1, glm::value_ptr(mat.colorDifuso));
-                        }
-                    }
-
-                    // Renderizar el modelo
-                    modelo->renderizar(shaderProgram->getProgramID());
-                    */
                 }
             }
-
-            // Desactivar blending al finalizar
             glDisable(GL_BLEND);
         }
     }
-
 
     /**
     * Método para cambiar el tamaño del viewport
     */
     void Renderer::cambiarTamano(int width, int height) {
-        glViewport(0, 0, width, height); // Ajusta el tamaño del viewport de OpenGL
+        glViewport(0, 0, width, height);
     }
 
     /**
@@ -251,6 +235,7 @@ namespace PAG
         }
     }
 
+    /*
     void PAG::Renderer::cambiarModoVisualizacion(ModoVisualizacion nuevoModo) {
         modoActual = nuevoModo;
     }
@@ -258,6 +243,7 @@ namespace PAG
     ModoVisualizacion PAG::Renderer::getModoVisualizacion() const {
         return modoActual;
     }
+    */
 
     void Renderer::addLuz(const Luz& luz) {
         luces.push_back(luz);
@@ -268,7 +254,6 @@ namespace PAG
     }
 
     void Renderer::setLuzUniforms(const Luz& luz) const {
-        glUniform1i(glGetUniformLocation(shaderProgram->getProgramID(), "tipoLuz"), static_cast<int>(luz.tipo));
         glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ia"), 1, glm::value_ptr(luz.colorAmbiente));
         glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Id"), 1, glm::value_ptr(luz.colorDifusa));
         glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Is"), 1, glm::value_ptr(luz.colorEspecular));

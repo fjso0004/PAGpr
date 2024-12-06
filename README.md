@@ -66,3 +66,10 @@ enlace a Manual de Usuario [ManualDeUsuario.pdf](ManualDeUsuario.pdf)(mantener p
 
 ## Práctica 8
 
+Para esta práctica, hemos añadido luces en varias direcciones para probar como afectan al modelo de la escena. Hemos creado una clase Luz que contiene un enum y un struct porque parece más sencillo de manejar.
+Esta clase encapsula los parámetros comunes y específicos de cada tipo de luz. La enum se usó para identificar el tipo de luz. 
+En el fragment shader, se usaron subrutinas para calcular el color resultante en función del tipo de luz activa. Cada subrutina implementa el cálculo específico para su tipo de luz.
+En el método refrescar, configuramos el blending para combinar las contribuciones de cada luz en múltiples pasadas. También, selecciona la subrutina adecuada para el cálculo de la luz, y, envia los datos de cada luz al shader.
+Encontré un problema con el blending, debido a que solo la primera luz que ponía en el bucle que maneja las 4 luces funcionaba (es decir, si inicializaba i=0, solo la luz 0 funcionaba, si i=1, solo funcionaba la luz 1.. etc).
+Buscando, encontré en StackOverflow, un usuario tenía el mismo problema que yo, y cambiando su fragment shader para que no usara subrutinas y modificando el código, conseguía que funcionara. Pero eso no era lo que se nos pedía en la práctica.
+Aún así, era cierto, y lo implementé de esa forma y funcionó. Luego encontré que en una de las respuestas descartadas, un usuario usaba glEnable(GL_DEPTH_TEST) y glDepthFunc(GL_LEQUAL) para asegurar que el buffer de profundidad se gestionara adecuadamente, y así logré que funcionara.

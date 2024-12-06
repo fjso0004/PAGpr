@@ -310,7 +310,7 @@ int main() {
         // Carga los shaders iniciales
         PAG::Renderer::getInstancia().loadShaderProgram(shaderBaseName);
         PAG::Renderer::getInstancia().creaModelo();
-        PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
+        //PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
         inicializarLuces(PAG::Renderer::getInstancia());
     }
     catch (const std::runtime_error& e) {
@@ -320,7 +320,6 @@ int main() {
         return -4;
     }
 
-    // Variables para controlar el color, inicializadas a valores globales
     ImVec4 color = ImVec4(red, green, blue, alpha);
 
     // Ciclo de eventos de la aplicación
@@ -349,10 +348,9 @@ int main() {
 
         ImGui::End();
 
-        // Ventana de control de color de fondo
+        // ---- Ventana de control de color de fondo ----
         ImGui::Begin("Color de fondo");
 
-        // Sincronizamos el picker de ImGui con los valores globales
         color.x = red;
         color.y = green;
         color.z = blue;
@@ -360,12 +358,9 @@ int main() {
         // Selector de color
         ImGui::ColorPicker4("Actual", (float*)&color, ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_InputRGB);
 
-        // Actualizamos los valores globales con los seleccionados en ImGui
         red = color.x;
         green = color.y;
         blue = color.z;
-
-        // Cambiamos el color de fondo con los valores actualizados
         PAG::Renderer::getInstancia().cambiarColorFondo(red, green, blue, alpha);
 
         ImGui::End();
@@ -481,16 +476,17 @@ int main() {
 
             if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
                 Material nuevoMaterial = modelos[i]->getMaterial();
-                nuevoMaterial.colorDifuso = colorDifuso; // Actualiza el color difuso
+                nuevoMaterial.colorAmbiente = glm::vec3(0.2f, 0.2f, 0.2f);  // Ejemplo
+                nuevoMaterial.colorDifuso = colorDifuso; // Color editado en ImGui
+                nuevoMaterial.colorEspecular = glm::vec3(1.0f, 1.0f, 1.0f); // Ejemplo
                 modelos[i]->setMaterial(nuevoMaterial);
 
-                // Reenviar propiedades del material al shader en el siguiente renderizado
-                PAG::Renderer::getInstancia().refrescar();
+                // Debugging
                 std::cout << "Material Actualizado: "
-                          << "Ka: " << nuevoMaterial.colorAmbiente.x << ", " << nuevoMaterial.colorAmbiente.y << ", " << nuevoMaterial.colorAmbiente.z << " | "
-                          << "Kd: " << nuevoMaterial.colorDifuso.x << ", " << nuevoMaterial.colorDifuso.y << ", " << nuevoMaterial.colorDifuso.z << " | "
-                          << "Ks: " << nuevoMaterial.colorEspecular.x << ", " << nuevoMaterial.colorEspecular.y << ", " << nuevoMaterial.colorEspecular.z << std::endl;
-
+                          << "Ka: " << nuevoMaterial.colorAmbiente.x << ", " << nuevoMaterial.colorAmbiente.y << ", " << nuevoMaterial.colorAmbiente.z
+                          << " | Kd: " << nuevoMaterial.colorDifuso.x << ", " << nuevoMaterial.colorDifuso.y << ", " << nuevoMaterial.colorDifuso.z
+                          << " | Ks: " << nuevoMaterial.colorEspecular.x << ", " << nuevoMaterial.colorEspecular.y << ", " << nuevoMaterial.colorEspecular.z
+                          << std::endl;
             }
 
             ImGui::Separator();
@@ -511,8 +507,8 @@ int main() {
         ImGui::Begin("Luces");
 
         if (ImGui::Button("Recargar Luces")) {
-            PAG::Renderer::getInstancia().clearLuces();  // Limpiar luces actuales
-            inicializarLuces(PAG::Renderer::getInstancia());  // Recargar las luces
+            PAG::Renderer::getInstancia().clearLuces();
+            inicializarLuces(PAG::Renderer::getInstancia());
         }
 
         static int luzSeleccionada = 0;
@@ -529,7 +525,7 @@ int main() {
             ImGui::EndListBox();
         }
 
-// Edita los parámetros de la luz seleccionada
+        // Edita los parámetros de la luz seleccionada
         if (luzSeleccionada >= 0 && luzSeleccionada < PAG::Renderer::getInstancia().getLuces().size()) {
             Luz& luz = PAG::Renderer::getInstancia().getLuces()[luzSeleccionada];
 

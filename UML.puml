@@ -23,7 +23,6 @@ RECTANGLE Sistema {
     - cursor_position_callback(window: GLFWwindow*, xpos: double, ypos: double)
 }
 
-' Clase Renderer (Singleton)
 RECTANGLE Renderer {
     - instancia: Renderer*
     - shaderProgram: ShaderProgram*
@@ -34,6 +33,7 @@ RECTANGLE Renderer {
     - subroutineIndices: GLuint[2]
     - models: std::vector<std::unique_ptr<ModeloOBJ>>
     - camara: Camara*
+    - luces: std::vector<Luz>
     + getInstancia(): Renderer&
     + refrescar()
     + cambiarTamano(width: int, height: int)
@@ -46,10 +46,24 @@ RECTANGLE Renderer {
     + eliminarModelo(index: int)
     + actualizarTransformacion(index: int, transform: glm::mat4)
     + setUniforms()
+    + addLuz(luz: Luz)
+    + clearLuces()
+    + setLuzUniforms(luz: Luz)
+    + getLuces(): std::vector<Luz>&
     + getCamara(): Camara*
 }
 
-' Clase Camara
+RECTANGLE Luz {
+    - tipo: TipoLuz
+    - colorAmbiente: glm::vec3
+    - colorDifusa: glm::vec3
+    - colorEspecular: glm::vec3
+    - posicion: glm::vec3
+    - direccion: glm::vec3
+    - anguloApertura: float
+    - atenuacion: float
+}
+
 RECTANGLE Camara {
     - posicion: glm::vec3
     - lookAt: glm::vec3
@@ -70,7 +84,6 @@ RECTANGLE Camara {
     + zoom(factor: float)
 }
 
-' Clase ShaderProgram
 RECTANGLE ShaderProgram {
     - idSP: GLuint
     + ShaderProgram()
@@ -81,7 +94,6 @@ RECTANGLE ShaderProgram {
     + loadShader(fileName: string, shaderType: GLenum): GLuint
 }
 
-' Clase ModeloOBJ
 RECTANGLE ModeloOBJ {
     - ruta: std::string
     - vertices: std::vector<Vertex>
@@ -102,7 +114,6 @@ RECTANGLE ModeloOBJ {
     + getMaterial() const: Material
 }
 
-' Representación del struct Material
 annotation Material {
     - colorDifuso: glm::vec3
     - colorAmbiente: glm::vec3
@@ -117,6 +128,7 @@ Sistema -- GLM : "Usa (dependencia)"
 Sistema -- GLFW : "Usa (dependencia)"
 Renderer --> ShaderProgram : "Crea y usa"
 Renderer --> ModeloOBJ : "Gestiona y renderiza múltiples modelos"
+Renderer --> Luz : "Gestiona y aplica uniformes de las luces"
 Renderer -- GLAD : "Usa (dependencia)"
 Renderer -- GLM : "Usa (dependencia)"
 ModeloOBJ --> Material : "Usa como propiedad"
@@ -124,14 +136,19 @@ ModeloOBJ -- tinyobjloader : "Usa (dependencia)"
 ShaderProgram -- GLAD : "Usa (dependencia)"
 Camara -- GLM : "Usa (dependencia)"
 
-' Nota para especificar que Material es un struct
 note right of Material
 Material es un struct, no una clase.
 Se utiliza para almacenar las propiedades
 de los materiales del modelo.
 end note
 
-' Colección de dependencias
+note right of Luz
+Luz es un struct, no una clase.
+Se considera como tal al tener el struct y el enum.
+Se utiliza para almacenar las propiedades
+de las luces del modelo.
+end note
+
 collections GLAD
 collections ImGui
 collections tinyobjloader

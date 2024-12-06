@@ -16,13 +16,13 @@ enum class TipoLuz {
 
 struct Luz {
     TipoLuz tipo;
-    glm::vec3 colorAmbiente;  // Ia
-    glm::vec3 colorDifusa;    // Id
-    glm::vec3 colorEspecular; // Is
-    glm::vec3 posicion;       // p (si aplica)
-    glm::vec3 direccion;      // d (si aplica)
-    float anguloApertura;     // Ángulo del cono (gamma)
-    float atenuacion;         // Atenuación (opcional)
+    glm::vec3 colorAmbiente;
+    glm::vec3 colorDifusa;
+    glm::vec3 colorEspecular;
+    glm::vec3 posicion;
+    glm::vec3 direccion;
+    float anguloApertura;
+    float atenuacion;
 };
 
 #endif //PAGPR_LUZ_H
