@@ -16,6 +16,7 @@ struct Material {
     glm::vec3 colorDifuso;
     glm::vec3 colorAmbiente;
     glm::vec3 colorEspecular;
+    GLuint texturaID = 0;
 };
 
 class ModeloOBJ {

@@ -122,6 +122,17 @@ namespace PAG
                     glUniform3fv(glGetUniformLocation(shaderProgram->getProgramID(), "Ks"), 1, glm::value_ptr(material.colorEspecular));
                     glUniform1f(glGetUniformLocation(shaderProgram->getProgramID(), "ns"), 32.0f);
 
+                    // Activar la textura si está disponible
+                    GLuint usaTexturaLoc = glGetUniformLocation(shaderProgram->getProgramID(), "usaTextura");
+                    if (material.texturaID) {
+                        glUniform1i(usaTexturaLoc, GL_TRUE);
+                        glActiveTexture(GL_TEXTURE0);
+                        glBindTexture(GL_TEXTURE_2D, material.texturaID);
+                        glUniform1i(glGetUniformLocation(shaderProgram->getProgramID(), "textura"), 0);
+                    } else {
+                        glUniform1i(usaTexturaLoc, GL_FALSE);
+                    }
+
                     modelo->renderizar(shaderProgram->getProgramID());
                 }
             }
@@ -207,13 +218,23 @@ namespace PAG
         return camara;
     }
 
-    void Renderer::cargarModelo(const std::string& filePath) {
+    void Renderer::cargarModelo(const std::string& filePath, const std::string& texturaPath) {
         try {
             auto model = std::make_unique<ModeloOBJ>(filePath);
             if (model->cargarModelo()) {
                 model->inicializarBuffers();
                 models.push_back(std::move(model));
-                std::cout << "Modelo cargado y buffers inicializados: " << filePath << std::endl;
+
+                // Cargar y asociar textura
+                GLuint texturaID = cargarTextura(texturaPath);
+                models.back()->setMaterial({
+                                                   glm::vec3(0.8f, 0.5f, 0.3f),
+                                                   glm::vec3(0.2f, 0.2f, 0.2f),
+                                                   glm::vec3(1.0f, 1.0f, 1.0f),
+                                                   texturaID
+                                           });
+
+                std::cout << "Modelo y textura cargados: " << filePath << " | " << texturaPath << std::endl;
             } else {
                 std::cerr << "Error al cargar el modelo: " << filePath << std::endl;
             }
@@ -221,6 +242,7 @@ namespace PAG
             std::cerr << "Excepción al cargar el modelo: " << e.what() << std::endl;
         }
     }
+
 
     void Renderer::eliminarModelo(int index) {
         if (index >= 0 && index < models.size()) {
@@ -272,5 +294,34 @@ namespace PAG
 
     std::vector<Luz>& Renderer::getLuces() {
         return luces;
+    }
+
+    GLuint Renderer::cargarTextura(const std::string& ruta) {
+        std::vector<unsigned char> imagen;
+        unsigned ancho, alto;
+        unsigned error = lodepng::decode(imagen, ancho, alto, ruta.c_str());
+        if (error) {
+            throw std::runtime_error("Error cargando textura: " + std::string(lodepng_error_text(error)));
+        }
+
+        // Voltear la imagen verticalmente
+        size_t filaBytes = ancho * 4;
+        unsigned char* imgPtr = imagen.data();
+        for (size_t y = 0; y < alto / 2; ++y) {
+            std::swap_ranges(imgPtr + y * filaBytes, imgPtr + (y + 1) * filaBytes, imgPtr + (alto - y - 1) * filaBytes);
+        }
+
+        // Generar textura OpenGL
+        GLuint texturaID;
+        glGenTextures(1, &texturaID);
+        glBindTexture(GL_TEXTURE_2D, texturaID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ancho, alto, 0, GL_RGBA, GL_UNSIGNED_BYTE, imagen.data());
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+        return texturaID;
     }
 }

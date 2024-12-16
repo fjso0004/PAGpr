@@ -347,6 +347,9 @@ CMakeFiles/PAGpr.dir/Renderer.cpp.obj: \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
  C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\Luz.h \
+ C:\Users\34660\Downloads\Universidad\PAGpr\ -\ copia\lodepng.h \
+ C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/string.h \
+ C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \
@@ -403,6 +406,4 @@ CMakeFiles/PAGpr.dir/Renderer.cpp.obj: \
  C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_uint1.hpp \
  C:/Users/34660/Downloads/Universidad/PAGpr\ -\ copia/GLM/glm/ext/vector_uint1_sized.hpp \
  C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
- C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/string.h \
- C:/Users/34660/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/Users/34660/DOWNLO~1/UNIVER~1/PAGPR-~1/GLM/glm/gtc/type_ptr.inl

@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/imgui/imgui_stdlib.cpp" "CMakeFiles/PAGpr.dir/imgui/imgui_stdlib.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/imgui/imgui_stdlib.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/imgui/imgui_tables.cpp" "CMakeFiles/PAGpr.dir/imgui/imgui_tables.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/imgui/imgui_tables.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/imgui/imgui_widgets.cpp" "CMakeFiles/PAGpr.dir/imgui/imgui_widgets.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/imgui/imgui_widgets.cpp.obj.d"
+  "C:/Users/34660/Downloads/Universidad/PAGpr - copia/lodepng.cpp" "CMakeFiles/PAGpr.dir/lodepng.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/lodepng.cpp.obj.d"
   "C:/Users/34660/Downloads/Universidad/PAGpr - copia/main.cpp" "CMakeFiles/PAGpr.dir/main.cpp.obj" "gcc" "CMakeFiles/PAGpr.dir/main.cpp.obj.d"
   )
 

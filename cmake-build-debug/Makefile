@@ -464,6 +464,30 @@ imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/imgui/imgui_widgets.cpp.s
 .PHONY : imgui/imgui_widgets.cpp.s
 
+lodepng.obj: lodepng.cpp.obj
+.PHONY : lodepng.obj
+
+# target to build an object file
+lodepng.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/lodepng.cpp.obj
+.PHONY : lodepng.cpp.obj
+
+lodepng.i: lodepng.cpp.i
+.PHONY : lodepng.i
+
+# target to preprocess a source file
+lodepng.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/lodepng.cpp.i
+.PHONY : lodepng.cpp.i
+
+lodepng.s: lodepng.cpp.s
+.PHONY : lodepng.s
+
+# target to generate assembly for a file
+lodepng.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PAGpr.dir\build.make CMakeFiles/PAGpr.dir/lodepng.cpp.s
+.PHONY : lodepng.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -539,6 +563,9 @@ help:
 	@echo ... imgui/imgui_widgets.obj
 	@echo ... imgui/imgui_widgets.i
 	@echo ... imgui/imgui_widgets.s
+	@echo ... lodepng.obj
+	@echo ... lodepng.i
+	@echo ... lodepng.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

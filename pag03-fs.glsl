@@ -2,6 +2,7 @@
 
 in vec3 posicionV; // Posición en espacio de visión
 in vec3 normalV;   // Normal en espacio de visión
+in vec2 texCoordF; // Coordenadas de textura
 
 // Uniformes del material
 uniform vec3 Ka;        // Color ambiente
@@ -16,6 +17,10 @@ uniform vec3 Is;        // Intensidad de luz especular
 uniform vec3 luzPosicion; // Posición de la luz en espacio de visión
 uniform vec3 luzDireccion; // Dirección de la luz
 uniform float luzApertura; // Ángulo de apertura (para foco)
+
+// Uniformes de textura
+uniform sampler2D textura; // Textura del material
+uniform bool usaTextura;   // Bandera para determinar si usar textura
 
 out vec4 FragColor;
 
@@ -82,5 +87,13 @@ vec4 luzFoco() {
 }
 
 void main() {
-    FragColor = luzActiva(); // Selecciona la subrutina activa
+    vec4 colorBase = luzActiva(); // Calcula el color base usando la subrutina de luz activa
+
+    // Combina el color base con la textura si está activa
+    if (usaTextura) {
+        vec4 colorTextura = texture(textura, texCoordF);
+        FragColor = vec4(colorBase.rgb * colorTextura.rgb, 1.0);
+    } else {
+        FragColor = colorBase;
+    }
 }

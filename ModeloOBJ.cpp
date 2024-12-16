@@ -122,12 +122,26 @@ void ModeloOBJ::SetModelMatrix(const glm::mat4 &nuevaTransformacion) {
 void ModeloOBJ::renderizar(GLuint shaderProgramID) const {
     if (idVAO == 0) return;
 
+    // Asignar matriz de modelo al shader
     GLuint modelLoc = glGetUniformLocation(shaderProgramID, "model");
     if (modelLoc != -1) {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformacion));
     }
 
+    // Activar textura si está disponible
+    if (material.texturaID) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.texturaID);
+        glUniform1i(glGetUniformLocation(shaderProgramID, "textura"), 0);
+    }
+
     glBindVertexArray(idVAO);
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, nullptr);
     glBindVertexArray(0);
+
+    // Desvincular textura
+    if (material.texturaID) {
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }
+

@@ -21,6 +21,8 @@ add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES} ${IMGUI_FILES}
         ModeloOBJ.h
         Luz.cpp
         Luz.h
+        lodepng.cpp
+        lodepng.h
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC GLAD/include

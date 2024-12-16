@@ -392,6 +392,7 @@ int main() {
 
         // ---- Ventana para cargar y gestionar modelos ----
         static std::string rutaModelo = "../vaca.obj"; // Ruta para cargar un modelo
+        static std::string rutaTextura = "../spot_texture.png";
         static int modeloSeleccionado = -1; // Índice del modelo seleccionado
         static float traslacion[3] = {0.0f, 0.0f, 0.0f};
         static float rotacion[3] = {0.0f, 0.0f, 0.0f};
@@ -402,7 +403,7 @@ int main() {
         ImGui::Text("Cargar nuevo modelo:");
         ImGui::InputText("Ruta del Modelo", &rutaModelo);
         if (ImGui::Button("Cargar Modelo")) {
-            PAG::Renderer::getInstancia().cargarModelo(rutaModelo);
+            PAG::Renderer::getInstancia().cargarModelo(rutaModelo, rutaTextura);
 
             // Configurar el material para el modelo cargado
             auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a los modelos
@@ -458,6 +459,60 @@ int main() {
             transformacion = glm::scale(transformacion, glm::vec3(escala[0], escala[1], escala[2]));
 
             PAG::Renderer::getInstancia().actualizarTransformacion(modeloSeleccionado, transformacion);
+        }
+
+        ImGui::End();
+
+        // ---- Ventana para la gestión de texturas ----
+        ImGui::Begin("Gestión de Texturas");
+
+        static std::string texturaRuta = "../spot_texture.png";
+        static int modeloSeleccionadoParaTextura = -1; // Índice del modelo al que se asociará la textura
+
+        ImGui::Text("Cargar Textura:");
+        ImGui::InputText("Ruta de la Textura", &texturaRuta);
+
+        if (ImGui::Button("Cargar Textura")) {
+            try {
+                if (modeloSeleccionadoParaTextura >= 0 && modeloSeleccionadoParaTextura < PAG::Renderer::getInstancia().getModels().size()) {
+                    GLuint texturaID = PAG::Renderer::getInstancia().cargarTextura(texturaRuta);
+
+                    auto& modelos = PAG::Renderer::getInstancia().getModels();
+                    Material material = modelos[modeloSeleccionadoParaTextura]->getMaterial();
+                    material.texturaID = texturaID; // Asignar la textura al material del modelo seleccionado
+                    modelos[modeloSeleccionadoParaTextura]->setMaterial(material);
+
+                    std::cout << "Textura cargada y asociada al modelo " << modeloSeleccionadoParaTextura << ": " << texturaRuta << std::endl;
+                } else {
+                    std::cerr << "Error: No hay un modelo seleccionado para asociar la textura." << std::endl;
+                }
+            } catch (const std::exception& e) {
+                std::cerr << "Error al cargar la textura: " << e.what() << std::endl;
+            }
+        }
+
+        ImGui::Separator();
+
+// Mostrar los modelos disponibles para asociar texturas
+        ImGui::Text("Selecciona un modelo para asociar la textura:");
+        if (ImGui::BeginListBox("Modelos")) {
+            const auto& modelos = PAG::Renderer::getInstancia().getModels();
+            for (size_t i = 0; i < modelos.size(); ++i) {
+                const bool isSelected = (modeloSeleccionadoParaTextura == static_cast<int>(i));
+                if (ImGui::Selectable(("Modelo " + std::to_string(i)).c_str(), isSelected)) {
+                    modeloSeleccionadoParaTextura = static_cast<int>(i);
+                }
+                if (isSelected) {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndListBox();
+        }
+
+        if (modeloSeleccionadoParaTextura >= 0) {
+            ImGui::Text("Modelo Seleccionado: %d", modeloSeleccionadoParaTextura);
+        } else {
+            ImGui::Text("No hay un modelo seleccionado.");
         }
 
         ImGui::End();

@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/PAGpr.dir/imgui/imgui_tables.cpp.obj.d"
   "CMakeFiles/PAGpr.dir/imgui/imgui_widgets.cpp.obj"
   "CMakeFiles/PAGpr.dir/imgui/imgui_widgets.cpp.obj.d"
+  "CMakeFiles/PAGpr.dir/lodepng.cpp.obj"
+  "CMakeFiles/PAGpr.dir/lodepng.cpp.obj.d"
   "CMakeFiles/PAGpr.dir/main.cpp.obj"
   "CMakeFiles/PAGpr.dir/main.cpp.obj.d"
   "PAGpr.exe"

@@ -22,6 +22,7 @@
 #include "Camera.h"
 #include "ModeloOBJ.h"
 #include "Luz.h"
+#include "lodepng.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -108,12 +109,14 @@ namespace PAG
         void clearLuces();
         std::vector<Luz>& getLuces();
 
-        void cargarModelo(const std::string& filePath);
+        void cargarModelo(const std::string& filePath, const std::string& texturaPath);
         void eliminarModelo(int index);
         void actualizarTransformacion(int index, const glm::mat4& transform);
         std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {return models;}
         //void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
         //ModoVisualizacion getModoVisualizacion() const;
+
+        GLuint cargarTextura(const std::string& ruta);
     };
 }
 
