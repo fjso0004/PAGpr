@@ -42,7 +42,8 @@ RECTANGLE Renderer {
     + loadShaderProgram(shaderBase: string)
     + cambiarModoVisualizacion(nuevoModo: ModoVisualizacion)
     + getModoVisualizacion(): ModoVisualizacion
-    + cargarModelo(filePath: std::string)
+    + cargarModelo(filePath: std::string, texturaPath: std::string)
+    + cargarTextura(ruta: std::string): GLuint
     + eliminarModelo(index: int)
     + actualizarTransformacion(index: int, transform: glm::mat4)
     + setUniforms()
@@ -118,6 +119,7 @@ annotation Material {
     - colorDifuso: glm::vec3
     - colorAmbiente: glm::vec3
     - colorEspecular: glm::vec3
+    - texturaID: GLuint
 }
 
 allowmixing
@@ -131,6 +133,7 @@ Renderer --> ModeloOBJ : "Gestiona y renderiza múltiples modelos"
 Renderer --> Luz : "Gestiona y aplica uniformes de las luces"
 Renderer -- GLAD : "Usa (dependencia)"
 Renderer -- GLM : "Usa (dependencia)"
+Renderer --> Material : "Asocia texturas a modelos"
 ModeloOBJ --> Material : "Usa como propiedad"
 ModeloOBJ -- tinyobjloader : "Usa (dependencia)"
 ShaderProgram -- GLAD : "Usa (dependencia)"
@@ -140,6 +143,7 @@ note right of Material
 Material es un struct, no una clase.
 Se utiliza para almacenar las propiedades
 de los materiales del modelo.
+Ahora incluye texturaID para manejar texturas.
 end note
 
 note right of Luz

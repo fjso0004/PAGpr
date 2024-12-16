@@ -29,7 +29,7 @@
 
 namespace PAG
 {
-    //enum class ModoVisualizacion { Alambre, Solido };
+    enum class ModoVisualizacion { Alambre, Solido };
     /**
     * @brief Clase encargada de encapsular la gestión del área de dibujo OpenGL
     *
@@ -53,7 +53,7 @@ namespace PAG
 
         Camara* camara;
 
-        //ModoVisualizacion modoActual = ModoVisualizacion::Solido;
+        ModoVisualizacion modoActual = ModoVisualizacion::Solido;
         GLuint subroutineIndices[2];
 
         void setLuzUniforms(const Luz& luz) const;
@@ -113,8 +113,8 @@ namespace PAG
         void eliminarModelo(int index);
         void actualizarTransformacion(int index, const glm::mat4& transform);
         std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {return models;}
-        //void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
-        //ModoVisualizacion getModoVisualizacion() const;
+        void cambiarModoVisualizacion(ModoVisualizacion nuevoModo);
+        ModoVisualizacion getModoVisualizacion() const;
 
         GLuint cargarTextura(const std::string& ruta);
     };

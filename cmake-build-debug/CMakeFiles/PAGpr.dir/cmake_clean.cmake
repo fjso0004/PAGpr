@@ -3,8 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/PAGpr.dir/Camera.cpp.obj.d"
   "CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj"
   "CMakeFiles/PAGpr.dir/GLAD/src/glad.c.obj.d"
-  "CMakeFiles/PAGpr.dir/Luz.cpp.obj"
-  "CMakeFiles/PAGpr.dir/Luz.cpp.obj.d"
   "CMakeFiles/PAGpr.dir/ModeloOBJ.cpp.obj"
   "CMakeFiles/PAGpr.dir/ModeloOBJ.cpp.obj.d"
   "CMakeFiles/PAGpr.dir/Renderer.cpp.obj"

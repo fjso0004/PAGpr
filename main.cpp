@@ -391,7 +391,7 @@ int main() {
         ImGui::End();
 
         // ---- Ventana para cargar y gestionar modelos ----
-        static std::string rutaModelo = "../vaca.obj"; // Ruta para cargar un modelo
+        static std::string rutaModelo = "../modelos/vaca.obj"; // Ruta para cargar un modelo
         static std::string rutaTextura = "../spot_texture.png";
         static int modeloSeleccionado = -1; // Índice del modelo seleccionado
         static float traslacion[3] = {0.0f, 0.0f, 0.0f};
@@ -426,7 +426,7 @@ int main() {
             const auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a modelos
             for (size_t i = 0; i < modelos.size(); ++i) {
                 const bool seleccionado = (modeloSeleccionado == static_cast<int>(i));
-                if (ImGui::Selectable(("Modelo " + std::to_string(i)).c_str(), seleccionado)) {
+                if (ImGui::Selectable(("Modelo " + std::to_string(i+1)).c_str(), seleccionado)) {
                     modeloSeleccionado = static_cast<int>(i);
                 }
                 if (seleccionado) {
@@ -466,7 +466,7 @@ int main() {
         // ---- Ventana para la gestión de texturas ----
         ImGui::Begin("Gestión de Texturas");
 
-        static std::string texturaRuta = "../spot_texture.png";
+        static std::string texturaRuta = "../texturas/spot_texture.png";
         static int modeloSeleccionadoParaTextura = -1; // Índice del modelo al que se asociará la textura
 
         ImGui::Text("Cargar Textura:");
@@ -493,13 +493,13 @@ int main() {
 
         ImGui::Separator();
 
-// Mostrar los modelos disponibles para asociar texturas
+        // Mostrar los modelos disponibles para asociar texturas
         ImGui::Text("Selecciona un modelo para asociar la textura:");
         if (ImGui::BeginListBox("Modelos")) {
             const auto& modelos = PAG::Renderer::getInstancia().getModels();
             for (size_t i = 0; i < modelos.size(); ++i) {
                 const bool isSelected = (modeloSeleccionadoParaTextura == static_cast<int>(i));
-                if (ImGui::Selectable(("Modelo " + std::to_string(i)).c_str(), isSelected)) {
+                if (ImGui::Selectable(("Modelo " + std::to_string(i+1)).c_str(), isSelected)) {
                     modeloSeleccionadoParaTextura = static_cast<int>(i);
                 }
                 if (isSelected) {
@@ -522,14 +522,14 @@ int main() {
         // Iterar sobre todos los modelos para mostrar y editar sus materiales
         const auto& modelos = PAG::Renderer::getInstancia().getModels();
         for (size_t i = 0; i < modelos.size(); ++i) {
-            ImGui::Text("Modelo %zu:", i);
+            ImGui::Text("Modelo %zu:", i+1);
 
             static glm::vec3 colorDifuso = modelos[i]->getMaterial().colorDifuso;
 
             // Mostrar el selector de color para editar el color difuso
             ImGui::ColorEdit3(("Color Difuso##" + std::to_string(i)).c_str(), glm::value_ptr(colorDifuso));
 
-            if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
+            if (ImGui::Button(("Actualizar Material##" + std::to_string(i+1)).c_str())) {
                 Material nuevoMaterial = modelos[i]->getMaterial();
                 nuevoMaterial.colorAmbiente = glm::vec3(0.2f, 0.2f, 0.2f);  // Ejemplo
                 nuevoMaterial.colorDifuso = colorDifuso; // Color editado en ImGui
@@ -548,7 +548,7 @@ int main() {
         }
         ImGui::End();
 
-        /*
+
         ImGui::Begin("Modo de Visualización");
         if (ImGui::RadioButton("Alambre", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 0)) {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Alambre);
@@ -557,7 +557,7 @@ int main() {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
         }
         ImGui::End();
-        */
+
 
         ImGui::Begin("Luces");
 
@@ -570,7 +570,7 @@ int main() {
         if (ImGui::BeginListBox("Luces")) {
             for (size_t i = 0; i < PAG::Renderer::getInstancia().getLuces().size(); ++i) {
                 const bool seleccionada = (luzSeleccionada == static_cast<int>(i));
-                if (ImGui::Selectable(("Luz " + std::to_string(i)).c_str(), seleccionada)) {
+                if (ImGui::Selectable(("Luz " + std::to_string(i+1)).c_str(), seleccionada)) {
                     luzSeleccionada = static_cast<int>(i);
                 }
                 if (seleccionada) {

@@ -19,7 +19,6 @@ add_executable(PAGpr main.cpp ${MY_FILES} ${GLAD_FILES} ${IMGUI_FILES}
         Camera.cpp
         ModeloOBJ.cpp
         ModeloOBJ.h
-        Luz.cpp
         Luz.h
         lodepng.cpp
         lodepng.h

@@ -68,8 +68,7 @@ namespace PAG
             shaderProgram->useProgram();
             setUniforms();
 
-            // Configurar el modo de polígonos
-            //glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
+            glPolygonMode(GL_FRONT_AND_BACK, (modoActual == ModoVisualizacion::Alambre) ? GL_LINE : GL_FILL);
 
             glEnable(GL_BLEND);
             glBlendEquation(GL_FUNC_ADD);
@@ -257,7 +256,6 @@ namespace PAG
         }
     }
 
-    /*
     void PAG::Renderer::cambiarModoVisualizacion(ModoVisualizacion nuevoModo) {
         modoActual = nuevoModo;
     }
@@ -265,7 +263,6 @@ namespace PAG
     ModoVisualizacion PAG::Renderer::getModoVisualizacion() const {
         return modoActual;
     }
-    */
 
     void Renderer::addLuz(const Luz& luz) {
         luces.push_back(luz);
@@ -311,7 +308,6 @@ namespace PAG
             std::swap_ranges(imgPtr + y * filaBytes, imgPtr + (y + 1) * filaBytes, imgPtr + (alto - y - 1) * filaBytes);
         }
 
-        // Generar textura OpenGL
         GLuint texturaID;
         glGenTextures(1, &texturaID);
         glBindTexture(GL_TEXTURE_2D, texturaID);
