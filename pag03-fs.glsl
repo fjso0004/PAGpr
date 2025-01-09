@@ -1,26 +1,27 @@
 #version 410
 
-in vec3 posicionV; // Posición en espacio de visión
-in vec3 normalV;   // Normal en espacio de visión
-in vec2 texCoordF; // Coordenadas de textura
+in vec3 posicionV;        // Posición en espacio de visión
+in vec2 texCoordF;        // Coordenadas de textura
+in mat3 TBN;              // Matriz TBN para transformar al espacio de la tangente
 
 // Uniformes del material
-uniform vec3 Ka;        // Color ambiente
-uniform vec3 Kd;        // Color difuso
-uniform vec3 Ks;        // Color especular
-uniform float ns;       // Exponente especular
+uniform vec3 Ka;          // Color ambiente
+uniform vec3 Kd;          // Color difuso
+uniform vec3 Ks;          // Color especular
+uniform float ns;         // Exponente especular
 
 // Uniformes de la luz
-uniform vec3 Ia;        // Intensidad de luz ambiente
-uniform vec3 Id;        // Intensidad de luz difusa
-uniform vec3 Is;        // Intensidad de luz especular
+uniform vec3 Ia;          // Intensidad de luz ambiente
+uniform vec3 Id;          // Intensidad de luz difusa
+uniform vec3 Is;          // Intensidad de luz especular
 uniform vec3 luzPosicion; // Posición de la luz en espacio de visión
 uniform vec3 luzDireccion; // Dirección de la luz
 uniform float luzApertura; // Ángulo de apertura (para foco)
 
 // Uniformes de textura
-uniform sampler2D textura; // Textura del material
-uniform bool usaTextura;   // Bandera para determinar si usar textura
+uniform sampler2D textura;     // Textura del material
+uniform sampler2D normalMap;   // Mapa de normales
+uniform bool usaTextura;       // Bandera para determinar si usar textura
 
 out vec4 FragColor;
 
@@ -39,7 +40,7 @@ vec4 luzAmbiente() {
 subroutine(LuzCalculationType)
 vec4 luzPuntual() {
     vec3 L = normalize(luzPosicion - posicionV);
-    vec3 N = normalize(normalV);
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
     vec3 V = normalize(-posicionV);
     vec3 R = reflect(-L, N);
 
@@ -54,7 +55,7 @@ vec4 luzPuntual() {
 subroutine(LuzCalculationType)
 vec4 luzDireccional() {
     vec3 L = normalize(-luzDireccion);
-    vec3 N = normalize(normalV);
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
     vec3 V = normalize(-posicionV);
     vec3 R = reflect(-L, N);
 
@@ -69,7 +70,7 @@ vec4 luzDireccional() {
 subroutine(LuzCalculationType)
 vec4 luzFoco() {
     vec3 L = normalize(luzPosicion - posicionV);
-    vec3 N = normalize(normalV);
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
     vec3 V = normalize(-posicionV);
     vec3 R = reflect(-L, N);
 

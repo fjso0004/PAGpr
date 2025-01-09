@@ -51,6 +51,16 @@ namespace PAG
         GLuint idVBO = 0;
         GLuint idIBO = 0;
 
+        //ShaderProgram *shaderSombras;
+        std::shared_ptr<ShaderProgram> shaderSombras;
+        GLuint fboSombras;                      // Framebuffer para sombras
+        std::vector<GLuint> texturasSombras;    // Texturas para mapas de sombras
+        GLsizei anchoMapaSombras = 1024;            // Dimensiones del mapa de sombras
+        GLsizei altoMapaSombras = 1024;
+
+        void inicializarShadowMapping();        // Inicializa FBO y texturas de sombras
+        void generarMapaDeSombras(const Luz& luz, const glm::mat4& mVP);
+
         Camara* camara;
 
         ModoVisualizacion modoActual = ModoVisualizacion::Solido;
@@ -109,7 +119,7 @@ namespace PAG
         void clearLuces();
         std::vector<Luz>& getLuces();
 
-        void cargarModelo(const std::string& filePath, const std::string& texturaPath);
+        void cargarModelo(const std::string& filePath, const std::string& texturaPath, const std::string& normalMapPath);
         void eliminarModelo(int index);
         void actualizarTransformacion(int index, const glm::mat4& transform);
         std::vector<std::unique_ptr<ModeloOBJ>>& getModels() {return models;}
@@ -117,6 +127,9 @@ namespace PAG
         ModoVisualizacion getModoVisualizacion() const;
 
         GLuint cargarTextura(const std::string& ruta);
+        std::shared_ptr<ShaderProgram> getShaderProgram() const {return shaderProgram;}
+
+        void cargarModeloConNormalMap(const std::string& modeloPath, const std::string& texturaPath, const std::string& normalMapPath); // NUEVO
     };
 }
 

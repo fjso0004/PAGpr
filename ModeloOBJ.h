@@ -17,6 +17,7 @@ struct Material {
     glm::vec3 colorAmbiente;
     glm::vec3 colorEspecular;
     GLuint texturaID = 0;
+    GLuint normalMapID = 0;
 };
 
 class ModeloOBJ {
@@ -26,6 +27,8 @@ public:
         glm::vec3 position;
         glm::vec3 normal;
         glm::vec2 texCoord;
+        glm::vec3 tangent;
+        glm::vec3 bitangent;
     };
 
     ModeloOBJ(const std::string& rutaArchivo);
@@ -34,8 +37,13 @@ public:
     void inicializarBuffers();
     void renderizar(GLuint shaderProgramID) const;
     void SetModelMatrix(const glm::mat4& nuevaTransformacion);
+    const glm::mat4 &getModelMatrix() const;
     void setMaterial(const Material& nuevoMaterial) {material = nuevoMaterial;}
-    Material getMaterial() const {return material;}
+    Material& getMaterial() { return material; } // Devuelve referencia no constante
+    const Material& getMaterial() const { return material; } // Devuelve referencia constante para objetos constantes
+
+    void setNormalMap(GLuint normalMap) { material.normalMapID = normalMap; }
+    GLuint getNormalMap() const { return material.normalMapID; }
 
 private:
     std::string ruta;

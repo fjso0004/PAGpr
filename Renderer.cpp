@@ -25,8 +25,9 @@ namespace PAG
     /**
     * Constructor por defecto
     */
-    Renderer::Renderer() : shaderProgram(std::make_shared<ShaderProgram>()), camara(nullptr) {
+    Renderer::Renderer() : shaderProgram(std::make_shared<ShaderProgram>()), shaderSombras(std::make_shared<ShaderProgram>()), camara(nullptr) {
         camara = new Camara(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 1024.0f / 576.0f, 0.1f, 100.0f);
+        //shaderSombras->loadShaders("../sombras-vs.glsl", "../sombras-fs.glsl");
         glEnable(GL_DEPTH_TEST);
     }
 
@@ -38,6 +39,18 @@ namespace PAG
             delete camara;
             camara = nullptr;
         }
+/*
+        if (shaderSombras) {
+            delete shaderSombras;
+            shaderSombras = nullptr;
+        }
+
+        if (fboSombras) {
+            glDeleteFramebuffers(1, &fboSombras);
+        }
+        for (auto textura : texturasSombras) {
+            glDeleteTextures(1, &textura);
+        }*/
 
         // Libera los recursos de OpenGL
         if (idVBO != 0) { glDeleteBuffers(1, &idVBO); }
@@ -132,12 +145,24 @@ namespace PAG
                         glUniform1i(usaTexturaLoc, GL_FALSE);
                     }
 
+                    // Activar el mapa de normales si está disponible
+                    GLuint usaNormalMapLoc = glGetUniformLocation(shaderProgram->getProgramID(), "usaNormalMap");
+                    if (material.normalMapID) {
+                        glUniform1i(usaNormalMapLoc, GL_TRUE);
+                        glActiveTexture(GL_TEXTURE1);
+                        glBindTexture(GL_TEXTURE_2D, material.normalMapID);
+                        glUniform1i(glGetUniformLocation(shaderProgram->getProgramID(), "normalMap"), 1);
+                    } else {
+                        glUniform1i(usaNormalMapLoc, GL_FALSE);
+                    }
+
                     modelo->renderizar(shaderProgram->getProgramID());
                 }
             }
             glDisable(GL_BLEND);
         }
     }
+
 
     /**
     * Método para cambiar el tamaño del viewport
@@ -217,23 +242,26 @@ namespace PAG
         return camara;
     }
 
-    void Renderer::cargarModelo(const std::string& filePath, const std::string& texturaPath) {
+    void Renderer::cargarModelo(const std::string& filePath, const std::string& texturaPath, const std::string& normalMapPath) {
         try {
             auto model = std::make_unique<ModeloOBJ>(filePath);
             if (model->cargarModelo()) {
                 model->inicializarBuffers();
                 models.push_back(std::move(model));
 
-                // Cargar y asociar textura
+                // Cargar y asociar texturas
                 GLuint texturaID = cargarTextura(texturaPath);
+                GLuint normalMapID = cargarTextura(normalMapPath); // Nuevo: cargar mapa de normales
+
                 models.back()->setMaterial({
                                                    glm::vec3(0.8f, 0.5f, 0.3f),
                                                    glm::vec3(0.2f, 0.2f, 0.2f),
                                                    glm::vec3(1.0f, 1.0f, 1.0f),
-                                                   texturaID
+                                                   texturaID,
+                                                   normalMapID // Asociar el mapa de normales
                                            });
 
-                std::cout << "Modelo y textura cargados: " << filePath << " | " << texturaPath << std::endl;
+                std::cout << "Modelo y texturas cargados: " << filePath << " | " << texturaPath << " | " << normalMapPath << std::endl;
             } else {
                 std::cerr << "Error al cargar el modelo: " << filePath << std::endl;
             }
@@ -266,6 +294,28 @@ namespace PAG
 
     void Renderer::addLuz(const Luz& luz) {
         luces.push_back(luz);
+        // Inicializar shadow mapping si aún no se ha hecho
+        /*if (fboSombras == 0) {
+            inicializarShadowMapping();
+        }
+
+        // Si ya está inicializado, agregar una nueva textura para la nueva luz
+        if (luz.tipo == TipoLuz::Direccional || luz.tipo == TipoLuz::Foco) {
+            GLuint texturaSombra;
+            glGenTextures(1, &texturaSombra);
+            glBindTexture(GL_TEXTURE_2D, texturaSombra);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, anchoMapaSombras, altoMapaSombras, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+            GLfloat borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
+            glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LESS);
+
+            texturasSombras.push_back(texturaSombra);
+        }*/
     }
 
     void Renderer::clearLuces() {
@@ -320,4 +370,82 @@ namespace PAG
         glBindTexture(GL_TEXTURE_2D, 0);
         return texturaID;
     }
+/*
+    void Renderer::cargarModeloConNormalMap(const std::string& modeloPath, const std::string& texturaPath, const std::string& normalMapPath) {
+        auto modelo = std::make_unique<ModeloOBJ>(modeloPath);
+
+        if (modelo->cargarModelo()) {
+            modelo->inicializarBuffers();
+
+            // Cargar textura difusa
+            GLuint texturaID = cargarTextura(texturaPath);
+            modelo->setMaterial({ glm::vec3(0.8f, 0.5f, 0.3f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(1.0f, 1.0f, 1.0f), texturaID });
+
+            GLuint normalMapID = 0;
+            try {
+                normalMapID = cargarTextura(normalMapPath);
+                modelo->setNormalMap(normalMapID);
+            } catch (const std::exception& e) {
+                std::cerr << "Error cargando mapa de normales: " << e.what() << std::endl;
+                normalMapID = 0; // Asignar 0 si la textura falla
+            }
+
+            models.push_back(std::move(modelo));
+            std::cout << "Modelo y mapa de normales cargados: " << modeloPath << std::endl;
+        } else {
+            std::cerr << "Error al cargar el modelo: " << modeloPath << std::endl;
+        }
+    }
+
+    void Renderer::inicializarShadowMapping() {
+        glGenFramebuffers(1, &fboSombras);
+
+        for (size_t i = 0; i < luces.size(); ++i) {
+            GLuint texturaSombra;
+            glGenTextures(1, &texturaSombra);
+            glBindTexture(GL_TEXTURE_2D, texturaSombra);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, anchoMapaSombras, altoMapaSombras, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+            GLfloat borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
+            glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LESS);
+
+            texturasSombras.push_back(texturaSombra);
+        }
+    }
+
+    void Renderer::generarMapaDeSombras(const Luz& luz, const glm::mat4& mVP) {
+        glBindFramebuffer(GL_FRAMEBUFFER, fboSombras);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, texturasSombras[&luz - &luces[0]], 0);
+        glDrawBuffer(GL_NONE);
+        glReadBuffer(GL_NONE);
+
+        GLenum estado = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        if (estado != GL_FRAMEBUFFER_COMPLETE) {
+            std::cerr << "Error: Framebuffer no completo, código de estado: " << estado << std::endl;
+            return;
+        }
+
+        glViewport(0, 0, anchoMapaSombras, altoMapaSombras);
+        glClear(GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+
+        // Configurar el shader para calcular sombras
+        shaderSombras->useProgram();
+        glUniformMatrix4fv(glGetUniformLocation(shaderSombras->getProgramID(), "matrizModVisProy"), 1, GL_FALSE, glm::value_ptr(mVP));
+
+        // Renderizar cada modelo
+        for (const auto& modelo : models) {
+            glm::mat4 matrizMVP = mVP * modelo->getModelMatrix();
+            glUniformMatrix4fv(glGetUniformLocation(shaderSombras->getProgramID(), "matrizModVisProy"), 1, GL_FALSE, glm::value_ptr(matrizMVP));
+            modelo->renderizar(shaderSombras->getProgramID());
+        }
+
+        glCullFace(GL_BACK);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }*/
 }

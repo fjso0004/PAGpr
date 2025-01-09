@@ -310,7 +310,6 @@ int main() {
         // Carga los shaders iniciales
         PAG::Renderer::getInstancia().loadShaderProgram(shaderBaseName);
         PAG::Renderer::getInstancia().creaModelo();
-        //PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
         inicializarLuces(PAG::Renderer::getInstancia());
     }
     catch (const std::runtime_error& e) {
@@ -321,6 +320,8 @@ int main() {
     }
 
     ImVec4 color = ImVec4(red, green, blue, alpha);
+    static bool usaNormalMapping = false;
+    static std::string rutaNormalMap = "../texturas/material_0_normal.png"; // Ruta del mapa de normales
 
     // Ciclo de eventos de la aplicación
     while (!glfwWindowShouldClose(window)) {
@@ -391,8 +392,8 @@ int main() {
         ImGui::End();
 
         // ---- Ventana para cargar y gestionar modelos ----
-        static std::string rutaModelo = "../modelos/vaca.obj"; // Ruta para cargar un modelo
-        static std::string rutaTextura = "../spot_texture.png";
+        static std::string rutaModelo = "../modelos/t-rex.obj"; // Ruta para cargar un modelo
+        static std::string rutaTextura = "../material_0_diffuse.png";
         static int modeloSeleccionado = -1; // Índice del modelo seleccionado
         static float traslacion[3] = {0.0f, 0.0f, 0.0f};
         static float rotacion[3] = {0.0f, 0.0f, 0.0f};
@@ -403,7 +404,7 @@ int main() {
         ImGui::Text("Cargar nuevo modelo:");
         ImGui::InputText("Ruta del Modelo", &rutaModelo);
         if (ImGui::Button("Cargar Modelo")) {
-            PAG::Renderer::getInstancia().cargarModelo(rutaModelo, rutaTextura);
+            PAG::Renderer::getInstancia().cargarModelo(rutaModelo, rutaTextura, rutaNormalMap);
 
             // Configurar el material para el modelo cargado
             auto& modelos = PAG::Renderer::getInstancia().getModels(); // Obtener referencia a los modelos
@@ -418,6 +419,7 @@ int main() {
             rutaModelo.clear();
         }
 
+        ImGui::Separator();
 
         ImGui::Separator();
 
@@ -463,10 +465,74 @@ int main() {
 
         ImGui::End();
 
+        // ---- Ventana para gestionar normal mapping ----
+        ImGui::Begin("Gestión de Normal Mapping");
+        static std::string rutaNormalMap = "../texturas/material_0_normal.png";
+        static int modeloSeleccionadoParaNormalMap = -1; // Índice del modelo seleccionado para asignar el mapa de normales
+
+        ImGui::Text("Cargar Mapa de Normales:");
+        ImGui::InputText("Ruta del Mapa de Normales", &rutaNormalMap);
+
+        if (ImGui::Button("Cargar Mapa de Normales")) {
+            try {
+                if (modeloSeleccionadoParaNormalMap >= 0 && modeloSeleccionadoParaNormalMap < PAG::Renderer::getInstancia().getModels().size()) {
+                    GLuint normalMapID = PAG::Renderer::getInstancia().cargarTextura(rutaNormalMap);
+
+                    auto& modelos = PAG::Renderer::getInstancia().getModels();
+                    Material material = modelos[modeloSeleccionadoParaNormalMap]->getMaterial();
+                    material.normalMapID = normalMapID; // Asociar el mapa de normales al material del modelo seleccionado
+                    modelos[modeloSeleccionadoParaNormalMap]->setMaterial(material);
+
+                    std::cout << "Mapa de Normales cargado y asociado al modelo " << modeloSeleccionadoParaNormalMap << ": " << rutaNormalMap << std::endl;
+                } else {
+                    std::cerr << "Error: No hay un modelo seleccionado para asociar el mapa de normales." << std::endl;
+                }
+            } catch (const std::exception& e) {
+                std::cerr << "Error al cargar el mapa de normales: " << e.what() << std::endl;
+            }
+        }
+
+        ImGui::Separator();
+
+        // Mostrar los modelos disponibles para asociar mapas de normales
+        ImGui::Text("Selecciona un modelo para asociar el mapa de normales:");
+        if (ImGui::BeginListBox("Modelos")) {
+            const auto& modelos = PAG::Renderer::getInstancia().getModels();
+            for (size_t i = 0; i < modelos.size(); ++i) {
+                const bool isSelected = (modeloSeleccionadoParaNormalMap == static_cast<int>(i));
+                if (ImGui::Selectable(("Modelo " + std::to_string(i + 1)).c_str(), isSelected)) {
+                    modeloSeleccionadoParaNormalMap = static_cast<int>(i);
+                }
+                if (isSelected) {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndListBox();
+        }
+
+        if (modeloSeleccionadoParaNormalMap >= 0) {
+            ImGui::Text("Modelo Seleccionado: %d", modeloSeleccionadoParaNormalMap);
+        } else {
+            ImGui::Text("No hay un modelo seleccionado.");
+        }
+
+        ImGui::End();
+/*
+        // ---- Ventana de control de renderizado ----
+        ImGui::Begin("Modo de Renderizado");
+        static bool usaNormalMapping = true; // Bandera para activar/desactivar el normal mapping
+
+        if (ImGui::Checkbox("Activar Normal Mapping", &usaNormalMapping)) {
+            GLuint usaNormalMapLoc = glGetUniformLocation(PAG::Renderer::getInstancia().getShaderProgram()->getProgramID(), "usaNormalMap");
+            glUniform1i(usaNormalMapLoc, usaNormalMapping ? GL_TRUE : GL_FALSE);
+        }
+*/
+        ImGui::End();
+
         // ---- Ventana para la gestión de texturas ----
         ImGui::Begin("Gestión de Texturas");
 
-        static std::string texturaRuta = "../texturas/spot_texture.png";
+        static std::string texturaRuta = "../texturas/material_0_diffuse.png";
         static int modeloSeleccionadoParaTextura = -1; // Índice del modelo al que se asociará la textura
 
         ImGui::Text("Cargar Textura:");
@@ -519,35 +585,32 @@ int main() {
 
         ImGui::Begin("Material de Modelos");
 
-        // Iterar sobre todos los modelos para mostrar y editar sus materiales
         const auto& modelos = PAG::Renderer::getInstancia().getModels();
         for (size_t i = 0; i < modelos.size(); ++i) {
             ImGui::Text("Modelo %zu:", i+1);
 
-            static glm::vec3 colorDifuso = modelos[i]->getMaterial().colorDifuso;
+            auto& material = modelos[i]->getMaterial();
+            static glm::vec3 colorDifuso = material.colorDifuso;
+            static bool usaNormalMappingModelo = (material.normalMapID != 0);
 
-            // Mostrar el selector de color para editar el color difuso
+            // Mostrar el selector de color difuso
             ImGui::ColorEdit3(("Color Difuso##" + std::to_string(i)).c_str(), glm::value_ptr(colorDifuso));
-
-            if (ImGui::Button(("Actualizar Material##" + std::to_string(i+1)).c_str())) {
-                Material nuevoMaterial = modelos[i]->getMaterial();
-                nuevoMaterial.colorAmbiente = glm::vec3(0.2f, 0.2f, 0.2f);  // Ejemplo
-                nuevoMaterial.colorDifuso = colorDifuso; // Color editado en ImGui
-                nuevoMaterial.colorEspecular = glm::vec3(1.0f, 1.0f, 1.0f); // Ejemplo
+            if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
+                Material nuevoMaterial = material;
+                nuevoMaterial.colorDifuso = colorDifuso;
+                if (usaNormalMappingModelo && material.normalMapID == 0) {
+                    std::cerr << "Error: No se ha cargado un mapa de normales para este modelo." << std::endl;
+                } else if (!usaNormalMappingModelo) {
+                    nuevoMaterial.normalMapID = 0; // Desactiva el mapa de normales
+                }
                 modelos[i]->setMaterial(nuevoMaterial);
 
-                // Debugging
-                std::cout << "Material Actualizado: "
-                          << "Ka: " << nuevoMaterial.colorAmbiente.x << ", " << nuevoMaterial.colorAmbiente.y << ", " << nuevoMaterial.colorAmbiente.z
-                          << " | Kd: " << nuevoMaterial.colorDifuso.x << ", " << nuevoMaterial.colorDifuso.y << ", " << nuevoMaterial.colorDifuso.z
-                          << " | Ks: " << nuevoMaterial.colorEspecular.x << ", " << nuevoMaterial.colorEspecular.y << ", " << nuevoMaterial.colorEspecular.z
-                          << std::endl;
+                std::cout << "Material actualizado para el modelo " << i+1 << std::endl;
             }
 
             ImGui::Separator();
         }
         ImGui::End();
-
 
         ImGui::Begin("Modo de Visualización");
         if (ImGui::RadioButton("Alambre", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 0)) {
@@ -556,6 +619,7 @@ int main() {
         if (ImGui::RadioButton("Sólido", static_cast<int>(PAG::Renderer::getInstancia().getModoVisualizacion()) == 1)) {
             PAG::Renderer::getInstancia().cambiarModoVisualizacion(PAG::ModoVisualizacion::Solido);
         }
+
         ImGui::End();
 
 
