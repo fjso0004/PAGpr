@@ -88,6 +88,16 @@ bool ModeloOBJ::cargarModelo() {
             glm::vec3 tangent = scaleFactor * (deltaUV2.y * edge1 - deltaUV1.y * edge2);
             glm::vec3 bitangent = scaleFactor * (-deltaUV2.x * edge1 + deltaUV1.x * edge2);
 
+            float denominator = (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+            if (abs(denominator) < 1e-6) {
+                tangent = glm::vec3(0.0f);
+                bitangent = glm::vec3(0.0f);
+            } else {
+                float scaleFactor = 1.0f / denominator;
+                tangent = scaleFactor * (deltaUV2.y * edge1 - deltaUV1.y * edge2);
+                bitangent = scaleFactor * (-deltaUV2.x * edge1 + deltaUV1.x * edge2);
+            }
+
             // Normalizar y asignar tangentes y bitangentes a los vértices
             for (int i = 0; i < 3; i++) {
                 vertices[indices[indexOffset + i]].tangent += tangent;
@@ -167,4 +177,8 @@ void ModeloOBJ::renderizar(GLuint shaderProgramID) const {
     if (material.texturaID) {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
+}
+
+const glm::mat4 &ModeloOBJ::getModelMatrix() const {
+    return transformacion;
 }

@@ -1,83 +1,90 @@
 #version 410
 
-in vec3 posicionV;        // Posición en espacio de visión
-in vec2 texCoordF;        // Coordenadas de textura
-in mat3 TBN;              // Matriz TBN para transformar al espacio de la tangente
+in vec3 posicionV;
+in vec2 texCoordF;
+in mat3 TBN;
+in vec4 coordenadasSombra;
 
-// Uniformes del material
-uniform vec3 Ka;          // Color ambiente
-uniform vec3 Kd;          // Color difuso
-uniform vec3 Ks;          // Color especular
-uniform float ns;         // Exponente especular
+uniform vec3 Ka;
+uniform vec3 Kd;
+uniform vec3 Ks;
+uniform float ns;
 
-// Uniformes de la luz
-uniform vec3 Ia;          // Intensidad de luz ambiente
-uniform vec3 Id;          // Intensidad de luz difusa
-uniform vec3 Is;          // Intensidad de luz especular
-uniform vec3 luzPosicion; // Posición de la luz en espacio de visión
-uniform vec3 luzDireccion; // Dirección de la luz
-uniform float luzApertura; // Ángulo de apertura (para foco)
+uniform vec3 Ia;
+uniform vec3 Id;
+uniform vec3 Is;
+uniform vec3 luzPosicion;
+uniform vec3 luzDireccion;
+uniform float luzApertura;
 
-// Uniformes de textura
-uniform sampler2D textura;     // Textura del material
-uniform sampler2D normalMap;   // Mapa de normales
-uniform bool usaTextura;       // Bandera para determinar si usar textura
+uniform sampler2D textura;
+uniform sampler2D normalMap;
+uniform sampler2DShadow mapaSombras;
+uniform bool usaTextura;
 
 out vec4 FragColor;
 
-// Subrutinas para diferentes tipos de luz
 subroutine vec4 LuzCalculationType();
 subroutine uniform LuzCalculationType luzActiva;
 
-// Subrutina para luz ambiente
+float calcularSombra() {
+    vec3 coordsSombra = coordenadasSombra.xyz / coordenadasSombra.w;
+    coordsSombra = coordsSombra * 0.5 + 0.5;
+
+    // Validar rango
+    if (coordsSombra.x < 0.0 || coordsSombra.x > 1.0 ||
+        coordsSombra.y < 0.0 || coordsSombra.y > 1.0) {
+        return 1.0; // No hay sombra
+    }
+    return texture(mapaSombras, vec3(coordsSombra.xy, coordsSombra.z));
+}
+
+subroutine(LuzCalculationType)
+vec4 luzPuntual() {
+    vec3 L = normalize(luzPosicion - posicionV);
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0));
+    vec3 V = normalize(-posicionV);
+    vec3 R = reflect(-L, N);
+
+    vec3 ambiente = Ka * Ia;
+    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
+    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
+
+    float sombra = calcularSombra();
+    return vec4((ambiente + sombra * (difusa + especular)), 1.0);
+}
+
+subroutine(LuzCalculationType)
+vec4 luzDireccional() {
+    vec3 L = normalize(-luzDireccion);
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0));
+    vec3 V = normalize(-posicionV);
+    vec3 R = reflect(-L, N);
+
+    vec3 ambiente = Ka * Ia;
+    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
+    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
+
+    float sombra = calcularSombra();
+    return vec4((ambiente + sombra * (difusa + especular)), 1.0);
+}
+
 subroutine(LuzCalculationType)
 vec4 luzAmbiente() {
     vec3 ambiente = Ka * Ia;
     return vec4(ambiente, 1.0);
 }
 
-// Subrutina para luz puntual
-subroutine(LuzCalculationType)
-vec4 luzPuntual() {
-    vec3 L = normalize(luzPosicion - posicionV);
-    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
-    vec3 V = normalize(-posicionV);
-    vec3 R = reflect(-L, N);
-
-    vec3 ambiente = Ka * Ia;
-    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
-    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
-
-    return vec4(ambiente + difusa + especular, 1.0);
-}
-
-// Subrutina para luz direccional
-subroutine(LuzCalculationType)
-vec4 luzDireccional() {
-    vec3 L = normalize(-luzDireccion);
-    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
-    vec3 V = normalize(-posicionV);
-    vec3 R = reflect(-L, N);
-
-    vec3 ambiente = Ka * Ia;
-    vec3 difusa = max(dot(N, L), 0.0) * Kd * Id;
-    vec3 especular = pow(max(dot(R, V), 0.0), ns) * Ks * Is;
-
-    return vec4(ambiente + difusa + especular, 1.0);
-}
-
-// Subrutina para foco de luz
 subroutine(LuzCalculationType)
 vec4 luzFoco() {
     vec3 L = normalize(luzPosicion - posicionV);
-    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0)); // Normal del mapa
+    vec3 N = normalize(TBN * (texture(normalMap, texCoordF).rgb * 2.0 - 1.0));
     vec3 V = normalize(-posicionV);
     vec3 R = reflect(-L, N);
 
-    // Ángulo entre la dirección de la luz y la dirección del foco
     float anguloLuz = dot(-L, normalize(luzDireccion));
     if (anguloLuz < cos(radians(luzApertura))) {
-        return vec4(Ka * Ia, 1.0); // Fuera del cono, solo componente ambiente
+        return vec4(Ka * Ia, 1.0);
     }
 
     vec3 ambiente = Ka * Ia;
@@ -88,9 +95,8 @@ vec4 luzFoco() {
 }
 
 void main() {
-    vec4 colorBase = luzActiva(); // Calcula el color base usando la subrutina de luz activa
+    vec4 colorBase = luzActiva();
 
-    // Combina el color base con la textura si está activa
     if (usaTextura) {
         vec4 colorTextura = texture(textura, texCoordF);
         FragColor = vec4(colorBase.rgb * colorTextura.rgb, 1.0);

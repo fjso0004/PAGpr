@@ -2,11 +2,9 @@
 
 layout (location = 0) in vec3 posicion;
 
-uniform mat4 matrizModVisProy;
-
-out vec4 coordenadasSombra; // Salida: Coordenadas de sombra
+uniform mat4 matrizSombras;
+uniform mat4 model;
 
 void main() {
-    coordenadasSombra = matrizModVisProy * vec4(posicion, 1.0); // Calcula coordenadas en el espacio de la luz
-    gl_Position = coordenadasSombra; // Para el mapa de sombras
+    gl_Position = matrizSombras * model * vec4(posicion, 1.0);
 }

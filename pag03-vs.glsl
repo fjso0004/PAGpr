@@ -2,17 +2,19 @@
 
 layout (location = 0) in vec3 posicion;
 layout (location = 1) in vec3 normal;
-layout (location = 2) in vec2 texCoord; // Coordenadas de textura
-layout (location = 3) in vec3 tangent;   // Tangente
-layout (location = 4) in vec3 bitangent; // Bitangente
+layout (location = 2) in vec2 texCoord;
+layout (location = 3) in vec3 tangent;
+layout (location = 4) in vec3 bitangent;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat4 matrizSombras;
 
-out vec3 posicionV;       // Posición en espacio de visión
-out vec2 texCoordF; // Salida de las coordenadas de textura
-out mat3 TBN;             // Matriz TBN para transformar al espacio de la tangente
+out vec3 posicionV;
+out vec2 texCoordF;
+out mat3 TBN;
+out vec4 coordenadasSombra;
 
 void main() {
     vec4 posMundo = model * vec4(posicion, 1.0);
@@ -26,6 +28,8 @@ void main() {
     TBN = mat3(T, B, N); // Construir la matriz TBN
 
     texCoordF = texCoord; // Pasar las coordenadas de textura al fragment shader
+
+    coordenadasSombra = matrizSombras * vec4(posicion, 1.0);
 
     gl_Position = projection * view * posMundo;
 }

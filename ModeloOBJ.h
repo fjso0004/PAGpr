@@ -40,10 +40,6 @@ public:
     const glm::mat4 &getModelMatrix() const;
     void setMaterial(const Material& nuevoMaterial) {material = nuevoMaterial;}
     Material& getMaterial() { return material; } // Devuelve referencia no constante
-    const Material& getMaterial() const { return material; } // Devuelve referencia constante para objetos constantes
-
-    void setNormalMap(GLuint normalMap) { material.normalMapID = normalMap; }
-    GLuint getNormalMap() const { return material.normalMapID; }
 
 private:
     std::string ruta;

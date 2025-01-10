@@ -51,15 +51,11 @@ namespace PAG
         GLuint idVBO = 0;
         GLuint idIBO = 0;
 
-        //ShaderProgram *shaderSombras;
         std::shared_ptr<ShaderProgram> shaderSombras;
-        GLuint fboSombras;                      // Framebuffer para sombras
-        std::vector<GLuint> texturasSombras;    // Texturas para mapas de sombras
-        GLsizei anchoMapaSombras = 1024;            // Dimensiones del mapa de sombras
+        GLuint fboSombras;        // Framebuffer Object para sombras
+        GLuint texturaSombra;     // Textura asociada al mapa de sombras
+        GLsizei anchoMapaSombras = 1024; // Dimensiones del mapa de sombras
         GLsizei altoMapaSombras = 1024;
-
-        void inicializarShadowMapping();        // Inicializa FBO y texturas de sombras
-        void generarMapaDeSombras(const Luz& luz, const glm::mat4& mVP);
 
         Camara* camara;
 
@@ -127,9 +123,12 @@ namespace PAG
         ModoVisualizacion getModoVisualizacion() const;
 
         GLuint cargarTextura(const std::string& ruta);
-        std::shared_ptr<ShaderProgram> getShaderProgram() const {return shaderProgram;}
 
-        void cargarModeloConNormalMap(const std::string& modeloPath, const std::string& texturaPath, const std::string& normalMapPath); // NUEVO
+        void inicializarFBO();
+
+        void generarMapaSombras(const glm::mat4 &matrizSombras);
+
+        glm::mat4 calcularMatrizSombras(const Luz &luz);
     };
 }
 
