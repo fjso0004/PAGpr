@@ -526,8 +526,8 @@ int main() {
             GLuint usaNormalMapLoc = glGetUniformLocation(PAG::Renderer::getInstancia().getShaderProgram()->getProgramID(), "usaNormalMap");
             glUniform1i(usaNormalMapLoc, usaNormalMapping ? GL_TRUE : GL_FALSE);
         }
-*/
         ImGui::End();
+*/
 
         // ---- Ventana para la gestión de texturas ----
         ImGui::Begin("Gestión de Texturas");
@@ -591,18 +591,18 @@ int main() {
 
             auto& material = modelos[i]->getMaterial();
             static glm::vec3 colorDifuso = material.colorDifuso;
-            static bool usaNormalMappingModelo = (material.normalMapID != 0);
+            //static bool usaNormalMappingModelo = (material.normalMapID != 0);
 
             // Mostrar el selector de color difuso
             ImGui::ColorEdit3(("Color Difuso##" + std::to_string(i)).c_str(), glm::value_ptr(colorDifuso));
             if (ImGui::Button(("Actualizar Material##" + std::to_string(i)).c_str())) {
                 Material nuevoMaterial = material;
                 nuevoMaterial.colorDifuso = colorDifuso;
-                if (usaNormalMappingModelo && material.normalMapID == 0) {
-                    std::cerr << "Error: No se ha cargado un mapa de normales para este modelo." << std::endl;
-                } else if (!usaNormalMappingModelo) {
-                    nuevoMaterial.normalMapID = 0; // Desactiva el mapa de normales
-                }
+                //if (usaNormalMappingModelo && material.normalMapID == 0) {
+                //    std::cerr << "Error: No se ha cargado un mapa de normales para este modelo." << std::endl;
+                //} else if (!usaNormalMappingModelo) {
+                //    nuevoMaterial.normalMapID = 0; // Desactiva el mapa de normales
+                //}
                 modelos[i]->setMaterial(nuevoMaterial);
 
                 std::cout << "Material actualizado para el modelo " << i+1 << std::endl;
